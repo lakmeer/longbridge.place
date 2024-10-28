@@ -1,0 +1,27 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import Title from '@/components/Title.astro'
+import ArticleBody from '@/components/ArticleBody.astro'
+
+import { getCollection } from 'astro:content'
+
+export async function getStaticPaths() {
+  const lore = await getCollection('lore')
+  return lore.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }))
+}
+
+const { entry } = Astro.props;
+---
+
+<Layout title="Welcome to Astro.">
+  <main class="py-8 max-w-6xl mx-auto">
+    <Title />
+
+    <div class="mx-auto mt-16 px-8">
+      <ArticleBody article={entry} />
+    </div>
+  </main>
+</Layout>

@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/fonts/montserrat-variable.ttf');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/fonts/montserrat-variable-italic.ttf');
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('/fonts/Roboto-Light.ttf');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('/fonts/Roboto-LightItalic.ttf');
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('/fonts/Roboto-Medium.ttf');
+  font-style: normal;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Roboto';
+  src: url('/fonts/Roboto-MediumItalic.ttf');
+  font-style: italic;
+  font-weight: 500;
+}
+
+@layer base {
+  :root {
+    --font-title: 'Montserrat', sans-serif;
+    --font-body:  'Roboto', sans-serif;
+    --font-mono:  'Fira Code', monospace;
+
+    color: white;
+    font-family: var(--font-body);
+  }
+}
+
+@layer utilities {
+  .font-title {
+    font-family: var(--font-title);
+    letter-spacing: 2.1rem;
+  }
+
+  .font-title-lesser {
+    font-family: var(--font-title);
+    letter-spacing: 0.2rem;
+  }
+
+  .bg-sky-day {
+    background-image: linear-gradient(to bottom right, theme('colors.sky-day-dark'), theme('colors.sky-day-light'));
+    background-size: 400%;
+  }
+
+  /* Tailwind Typography Overrrides */
+  .prose {
+    letter-spacing: 0.03rem;
+
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: 300;
+      font-family: var(--font-title);
+      letter-spacing: 0.2rem;
+
+      a[href] {
+        font-weight: 300;
+        text-decoration: none;
+      }
+    }
+
+    a[href] {
+      font-weight: 500;
+      &:hover { opacity: 0.7; }
+    }
+  }
+}

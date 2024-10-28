@@ -1,0 +1,13 @@
+---
+interface Props {
+  article: any;
+}
+
+const { article } = Astro.props;
+const { Content } = await article.render();
+---
+
+<div class="prose mx-auto">
+  <h2 class="font-title-lesser mb-4">{article.data.title}</h2>
+  <Content />
+</div>
