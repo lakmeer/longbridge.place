@@ -1,7 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import Title from '@/components/Title.astro'
-import ArticleBody from '@/components/ArticleBody.astro'
 
 import { getCollection } from 'astro:content'
 
@@ -16,11 +15,11 @@ export async function getStaticPaths() {
 
 // This record
 
-const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { entry } = Astro.props
+const { Content } = await entry.render()
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title={entry.data.title}>
   <div class="prose mx-auto">
     <h3 class="text-4xl font-title"> {entry.data.title} </h3>
     <Content />

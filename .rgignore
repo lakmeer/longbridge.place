@@ -1,0 +1,4 @@
+# Ignores for Telescope/Ripgrep
+pnpm-lock.yaml
+*.ttf
+*.webp
