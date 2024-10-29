@@ -16,11 +16,11 @@ const headshot = await getEntry('image', person.data.headshot.id);
 
 <Card heading="Citizen">
   <div class="grid grid-cols-2 gap-8">
-    <img src={absolutePath(headshot.data.filepath)} alt={person.data.day_names} 
+    <img src={absolutePath(headshot.data.filepath)} alt={person.data.day_name} 
         class="w-full aspect-square object-cover " />
 
     <div class="grid gap-2">
-      <h3 class="font-title-lesser text-2xl">{person.data.day_names}</h3>
+      <h3 class="font-title-lesser text-2xl">{person.data.day_name}</h3>
 
       <dl>
         <dt>Names</dt>

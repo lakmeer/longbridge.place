@@ -1,0 +1,25 @@
+---
+import { getEntry, CollectionEntry } from 'astro:content';
+import { absolutePath } from '@utils';
+
+import Card from '@comp/Card.astro';
+
+interface Props {
+  place: CollectionEntry<'location'>;
+}
+
+const { place } = Astro.props;
+
+let image = place.data.image ? await getEntry('image', place.data.image.id) : null;
+
+---
+
+<Card heading="Place">
+  <div class="grid gap-8">
+    { image && 
+      <img src={absolutePath(image.data.filepath)} alt={place.data.name} 
+        class="w-full aspect-square object-cover " /> }
+
+    <h3 class="font-title-lesser text-center text-2xl">{place.data.name}</h3>
+  </div>
+</Card>

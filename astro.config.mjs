@@ -5,6 +5,8 @@ import tailwind from '@astrojs/tailwind';
 import alpinejs from '@astrojs/alpinejs';
 import mdx      from '@astrojs/mdx';
 
+import alwaysAbsolute from './src/plugins/always-absolute.ts';
+
 export default defineConfig({
   vite: {
     resolve: {
@@ -18,4 +20,7 @@ export default defineConfig({
     mdx(),
     alpinejs()
   ],
+  markdown: {
+    remarkPlugins: [ alwaysAbsolute ]
+  }
 });

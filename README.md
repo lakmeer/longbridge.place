@@ -11,7 +11,7 @@ Citizen character profiles.
 #### Frontmatter Schema
 
     names: All of the Character's Names
-    day_names: Character's Day Names
+    day_name: Character's Day Name
     gender: Character's Gender
     birthdate: Year or date in system format
     media:
