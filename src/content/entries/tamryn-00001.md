@@ -1,0 +1,97 @@
+---
+title: Insatiable Tamryn I (sketch)
+author: Loremaster Jay
+synopsis: Instatible Tamryn partakes in a seeing ceremony, and takes a risk.
+pov_char: Handelyn Second Seer Insatiable Tamryn
+other_chars: 
+ - Handelin First Seer Ria
+ - Unnamed Cult of the Hand members
+locations:
+ - Ceremonial Hall, Main Village, Cult of the Hand, Bridgehand, Beyond 11-firthan
+tags:
+ - seeing-tea
+ - cult-of-the-hand
+ - the-bridgehand
+ - seeing-ceremony
+ - worship-poem
+---
+Handelyn Second Seer Insatiable Tamryn had slept on dir face again. It became
+clear from the way that First Ria was glowering at dym over the rim of her tea
+bowl. First Ria flicked her eyes to indicate the special decor draping the
+inside of the hall. 
+
+_Have a sense of occasion, would you?_
+
+Second Tamryn glanced at dir reflection in the oily surface of the tea in dir
+bowl. Dir hair was matted and spikey on one side, and dir face sported several
+red blotches, imprints of the coils upon which de had eventually passed into
+sleep after last night's revelries. It's not like the occasion was particularly
+occasional. Seeing ceremonies happened every month. Second Tamryn stared First
+Ria in the eyes until she looked away, and then squashed dir hair flat with the
+palm of dir hand when she wasn't looking. De would cut it soon anyway.
+
+Gradually the hall filled with the rest of the troupe, shuffling in silently
+and taking up their tea bowls in the order that First Ria had prescribed.
+Taking the wrong bowl meant you were getting someone else's dose - resulting in
+one party suffering a day or two of horrible stomach cramps, and the other
+suffering a waste of their time. There is serious work to be done here. Second
+Tamryn has spent the last week preparing the tea carefully for each member
+specifically; measuring, tasting and adjusting the combination of ingredients
+to best bring out their unique abilities. De even goes as far as to incorporate
+personal reports from previous ceremonies, inducing particular effects or
+subjects, so that members can follow specific lines of inquiry or specialise in
+a certain theory. Second Tamryn is very good at this. That's why de is the
+Second.
+
+There has long been a strongly held belief that the Hand is not only sentient,
+but intelligent, generous and benevolent. How else explain the abundance of
+food and shelter visited upon the bridge for hundreds of years? It is only more
+recently that there has developed the suspicion that the Hand is also up to
+something. Second Tamryn is sure of it. De has tried every way de can think of
+to convince dir peers - and not least of all, dir First - that de is more
+deeply in tune with the Bridgehand's message than ever. While it's certainly
+true that no one else in the troupe has been so deep for so long as Insatiable
+Tamryn, there is understandable skepticism over whether the increasingly strong
+tea de is taking is producing genuine insight, or merely poisoning dir brain.
+Indeed, de is yet to find dir limit. Child of two generations of seers,
+Insatiable Tamryn's tolerance for the seeing tea is positively alarming. If de
+weren't in charge of preparation, First Ria would absolutely never authorise
+the reckless concoction that her Second is about to consume.
+
+Rule-breaking and convention-flouting must be done outside of the vigilance of
+First Ria. She will not be having it. She so completely suits the role of
+First, that it has legitimately become her day name. Any other troupe member
+would rightly find this mortifying, but Ria seems perfectly comfortable with
+it. First Ria truly is a perfectly straight stem. Second Tamryn suspects that
+she would make great furniture.
+
+Four of the twelve members now stand. Together they perform the commencement
+poem, same as every other time it has been sung, a thousand times, every month
+for a hundred-something years. Second Tamryn is extremely, paralysingly bored
+of the commencement poem. Mercifully, it is short. Shorter than the
+reconnection poem, anyway. De stares into the murky, rusty tea in dir bowl
+while dutifully lending dir voice to the chanted parts of the poem. Despite dir
+best scheming, dir tea is noticeably more orange than anyone else's. De simply
+hopes that the other members are preoccupied with dreading the unpleasantness
+that is inflicted upon them every month. The tea simply cannot be made less
+revolting. It's truly, inescapably awful. Even Insatiable Tamryn, prodigal tea
+mixer, Second Seer of the largest troupe in the Cult of the Hand, cannot make
+it tolerable. Well, maybe de could, if that's what de had been trying to do.
+
+That is _not_ what de has been trying to do.
+
+As the final verse of the poem growls to a close, Insatiable Tamryn finally
+gets nervous. Dir stomach is protesting before dir hands even begin to move the
+tea bowl closer to dir lips. Skilled seers can sidestep the worst of it by
+setting off quickly; floating gently away into the visions before the cramps
+set in. It is a matter of slow, controlled breathing. Tamryn has got this down
+to about seven minutes. The faster de can set off, the less time First Ria will
+have to realise that de is being catastrophically irresponsible.  De can feel
+the searing of dir First's gaze. Can Ria see the miniscule sheen of sweat
+collecting on dir forehead? Future Tamryn is about to take one for the team in
+several different ways.
+
+Silence as everyone raises their bowls. Tamryn gulps, again, and drains the
+horrible tea without flinching. Insatiable Tamryn sets dir bowl down carefully,
+relaxes dir shoulders, prepares to inhale with the correct speed and depth, and
+is violently slingshot into space.
