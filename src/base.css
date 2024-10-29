@@ -52,6 +52,10 @@
 }
 
 @layer utilities {
+  .debug, .debug * {
+    outline: 1px solid red;
+  }
+
   .font-title {
     font-family: var(--font-title);
     letter-spacing: 2.1rem;
@@ -87,4 +91,17 @@
       &:hover { opacity: 0.7; }
     }
   }
+
+  .prose-book {
+    p {
+      text-indent: 1.5rem;
+      text-align: justify;
+    }
+
+    p + p {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
+
 }

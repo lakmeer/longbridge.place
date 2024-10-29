@@ -1,0 +1,44 @@
+---
+import { getEntry, CollectionEntry } from 'astro:content';
+import { absolutePath } from '@utils';
+
+import Card from '@comp/Card.astro';
+
+interface Props {
+  person: CollectionEntry<'person'>;
+}
+
+const { person } = Astro.props;
+
+const metaNow  = await getEntry('meta', 'now');
+const headshot = await getEntry('image', person.data.headshot.id);
+---
+
+<Card heading="Citizen">
+  <div class="grid grid-cols-2 gap-8">
+    <img src={absolutePath(headshot.data.filepath)} alt={person.data.day_names} 
+        class="w-full aspect-square object-cover " />
+
+    <div class="grid gap-2">
+      <h3 class="font-title-lesser text-2xl">{person.data.day_names}</h3>
+
+      <dl>
+        <dt>Names</dt>
+        <dd>{person.data.names}</dd>
+        <dt>Gender</dt>
+        <dd>{person.data.gender}</dd>
+        <dt>Vocation</dt>
+        <dd>{person.data.vocation}</dd>
+        <dt>Age</dt>
+        <dd>{metaNow.data.year - person.data.birthdate}</dd>
+        <dt>Residence</dt>
+        <dd>{person.data.residence}</dd>
+      </dl>
+    </div>
+  </div>
+</Card>
+
+<style>
+  dt { font-weight: 500; font-family: var(--font-title); }
+  dd + dt { margin-top: 0.5rem; }
+</style>

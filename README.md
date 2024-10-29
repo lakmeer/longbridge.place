@@ -10,14 +10,14 @@ Citizen character profiles.
 
 #### Frontmatter Schema
 
-    names: All Character Names
-    day_name: Character's Day Name
+    names: All of the Character's Names
+    day_names: Character's Day Names
     gender: Character's Gender
-    age: Character's Age
+    birthdate: Year or date in system format
     media:
       - link to media item (image:slug)
     location:
-      - 
+      - list of locations
     tags:
       - tag-slug
 

@@ -1,13 +1,13 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import Title from '@/components/Title.astro'
-import ArticleBody from '@/components/ArticleBody.astro'
+import CitizenCard from '@/components/CitizenCard.astro'
 
-import { getCollection } from 'astro:content'
+import { getCollection, getEntry, getEntries } from 'astro:content'
 
 export async function getStaticPaths() {
-  const lore = await getCollection('lore')
-  return lore.map((entry) => ({
+  const people = await getCollection('person')
+  return people.map((entry) => ({
     params: { slug: entry.slug },
     props: { entry },
   }))
@@ -18,10 +18,15 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
+
 ---
 
 <Layout title="Welcome to Astro.">
-  <div class="prose mx-auto">
-    <Content />
+  <div class="mx-auto max-w-3xl grid gap-16">
+    <CitizenCard person={entry} />
+
+    <div class="prose mx-auto">
+      <Content />
+    </div>
   </div>
 </Layout>
