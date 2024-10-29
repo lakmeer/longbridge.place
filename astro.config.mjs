@@ -5,7 +5,7 @@ import tailwind from '@astrojs/tailwind';
 import alpinejs from '@astrojs/alpinejs';
 import mdx      from '@astrojs/mdx';
 
-import alwaysAbsolute from './src/plugins/always-absolute.ts';
+import collectionLinks from './src/plugins/collection-links.ts';
 
 export default defineConfig({
   vite: {
@@ -21,6 +21,6 @@ export default defineConfig({
     alpinejs()
   ],
   markdown: {
-    remarkPlugins: [ alwaysAbsolute ]
+    remarkPlugins: [ collectionLinks ]
   }
 });

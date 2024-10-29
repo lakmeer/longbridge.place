@@ -1,19 +1,15 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Title from '../components/Title.astro';
-import ArticleBody from '../components/ArticleBody.astro';
+import Layout from '../layouts/Layout.astro'
+import Title from '../components/Title.astro'
 
-import { getCollection, getEntry } from 'astro:content';
+import { getEntry } from 'astro:content'
 
-const intro = await getEntry('lore', 'introduction');
+const intro = await getEntry('lore', 'introduction')
+const { Content } = await intro.render()
 ---
 
-<Layout title="Welcome to Astro.">
-  <main>
-    <Title />
-
-    <div class="mx-auto mt-16">
-      <ArticleBody article={intro} />
-    </div>
-  </main>
+<Layout title="Welcome to Longbrige">
+  <div class="prose mx-auto">
+    <Content />
+  </div>
 </Layout>
