@@ -6,6 +6,7 @@ import alpinejs from '@astrojs/alpinejs';
 import mdx      from '@astrojs/mdx';
 
 import collectionLinks from './src/plugins/collection-links.ts';
+import linkChecker from './src/plugins/link-checker.ts';
 
 export default defineConfig({
   vite: {
@@ -21,6 +22,6 @@ export default defineConfig({
     alpinejs()
   ],
   markdown: {
-    remarkPlugins: [ collectionLinks ]
+    remarkPlugins: [ linkChecker, collectionLinks ]
   }
 });
