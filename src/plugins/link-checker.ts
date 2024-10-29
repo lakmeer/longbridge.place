@@ -24,6 +24,7 @@ globSync('./src/content/**/*.{mdx,yaml}')
     allCollections[coll].push(slug)
   })
 
+console.log(allCollections)
 
 // TODO: Collate tags, or collect collated tags from storage
 
@@ -39,7 +40,7 @@ export default function linkChecker (options = {}) {
         return console.warn(' WARN '.yellow.inverse, "Unknown collection:".yellow, collection)
       }
 
-      if (!allCollections[collection][slug]) {
+      if (!allCollections[collection].includes(slug)) {
         return console.warn(' WARN '.yellow.inverse, "Unknown entry:".yellow, collection + ":" + slug)
       }
 
