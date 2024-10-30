@@ -5,27 +5,32 @@ import { Markdown } from '@astropub/md'
 
 interface Props {
   src: string
+  level?: number
   heading?: string
 }
 
-const { src, heading } = Astro.props
+const { src, heading = false, level = 2 } = Astro.props
 const [ coll, slug ] = src.split(':')
 const entry = await getEntry(coll, slug)
 
 // Process body to find just the first paragraph
 const [ first, ...lines ] = entry.body.split(/\n\s*\n/)
 
+// Render heading
+const Htag = 'h' + level
+
 // Rendering explicitly using astropub/md instead of built-in render function, since
 // - the collection doc isn't modifyable from here
 // - we don't want to support embeds in the summary snippet
+
 ---
 { heading &&
-  <h2>
+  <Htag>
     <a class="font-weight-light" href={`/lore/${slug}`}>
       {entry.data.title}
       <LinkIcon class="ml-2" />
     </a>
-  </h2>
+  </Htag>
 }
 
 <Markdown of={first} />
