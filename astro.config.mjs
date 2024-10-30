@@ -9,26 +9,20 @@ import auto     from 'astro-auto-import'
 import CollectionLinks from './src/plugins/collection-links.ts'
 import LinkChecker     from './src/plugins/link-checker.ts'
 
-
 export default defineConfig({
   vite: {
     resolve: {
       preserveSymlinks: true,
     }
   },
-  integrations: [
-    tailwind({
-      applyBaseStyles: false,
-    }),
-    auto({
-      imports: [
-        { './src/components/embed/index': 'Embed' },
-      ]
-    }),
-    mdx(),
-    alpinejs()
-  ],
+  integrations: [tailwind({
+    applyBaseStyles: false,
+  }), auto({
+    imports: [
+      { './src/components/embed/index': 'Embed' },
+    ]
+  }), mdx(), alpinejs()],
   markdown: {
-    remarkPlugins: [ LinkChecker, CollectionLinks ]
+    remarkPlugins: [ LinkChecker, CollectionLinks ],
   }
 })

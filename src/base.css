@@ -68,6 +68,10 @@
     letter-spacing: 0.2rem;
   }
 
+  .font-title-least {
+    font-family: var(--font-title);
+  }
+
   .bg-sky-day {
     background-image: linear-gradient(to bottom right, theme('colors.sky-day-dark'), theme('colors.sky-day-light'));
     background-size: 400%;

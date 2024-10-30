@@ -2,7 +2,8 @@
 import { getEntry, CollectionEntry } from 'astro:content'
 import { absolutePath } from '@utils'
 
-import Card from '@comp/Card.astro'
+import Card     from '@comp/Card.astro'
+import MiniLink from '@comp/MiniLink.astro'
 
 interface Props {
   person: CollectionEntry<'person'>
@@ -12,7 +13,7 @@ interface Props {
 
 let { person, link, size } = Astro.props
 
-const metaNow  = await getEntry('meta', 'now')
+const now      = await getEntry('misc', 'now')
 const headshot = await getEntry('image', person.data.headshot.id)
 
 const gridLayout =
@@ -33,14 +34,32 @@ const gridLayout =
       <dl>
         <dt>Names</dt>
         <dd>{person.data.names}</dd>
-        <dt>Gender</dt>
-        <dd>{person.data.gender}</dd>
-        <dt>Vocation</dt>
-        <dd>{person.data.vocation}</dd>
-        <dt>Age</dt>
-        <dd>{metaNow.data.year - person.data.birthdate}</dd>
-        <dt>Residence</dt>
-        <dd>{person.data.residence}</dd>
+
+        { person.data.gender && <>
+          <dt>Gender</dt>
+          <dd>{person.data.gender}</dd>
+        </> }
+
+        { person.data.vocation && <>
+          <dt>Vocation</dt>
+          <dd>{person.data.vocation}</dd>
+        </> }
+
+        { person.data.birthdate && <>
+          <dt>Age</dt>
+          <dd>{now.data.year - person.data.birthdate}</dd>
+        </> }
+
+        { person.data.residence && <>
+          <dt>Residence</dt>
+          <dd><MiniLink ref={person.data.residence} /></dd>
+        </> }
+
+        { person.data.affiliation && <>
+          <dt>Affiliation</dt>
+          <dd>{person.data.affiliation}</dd>
+        </> }
+
       </dl>
     </div>
   </div>

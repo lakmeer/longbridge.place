@@ -2,7 +2,8 @@
 import { getEntry, CollectionEntry } from 'astro:content';
 import { absolutePath } from '@utils';
 
-import Card from '@comp/Card.astro';
+import Card     from '@comp/Card.astro';
+import MiniLink from '@comp/MiniLink.astro';
 
 interface Props {
   place: CollectionEntry<'location'>;
@@ -20,6 +21,26 @@ let image = place.data.image ? await getEntry('image', place.data.image.id) : nu
       <img src={absolutePath(image.data.filepath)} alt={place.data.name} 
         class="w-full aspect-square object-cover " /> }
 
-    <h3 class="font-title-lesser text-center text-2xl">{place.data.name}</h3>
+    <div class="grid gap-4">
+      <h3 class="font-title-lesser text-2xl">{place.data.name}</h3>
+
+      <dl>
+        { place.data.type && <>
+          <dt>Type</dt>
+          <dd>{place.data.type}</dd>
+        </> }
+
+        { place.data.location && <>
+          <dt>Location</dt>
+          <dd><MiniLink ref={place.data.location} /></dd>
+        </> }
+      </dl>
+    </div>
   </div>
 </Card>
+
+<style>
+  dl { columns: 2; }
+  dt { font-weight: 500; font-family: var(--font-title); }
+  dd + dt { margin-top: 0.5rem; }
+</style>

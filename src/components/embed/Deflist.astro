@@ -1,0 +1,21 @@
+---
+interface Props {
+  rows?: string[][]
+  src?: string
+}
+
+const { rows = [], src } = Astro.props
+
+// TODO: If `src` is passed instead of `rows`, fetch from the Tables 
+//       collection and process that to create the `rows` array.
+---
+
+<div class="embedded deflist not-prose">
+  <dl class="grid [grid-template-columns:max-content_1fr] py-1 gap-x-4 gap-y-2 border-t border-b border-white/30">
+    { rows.map(([ key, value ]) => (<>
+        <dt class="font-bold">{ key }</dt>
+        <dd>{ value }</dd>
+      </>))
+    }
+  </dl>
+</div>

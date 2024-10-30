@@ -4,22 +4,31 @@ import { getEntry } from 'astro:content'
 
 interface Props {
   src: string
+  level?: number
   heading?: string
 }
 
-const { src, heading } = Astro.props
+const { src, heading = false, level = 2 } = Astro.props
+
+// Gather entry
 const [ coll, slug ] = src.split(':')
 const entry = await getEntry(coll, slug)
+if (!entry) throw new Error(`Could not find entry for: '${src}'`)
+
+// Render Heading etc
+const Htag = 'h' + level
 const { Content } = await entry.render()
 ---
 
 { heading &&
-  <h2>
+  <Htag>
     <a class="font-weight-light" href={`/lore/${slug}`}>
       {entry.data.title}
       <LinkIcon class="ml-2" />
     </a>
-  </h2>
+  </Htag>
 }
 
-<Content />
+<div class="embedded">
+  <Content />
+</div>

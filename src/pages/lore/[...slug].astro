@@ -17,11 +17,21 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props
 const { Content } = await entry.render()
+
+const tags = entry.data.tags
+
+console.log(tags)
+
+const related = await getCollection('lore', ({ data }) => {
+  return data.tags.some((tag) => tags.includes(tag))
+})
+
+console.log(related.map((e) => e.data.tags))
 ---
 
 <Layout title={entry.data.title}>
   <div class="prose mx-auto">
-    <h3 class="text-4xl font-title"> {entry.data.title} </h3>
+    <h1 class="text-4xl font-title"> {entry.data.title} </h1>
     <Content />
   </div>
 </Layout>

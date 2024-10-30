@@ -17,3 +17,5 @@
 export { default as Article } from './Article.astro'
 export { default as Person  } from './Person.astro'
 export { default as Summary } from './Summary.astro'
+export { default as Deflist } from './Deflist.astro'
+

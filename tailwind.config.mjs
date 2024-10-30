@@ -17,7 +17,7 @@ export default {
             '--tw-prose-headings': theme('colors.white'),
             //'--tw-prose-lead': theme('colors.pink[700]'),
             '--tw-prose-links': theme('colors.white'),
-            //'--tw-prose-bold': theme('colors.pink[900]'),
+            '--tw-prose-bold': theme('colors.white'),
             //'--tw-prose-counters': theme('colors.pink[600]'),
             //'--tw-prose-bullets': theme('colors.pink[400]'),
             //'--tw-prose-hr': theme('colors.pink[300]'),
