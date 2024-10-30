@@ -21,7 +21,7 @@ const { Content } = await entry.render()
 
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title={entry.data.name}>
   <div class="mx-auto max-w-3xl grid gap-8">
     <PlaceCard place={entry} />
 

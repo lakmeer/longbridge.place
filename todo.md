@@ -12,3 +12,8 @@
 
 - Glossary Entry
 
+# More Content types
+
+- Events?
+- Deities?
+- Notes that pop up in little boxes - eg: idioms

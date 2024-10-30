@@ -28,7 +28,7 @@ const related = (await getCollection('lore', ({ data }) => {
   return data.tags.some((tag) => tags.includes(tag))
 })).filter((e) => e.data.title !== entry.data.title)
 
-// TODO: Filter out entries that have been fully embedded with Embed.Article
+// TODO: Filter out entries that have been embedded
 // TODO: Collect linked entries from body
 
 ---
@@ -37,12 +37,12 @@ const related = (await getCollection('lore', ({ data }) => {
     <h1 class="text-4xl font-title"> {entry.data.title} </h1>
     <Content />
 
-    { related.length && <>
+    { related.length ? <>
       <hr />
       <h3 class="text-lg font-title-lesser mb-4">Further Reading</h3>
       <ul>
       { related.map((e) => <li class="font-title-least"><a href={entryUrl(e)}>{e.data.title}</a></li>) }
       </ul>
-    </> }
+    </> : null }
   </div>
 </Layout>

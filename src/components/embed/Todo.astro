@@ -1,0 +1,8 @@
+---
+interface Props {
+  note?:string
+}
+
+const text = Astro.props.note ?? "Expand"
+---
+<span class="bg-yellow-500/30 not-prose px-1 rounded whitespace-nowrap">TODO: { text }</span>
