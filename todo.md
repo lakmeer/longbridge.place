@@ -8,3 +8,7 @@
 - Examine slugs in body links and make sure they match an existing file
 - Save relational graph of linked entries to sqlite so it can gather relevant pages for LLM edits
 
+# More Embed types
+
+- Glossary Entry
+

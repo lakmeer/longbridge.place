@@ -49,6 +49,7 @@
     scrollbar-gutter: stable;
     color: white;
     font-family: var(--font-body);
+    font-size: 18px;
   }
 
   /* Fancy HR */
