@@ -2,10 +2,10 @@
 //
 // Collection Links
 //
-// Resolve links in the form collection:entry#section
+// Replace links in the form collection:entry#section
 //
 
-export default function alwaysAbsolute (options = {}) {
+export default function CollectionLinks () {
   return function visit (node) {
     if (node.type === 'link' && node.url.includes(':')) {
       node.url = '/' + node.url.replace(':', '/')

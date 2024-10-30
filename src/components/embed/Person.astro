@@ -1,0 +1,17 @@
+---
+import CitizenCard from '@comp/CitizenCard.astro'
+import { getEntry } from 'astro:content'
+
+interface Props {
+  src: string
+  heading?: string
+}
+
+const { src, heading } = Astro.props
+const entry = await getEntry('person', src)
+---
+
+{ heading && <h2>{entry.data.day_name}</h2> }
+<div class="not-prose">
+  <CitizenCard size="sm" person={entry} link=`/person/${src}` />
+</div>

@@ -1,0 +1,25 @@
+---
+import LinkIcon from '@/icons/arrow-top-right-on-square.astro'
+import { getEntry } from 'astro:content'
+
+interface Props {
+  src: string
+  heading?: string
+}
+
+const { src, heading } = Astro.props
+const [ coll, slug ] = src.split(':')
+const entry = await getEntry(coll, slug)
+const { Content } = await entry.render()
+---
+
+{ heading &&
+  <h2>
+    <a class="font-weight-light" href={`/lore/${slug}`}>
+      {entry.data.title}
+      <LinkIcon class="ml-2" />
+    </a>
+  </h2>
+}
+
+<Content />

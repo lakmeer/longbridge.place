@@ -1,12 +1,14 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig } from 'astro/config'
 
-import tailwind from '@astrojs/tailwind';
-import alpinejs from '@astrojs/alpinejs';
-import mdx      from '@astrojs/mdx';
+import tailwind from '@astrojs/tailwind'
+import alpinejs from '@astrojs/alpinejs'
+import mdx      from '@astrojs/mdx'
+import auto     from 'astro-auto-import'
 
-import collectionLinks from './src/plugins/collection-links.ts';
-import linkChecker from './src/plugins/link-checker.ts';
+import CollectionLinks from './src/plugins/collection-links.ts'
+import LinkChecker     from './src/plugins/link-checker.ts'
+
 
 export default defineConfig({
   vite: {
@@ -18,10 +20,15 @@ export default defineConfig({
     tailwind({
       applyBaseStyles: false,
     }),
+    auto({
+      imports: [
+        { './src/components/embed/index': 'Embed' },
+      ]
+    }),
     mdx(),
     alpinejs()
   ],
   markdown: {
-    remarkPlugins: [ linkChecker, collectionLinks ]
+    remarkPlugins: [ LinkChecker, CollectionLinks ]
   }
-});
+})

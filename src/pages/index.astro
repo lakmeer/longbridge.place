@@ -4,10 +4,8 @@ import Title from '../components/Title.astro'
 
 import { getEntry } from 'astro:content'
 
-const intro = await getEntry('lore', 'introduction')
-const { Content } = await intro.render()
+const { Content } = await getEntry('lore', 'introduction').then(e => e.render())
 ---
-
 <Layout title="Welcome to Longbrige">
   <div class="prose mx-auto">
     <Content />

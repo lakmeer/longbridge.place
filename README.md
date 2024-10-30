@@ -21,38 +21,22 @@ Citizen character profiles.
     tags:
       - tag-slug
 
-
 ### Entries `/entry`
 Storyline chapters/subchapters.
 
 #### Frontmatter Schema
 
     title: Chapter Title
-    author: Link to Author entry (meta:author:loremaster-xxx)
+    author: Link to Author entry (meta:author/loremaster-xxx)
     synopsis: 1-sentance summary of events in the chapter
     pov_char: Link to Protagonist's profile (person:handelyn-second-seer-insatiable-tamryn)
     other_chars:
-      - Link to other characters appearing or mentioned (profile:handelyn-first-ria)
+      - Links to other characters appearing or mentioned (person:handelyn-first-ria), or
+      - Just the name (for minor characters without profiles)
     tags:
       - tag-slug
     related:
       - lore-slug
----
-synopsis: Instatible Tamryn partakes in a seeing ceremony, and takes a risk.
-pov_char: Handelyn Second Seer Insatiable Tamryn
-other_chars: 
- - Handelin First Seer Ria
- - Unnamed Cult of the Hand members
-locations:
- - Ceremonial Hall, Main Village, Cult of the Hand, Bridgehand, Beyond 11-firthan
-tags:
- - seeing-tea
- - cult-of-the-hand
- - the-bridgehand
- - seeing-ceremony
- - worship-poem
----
-
 
 ### Lore `/lore`
 Lore wiki articles. Can link to and embed each other, and embed media items.
@@ -67,36 +51,63 @@ Lore wiki articles. Can link to and embed each other, and embed media items.
 
 #### Guidelines
 
-- Lore articles should NOT include their own main heading - this will be added.
-- Lore articles should start with one to three-ish paragraph that can be used
-  as a fair summary of the entire article contents. Articles embedded into
-  other articles will use this to create embedded sections in relevant
-  articles. Embedding this way will take all contant before the first
-  subheading inside the article to use as the summary. It can contain any media
-  and so on.
+- Lore articles should NOT include their own main heading in the acutal body.
+- Lore articles should start with a one-ish paragraph overview that can be used
+  as a fair summary of the entire article contents. This will be used to create
+  embedded sections in relevant articles, and tooltips for links. Embedding this
+  way will take all contant before the first subheading inside the article to use
+  as the summary. Using as tooltip will take just the first paragraph.
+
+  TODO: May promote this to an explicit field in the frontmatter.
+
+- Related articles will be generated from matching tags and internal links.
 
 
+## Media & Data Types
 
-### Maps
-Interactive 2D maps, can add a location marker when embedded by a lore article.
+### Images
+Images to complement articles
 
-### Media `/media`
-#### `/media/image/`
-#### `/media/video/`
-#### `/media/images/`
-#### `/media/images/`
-#### `/media/images/`
+#### Schema
+
+    filepath: path inside `/public` folder
+    description: used as alt text when rendering context doesn't override it
+    subject:
+      - link to other collection entries
+      - just a string
+    width: number
+    height: number
+    format: jpg, png, webp, etc
+
+- Will be checked against filesystem at build time.
+  - TODO: This ^
+
+
+### `/video/`
+#### Frontmatter Schema
+- TBD
+
+### `/models/`
+#### Frontmatter Schema
+- TBD
+
+### `/splats/`
+#### Frontmatter Schema
+- TBD
+
+### `/maps/`
+#### Frontmatter Schema
+- TBD
 
 Images, videos, 3d meshes, splats, TIs, etc to complement articles
 
 ### Meta
-Meta content relating to the project itself, such as notes, user profiles, admins etc
+Meta content relating to the project itself, such as notes, user profiles, admins etc.
+No fixed schema.
 
 ### Notes
 Short tooltip notes that can pop up in other content. 
 
 ### Tables
 Tabular data. Can be embedded into lore articles.
-
-
 

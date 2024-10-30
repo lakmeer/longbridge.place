@@ -110,6 +110,11 @@
     }
   }
 
+  /* Apply this hack to h6 and h6 as well */
+  :where(h5 + *):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    margin-top: 0 !important;
+  }
+
   .prose-book {
     p {
       text-indent: 1.5rem;
