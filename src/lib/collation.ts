@@ -7,6 +7,7 @@ import { globSync } from 'glob'
 import { radFileSync } from 'fs'
 
 export type CollectionIndex = Record<string, string[]>
+export type WikiLink = [ string, string ]
 
 
 // indexContentByCollection
@@ -43,3 +44,40 @@ export function collateTags ():string[] {
 
   return allTags.toSorted()
 }
+
+
+// collectEmbeds
+//
+// Scrapes markdown source to find all embedded Articles or Summaries
+
+export function collectEmbeds (src:string):WikiLink[] {
+  const allEmbeds:string[] = []
+  const rx = /<Embed\.(Article|Summary) src="([^"]+)"/g
+
+  let match:string[]
+  while (match = rx.exec(src)) {
+    allEmbeds.push(match[2].split(':'))
+  }
+
+  return allEmbeds
+}
+
+
+// collectLinks
+//
+// Scrapes markdown source to find all wiki link urls
+
+export function collectLinks (src:string):WikiLink[] {
+  const allLinks:string[] = []
+  // links in the form [some markdown text](category:slug-wuth-hyphens/slashes/or#hashes)
+  const rx = /\[([^\]]+)\]\(([^)]+)\)/g
+  
+  let match:string[]
+  while (match = rx.exec(src)) {
+    allLinks.push(match[2].split(':'))
+  }
+
+  return allLinks
+}
+
+

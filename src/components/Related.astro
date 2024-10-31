@@ -1,0 +1,19 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import { entryUrl, getRelatedEntries } from '@utils'
+
+interface Props {
+  entry: CollectionEntry
+}
+
+const related = await getRelatedEntries(Astro.props.entry)
+---
+<div>
+  { related.length ? <>
+    <hr />
+    <h3 class="text-lg font-title-lesser mb-4">Further Reading</h3>
+    <ul>
+      { related.map((e) => <li class="font-title-least"><a href={entryUrl(e)}>{e.data.title}</a></li>) }
+    </ul>
+  </> : null }
+</div>

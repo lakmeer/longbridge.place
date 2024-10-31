@@ -63,7 +63,7 @@ const meta = defineCollection({
   schema: z.object({
     title: z.string(),
     tags: tags,
-    type: z.string().optional(), // For concrete artifacts like 'Book', etc
+    type: z.string().optional(),
   })
 })
 

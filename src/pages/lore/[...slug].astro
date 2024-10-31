@@ -1,10 +1,11 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import Title from '@/components/Title.astro'
+import Related from '@comp/Related.astro'
 
-import { getCollection } from 'astro:content'
-import { entryUrl } from '@utils'
+import { getCollection, getEntry } from 'astro:content'
 
+// All entries
 export async function getStaticPaths() {
   const lore = await getCollection('lore')
   return lore.map((entry) => ({
@@ -13,36 +14,16 @@ export async function getStaticPaths() {
   }))
 }
 
-
 // This entry
-
 const { entry } = Astro.props
 const { Content } = await entry.render()
-
-const tags = entry.data.tags
-
-
-// Entries with same tags
-
-const related = (await getCollection('lore', ({ data }) => {
-  return data.tags.some((tag) => tags.includes(tag))
-})).filter((e) => e.data.title !== entry.data.title)
-
-// TODO: Filter out entries that have been embedded
-// TODO: Collect linked entries from body
-
 ---
 <Layout title={entry.data.title}>
+  <h1 class="max-w-prose mx-auto text-3xl md:text-4xl mb-4 md:mb-8 lg:mb-16 font-title-wide">{ entry.data.title }</h1>
+
   <div class="prose mx-auto">
-    <h1 class="text-4xl font-title"> {entry.data.title} </h1>
     <Content />
 
-    { related.length ? <>
-      <hr />
-      <h3 class="text-lg font-title-lesser mb-4">Further Reading</h3>
-      <ul>
-      { related.map((e) => <li class="font-title-least"><a href={entryUrl(e)}>{e.data.title}</a></li>) }
-      </ul>
-    </> : null }
+    <Related entry={entry} />
   </div>
 </Layout>
