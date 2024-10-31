@@ -1,10 +1,10 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import Title from '@/components/Title.astro'
 import CitizenCard from '@/components/CitizenCard.astro'
 
-import { getCollection, getEntry, getEntries } from 'astro:content'
+import { getCollection } from 'astro:content'
 
+// All entries
 export async function getStaticPaths() {
   const people = await getCollection('person')
   return people.map((entry) => ({
@@ -13,14 +13,10 @@ export async function getStaticPaths() {
   }))
 }
 
-
-// This record
-
+// This entry
 const { entry } = Astro.props
 const { Content } = await entry.render()
-
 ---
-
 <Layout title={entry.data.day_name}>
   <div class="mx-auto max-w-3xl grid gap-16">
     <CitizenCard person={entry} />

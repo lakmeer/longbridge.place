@@ -64,3 +64,15 @@ export async function getRelatedEntries (entry:CollectionEntry) {
 
   return dedupe(related, (a, b) => a.data.title === b.data.title)
 }
+
+export function runMatches<T> (rx:RegExp, str:string):T[] {
+  const all:T[] = []
+  
+  let match:RegExpMatchArray | null
+  while (match = rx.exec(str)) {
+    //@ts-ignore
+    all.push(match[2].split(':'))
+  }
+
+  return all
+}

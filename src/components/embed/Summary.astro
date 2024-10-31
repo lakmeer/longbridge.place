@@ -13,8 +13,10 @@ const { src, heading = false, level = 2 } = Astro.props
 const [ coll, slug ] = src.split(':')
 const entry = await getEntry(coll, slug)
 
+if (!entry) Astro.throw(`No entry found for ${src}`)
+
 // Process body to find just the first paragraph
-const [ first, ...lines ] = entry.body.split(/\n\s*\n/)
+const first = entry!.body.split(/\n\s*\n/)[0]
 
 // Render heading
 const Htag = 'h' + level
@@ -27,7 +29,7 @@ const Htag = 'h' + level
 { heading &&
   <Htag>
     <a class="font-weight-light" href={`/lore/${slug}`}>
-      {entry.data.title}
+      {entry!.data.title}
       <LinkIcon class="ml-2" />
     </a>
   </Htag>

@@ -8,10 +8,10 @@ import MiniLink from '@comp/MiniLink.astro'
 interface Props {
   person: CollectionEntry<'person'>
   link?: string
-  size: 'sm' | 'md' | 'lg'
+  size?: 'sm' | 'md' | 'lg'
 }
 
-let { person, link, size } = Astro.props
+let { person, link, size = 'lg' } = Astro.props
 
 const now      = await getEntry('misc', 'now')
 const headshot = await getEntry('image', person.data.headshot.id)

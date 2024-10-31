@@ -1,9 +1,8 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import Title from '@/components/Title.astro'
 import Related from '@comp/Related.astro'
 
-import { getCollection, getEntry } from 'astro:content'
+import { getCollection } from 'astro:content'
 
 // All entries
 export async function getStaticPaths() {

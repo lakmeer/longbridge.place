@@ -1,9 +1,8 @@
 ---
-import Layout from '@/layouts/Layout.astro'
-import Title from '@/components/Title.astro'
+import Layout    from '@/layouts/Layout.astro'
 import PlaceCard from '@/components/PlaceCard.astro'
 
-import { getCollection, getEntry, getEntries } from 'astro:content'
+import { getCollection } from 'astro:content'
 
 export async function getStaticPaths() {
   const entries = await getCollection('location')

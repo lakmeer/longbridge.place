@@ -4,7 +4,9 @@
 //
 
 import { globSync } from 'glob'
-import { radFileSync } from 'fs'
+//import { readFileSync } from 'fs'
+
+import { runMatches } from '@utils'
 
 export type CollectionIndex = Record<string, string[]>
 export type WikiLink = [ string, string ]
@@ -42,7 +44,7 @@ export function collateTags ():string[] {
 
   // TODO:
 
-  return allTags.toSorted()
+  return [] // allTags.toSorted()
 }
 
 
@@ -51,15 +53,7 @@ export function collateTags ():string[] {
 // Scrapes markdown source to find all embedded Articles or Summaries
 
 export function collectEmbeds (src:string):WikiLink[] {
-  const allEmbeds:string[] = []
-  const rx = /<Embed\.(Article|Summary) src="([^"]+)"/g
-
-  let match:string[]
-  while (match = rx.exec(src)) {
-    allEmbeds.push(match[2].split(':'))
-  }
-
-  return allEmbeds
+  return runMatches(/<Embed\.(Article|Summary) src="([^"]+)"/g, src)
 }
 
 
@@ -68,16 +62,7 @@ export function collectEmbeds (src:string):WikiLink[] {
 // Scrapes markdown source to find all wiki link urls
 
 export function collectLinks (src:string):WikiLink[] {
-  const allLinks:string[] = []
-  // links in the form [some markdown text](category:slug-wuth-hyphens/slashes/or#hashes)
-  const rx = /\[([^\]]+)\]\(([^)]+)\)/g
-  
-  let match:string[]
-  while (match = rx.exec(src)) {
-    allLinks.push(match[2].split(':'))
-  }
-
-  return allLinks
+  return runMatches(/\[([^\]]+)\]\(([^)]+)\)/g, src)
 }
 
 
