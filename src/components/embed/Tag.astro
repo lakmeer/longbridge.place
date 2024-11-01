@@ -1,0 +1,37 @@
+---
+import type { AnyCollectionKey } from '@/content/config.ts'
+import { getEntry } from 'astro:content'
+import { Markdown } from '@astropub/md'
+
+import LinkIcon from '@/icons/arrow-top-right-on-square.astro'
+import Summary  from '@comp/embed/Summary.astro'
+
+interface Props {
+  tag:      string
+  level?:   number
+  heading?: boolean
+}
+
+const { tag, heading = false, level = 2 } = Astro.props
+
+const Htag = 'h' + level
+
+
+// TODO:
+
+
+// Rendering explicitly using astropub/md instead of built-in render function, since
+// - the collection doc isn't modifyable from here
+// - we don't want to support embeds in the summary snippet
+
+---
+{ heading &&
+  <Htag>
+    <a class="font-weight-light" href={`/lore/${slug}`}>
+      {entry?.data.title ?? entry?.data.name}
+      <LinkIcon class="ml-2" />
+    </a>
+  </Htag>
+}
+
+
