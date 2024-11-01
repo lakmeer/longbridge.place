@@ -17,7 +17,7 @@ export async function getStaticPaths() {
 const { entry } = Astro.props
 const { Content } = await entry.render()
 ---
-<Layout title={entry.data.day_name}>
+<Layout title={entry?.data.day_name}>
   <div class="mx-auto max-w-3xl grid gap-16">
     <CitizenCard person={entry} />
 

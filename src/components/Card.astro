@@ -1,10 +1,7 @@
 ---
-import { getEntry, CollectionEntry } from 'astro:content';
-import { absolutePath } from '@utils';
-
 interface Props {
   heading: string
-  cl: string
+  class?: string
 }
 
 const { heading, class: cl } = Astro.props;

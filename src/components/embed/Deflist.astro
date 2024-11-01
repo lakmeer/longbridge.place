@@ -1,10 +1,10 @@
 ---
 interface Props {
   rows?: string[][]
-  src?: string
+  //src?: string
 }
 
-const { rows = [], src } = Astro.props
+const { rows = [] } = Astro.props
 
 // TODO: If `src` is passed instead of `rows`, fetch from the Tables 
 //       collection and process that to create the `rows` array.

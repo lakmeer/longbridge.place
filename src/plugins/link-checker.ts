@@ -12,6 +12,7 @@ import { indexContentByCollection } from '../lib/collation.ts'
 export default function LinkChecker () {
   const allCollections = indexContentByCollection()
 
+  //@ts-ignore can't be bothered digging out this typedef
   return function visit (node) {
     if (node.type === 'link' && node.url.includes(':')) {
 

@@ -1,19 +1,19 @@
 ---
+import type { AnyCollectionKey } from '@/content/config.ts'
 import { getEntry } from 'astro:content'
-import LinkIcon from '@/icons/arrow-top-right-on-square.astro'
 import { Markdown } from '@astropub/md'
 
+import LinkIcon from '@/icons/arrow-top-right-on-square.astro'
+
 interface Props {
-  src: string
-  level?: number
+  src:      string
+  level?:   number
   heading?: string
 }
 
 const { src, heading = false, level = 2 } = Astro.props
 const [ coll, slug ] = src.split(':')
-const entry = await getEntry(coll, slug)
-
-if (!entry) Astro.throw(`No entry found for ${src}`)
+const entry = await getEntry(coll as AnyCollectionKey, slug)
 
 // Process body to find just the first paragraph
 const first = entry!.body.split(/\n\s*\n/)[0]
@@ -29,7 +29,7 @@ const Htag = 'h' + level
 { heading &&
   <Htag>
     <a class="font-weight-light" href={`/lore/${slug}`}>
-      {entry!.data.title}
+      {entry?.data.title ?? entry?.data.name}
       <LinkIcon class="ml-2" />
     </a>
   </Htag>

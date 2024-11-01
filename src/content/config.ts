@@ -26,6 +26,7 @@ const lore = defineCollection({
 const person = defineCollection({
   type: 'content',
   schema: z.object({
+    title: z.string(),
     day_name: z.string(),
     names: z.string(),
     gender: z.enum(['Male', 'Female', 'Nymi', 'Luminari']).optional(),
@@ -44,6 +45,7 @@ const person = defineCollection({
 const location = defineCollection({
   type: 'content',
   schema: z.object({
+    title: z.string(),
     name: z.string(),
     type: z.enum(['Enclave', 'Building', 'Block']).optional(),
     address: z.string().optional(),
@@ -77,6 +79,7 @@ const meta = defineCollection({
 const image = defineCollection({
   type: 'data',
   schema: z.object({
+    title: z.string(),
     filepath: z.string(),
     description: z.string(),
     width: z.number(),
@@ -108,3 +111,11 @@ export const collections = {
   misc,
   image,
 }
+
+export type AnyCollectionKey = keyof typeof collections
+export type AnyContentKey = 'lore' | 'location' | 'person'
+
+export function isValidCollection (coll:string): coll is AnyCollectionKey {
+  return Object.keys(collections).includes(coll)
+}
+

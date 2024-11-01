@@ -5,8 +5,8 @@ import { ViewTransitions } from 'astro:transitions'
 import Title from '@/components/Title.astro'
 
 interface Props {
-  title: string;
-  cl?:   string;
+  title:  string;
+  class?: string;
 }
 
 const { title, class: cl } = Astro.props

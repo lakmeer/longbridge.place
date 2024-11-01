@@ -6,6 +6,7 @@
 //
 
 export default function CollectionLinks () {
+  //@ts-ignore can't be bothered digging out this typedef
   return function visit (node) {
     if (node.type === 'link' && node.url.includes(':')) {
       node.url = '/' + node.url.replace(':', '/')

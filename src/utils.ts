@@ -1,6 +1,6 @@
 
 import { getEntry, getCollection, type CollectionEntry } from 'astro:content'
-import { collectEmbeds, collectLinks } from '@/lib/collation'
+import { collectEmbeds, collectLinks } from '@/lib/collections'
 
 export function absolutePath (path:string) {
   return '/' + path.replace(/^\//, '')
@@ -67,7 +67,7 @@ export async function getRelatedEntries (entry:CollectionEntry) {
 
 export function runMatches<T> (rx:RegExp, str:string):T[] {
   const all:T[] = []
-  
+
   let match:RegExpMatchArray | null
   while (match = rx.exec(str)) {
     //@ts-ignore
@@ -76,3 +76,12 @@ export function runMatches<T> (rx:RegExp, str:string):T[] {
 
   return all
 }
+
+import type { AnyCollectionKey } from '@/content/config.ts'
+
+export function launderWikiLink (src:string):[AnyCollectionKey, string] {
+  const [ coll, slug ] = src.split(':')
+
+  return [ coll as unknown as AnyCollectionKey, slug ]
+}
+
