@@ -1,4 +1,9 @@
 
+# TODOs
+
+- Replace tailwind-typography with custom styles
+- Serve story thread index from `/chapter/tamryn` ?
+
 # Content Preprocessing
 
 - Collect all slugs

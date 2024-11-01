@@ -1,6 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content'
-import CitizenCard from '@comp/CitizenCard.astro'
+import PersonCard from '@comp/PersonCard.astro'
 import { getEntry } from 'astro:content'
 
 interface Props {
@@ -14,5 +14,5 @@ const entry = await getEntry('person', src) as CollectionEntry<'person'>
 
 { heading && <h2>{entry?.data.day_name}</h2> }
 <div class="not-prose">
-  <CitizenCard size="sm" person={entry} link=`/person/${src}` />
+  <PersonCard size="sm" person={entry} link=`/person/${src}` />
 </div>

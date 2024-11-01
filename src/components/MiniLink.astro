@@ -10,13 +10,14 @@ import { resolve } from '@utils'
 
 interface Props {
   ref: string | { collection: string, slug: string }
+  class?: string
 }
 
-const { ref } = Astro.props
+const { ref, class: cl } = Astro.props
 const entry = await resolve(ref)
 ---
 { typeof entry === 'string' ? entry :
-  <a href=`/${entry.collection}/${entry.slug}` class="inline-flex minilink gap-1 hover:underline font-bold">
+  <a href=`/${entry.collection}/${entry.slug}` class:list={[ cl, "inline-flex minilink gap-1 hover:underline font-bold" ]}>
     { entry.collection === 'location' && <MapPin     class="size-5 "/> }
     { entry.collection === 'person'   && <UserCircle class="size-5 "/> }
     { entry.collection === 'lore'     && <BookOpen   class="size-5 "/> }

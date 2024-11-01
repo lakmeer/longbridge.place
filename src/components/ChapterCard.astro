@@ -1,0 +1,47 @@
+---
+//@ts-nocheck
+import { getEntry, getCollection, type CollectionEntry } from 'astro:content'
+import { resolve, absolutePath } from '@utils'
+
+import Card     from '@comp/Card.astro'
+import MiniLink from '@comp/MiniLink.astro'
+
+interface Props {
+  chapter: CollectionEntry<'chapter'>
+  link?: string
+}
+
+let { chapter } = Astro.props
+
+const thread = await getEntry(chapter.data.thread)
+const author = await getEntry(chapter.data.author)
+---
+<Card heading={thread.data.title + (chapter.data.number ? ' #' + chapter.data.number : '')} link=`/thread/${thread.id}`>
+  <div class="grid gap-8">
+    <div class="grid gap-2">
+      <h3 class="font-title text-xl">{chapter.data.title}</h3>
+
+      { chapter.data.synopsis && <p>{ chapter.data.synopsis }</p> }
+    </div>
+
+    <dl>
+      <dt>Author</dt>
+      <dd>{author.data.name}</dd>
+
+      <dt>Locations</dt>
+      <dd>{chapter.data.locations.map((l) => <MiniLink ref={l} />)}</dd>
+
+      <dt>Protagonist</dt>
+      <dd><MiniLink ref={chapter.data.pov_char} /></dd>
+
+      <dt>Other Characters</dt>
+      <dd>{chapter.data.other_chars.map((c) => <MiniLink class="block" ref={c} />)}</dd>
+    </dl>
+  </div>
+</Card>
+
+<style>
+  dl { columns: 2; }
+  dt { font-weight: 500; font-family: var(--font-title); }
+  dd + dt { margin-top: 0.5rem; }
+</style>

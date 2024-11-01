@@ -10,7 +10,6 @@ const tags = z.array(z.string()).optional()
 //
 
 // Main Wiki articles
-
 const lore = defineCollection({
   type: 'content',
   schema: z.object({
@@ -20,9 +19,23 @@ const lore = defineCollection({
   })
 })
 
+// Story chapters
+const chapter = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    thread: reference('thread'),
+    author: reference('author'),
+    number: z.number().optional(),
+    synopsis: z.string().optional(),
+    pov_char: reference('person').or(z.string()).optional(),
+    other_chars: z.array(reference('person').or(z.string())).optional(),
+    locations: z.array(reference('location').or(z.string())).optional(),
+    tags: tags.optional(),
+  })
+})
 
 // Citizen profiles and story characters
-
 const person = defineCollection({
   type: 'content',
   schema: z.object({
@@ -39,9 +52,7 @@ const person = defineCollection({
   }),
 })
 
-
 // Physical Places
-
 const location = defineCollection({
   type: 'content',
   schema: z.object({
@@ -57,9 +68,7 @@ const location = defineCollection({
   })
 })
 
-
 // Meta-articles targeted at contributors
-
 const meta = defineCollection({
   type: 'content',
   schema: z.object({
@@ -75,7 +84,6 @@ const meta = defineCollection({
 //
 
 // Media: Images  TODO: Validate that referenced files exist on build
-
 const image = defineCollection({
   type: 'data',
   schema: z.object({
@@ -98,10 +106,33 @@ const image = defineCollection({
 
 
 // Misc data storage with no specific schmea
-
 const misc = defineCollection({
   type: 'data'
 })
+
+// Storyline Threads
+const thread = defineCollection({
+  type: 'data',
+  schema: z.object({
+    title: z.string(),
+    tags: tags,
+    authors: z.array(reference('author').or(z.string())),
+  })
+})
+
+// Content Authors
+const author = defineCollection({
+  type: 'data',
+  schema: z.object({
+    name: z.string(),
+    headshot: reference('image').optional(),
+  })
+})
+
+
+//
+// Export and Utility Functions
+//
 
 export const collections = {
   lore,
@@ -110,10 +141,13 @@ export const collections = {
   meta,
   misc,
   image,
+  chapter,
+  author,
+  thread,
 }
 
 export type AnyCollectionKey = keyof typeof collections
-export type AnyContentKey = 'lore' | 'location' | 'person'
+export type AnyContentKey = 'lore' | 'location' | 'person' | 'chapter'
 
 export function isValidCollection (coll:string): coll is AnyCollectionKey {
   return Object.keys(collections).includes(coll)

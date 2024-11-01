@@ -2,6 +2,16 @@
 
 Catalog of all raw content for the Longbridge project.
 
+# Content Conventions
+
+- Collections are named the same as the route they are served from
+- Collection names are in the singular (person vs people)
+- Story chapters are written in the present tense
+- Chapters are organised into threads named after the POV character
+  - Since Astro can't type schemas of nested collections, thread reference is a prop of the frontmatter
+  - Threads are data objects
+- Chapter collection is subfolders for each thread (storyline)
+
 
 ## Content Types
 
@@ -27,6 +37,7 @@ Storyline chapters/subchapters.
 #### Frontmatter Schema
 
     title: Chapter Title
+    thread: Name of this storyline
     author: Link to Author entry (meta:author/loremaster-xxx)
     synopsis: 1-sentance summary of events in the chapter
     pov_char: Link to Protagonist's profile (person:handelyn-second-seer-insatiable-tamryn)

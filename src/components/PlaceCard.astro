@@ -22,7 +22,7 @@ let image = place.data.image ? await getEntry('image', place.data.image.id) : nu
         class="w-full aspect-square object-cover " /> }
 
     <div class="grid gap-4">
-      <h3 class="font-title-lesser text-2xl">{place.data.name}</h3>
+      <h3 class="font-title text-2xl">{place.data.name}</h3>
 
       <dl>
         { place.data.type && <>

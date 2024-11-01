@@ -7,8 +7,14 @@ export function absolutePath (path:string) {
 }
 
 export async function resolve (ref:string | { collection:string, slug:string }) {
+  console.log('🟡', ref)
   if (typeof ref === 'string') {
-    return ref
+    if (ref.includes(':')) {
+      const [ collection, slug ] = ref.split(':')
+      return resolve({ collection, slug })
+    } else {
+      return ref
+    }
   } else {
     return await getEntry(ref.collection, ref.slug)
   }

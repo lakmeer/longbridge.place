@@ -4,6 +4,10 @@ export default {
   theme: {
     extend: {
 
+      fontSize: {
+        '2xs': ['0.5rem', '0.5rem'],
+      },
+
       colors: {
         'sky-day':       '#53ACDB',
         'sky-day-dark':  '#1488BA',

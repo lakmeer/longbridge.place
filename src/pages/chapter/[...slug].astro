@@ -1,0 +1,34 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import ChapterCard from '@/components/ChapterCard.astro'
+
+import { getEntry, getCollection } from 'astro:content'
+import { resolve } from '@utils'
+
+// All entries
+export async function getStaticPaths() {
+  const chapters = await getCollection('chapter')
+  return chapters.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }))
+}
+
+// This entry
+const { entry } = Astro.props
+const { Content } = await entry.render()
+
+const thread = await getEntry(entry.data.thread)
+---
+<Layout title={entry?.data.day_name}>
+  <div class="mx-auto max-w-3xl grid gap-20">
+    <div class="grid text-center gap-8">
+      <h2 class="font-title-xwide uppercase text-center text-lg ">{ thread.data.title }</h2>
+      <h3 class="font-title-wide text-center text-3xl">{ entry.data.title }</h3>
+    </div>
+
+    <div class="prose prose-book mx-auto">
+      <Content />
+    </div>
+  </div>
+</Layout>

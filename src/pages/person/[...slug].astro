@@ -1,6 +1,6 @@
 ---
 import Layout from '@/layouts/Layout.astro'
-import CitizenCard from '@/components/CitizenCard.astro'
+import PersonCard from '@/components/PersonCard.astro'
 
 import { getCollection } from 'astro:content'
 
@@ -19,7 +19,7 @@ const { Content } = await entry.render()
 ---
 <Layout title={entry?.data.day_name}>
   <div class="mx-auto max-w-3xl grid gap-16">
-    <CitizenCard person={entry} />
+    <PersonCard person={entry} />
 
     <div class="prose mx-auto">
       <Content />

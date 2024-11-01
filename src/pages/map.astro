@@ -1,0 +1,137 @@
+---
+import Layout from '@/layouts/Layout.astro'
+
+const GREEN      = '#3ACB1D'
+const BH_DARK    = '#4B50AE'
+const BH_LIGHT   = '#B98CF2'
+const BLUE       = '#6BD3FF'
+const KS_SHADE_1 = '#EDEDED'
+const KS_SHADE_2 = '#D9D9D9'
+---
+<Layout title="Map">
+  <h1 class="font-title-wide text-center text-2xl">Enclaves</h1>
+
+  <div class="relative grid md:[grid-template-columns:3fr_1fr] my-[-17vw] md:my-[-5vw]">
+    <svg width="100%" viewBox="0 0 280 2600" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="bridgehand" x1="50" y1="0"  x2="50" y2="300" gradientUnits="userSpaceOnUse"> <stop offset="0.125751" stop-color={BH_DARK}  stop-opacity="0"/> <stop offset="0.415" stop-color={BH_DARK}/> <stop offset="0.580029" stop-color={BH_LIGHT}/> <stop offset="0.75" stop-color={BH_LIGHT}/> <stop offset="1" stop-color="white"/> </linearGradient>
+        <linearGradient id="indicator"  x1="21" y1="-4" x2="21" y2="359" gradientUnits="userSpaceOnUse"> <stop offset="0.103818" stop-color={BH_LIGHT} stop-opacity="0"/> <stop offset="0.285" stop-color={BH_LIGHT}/> </linearGradient>
+      </defs>
+
+      <!-- Bridge Main -->
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M44 300L50 294L56 300L53 303V397L56 400L53 403V497L56 500L53 503V597L56 600L53 603V697L56 700L53 703V797L56 800L53 803V897L56 900L53 903V997L56 1000L53 1003V1097L56 1100L53 1103V1197L56 1200L53 1203V1297L56 1300L53 1303V1400V1497L56 1500L53 1503V1597L56 1600L53 1603V1697L56 1700L53 1703V1797L56 1800L53 1803V1897L56 1900L53 1903V1997L56 2000L53 2003V2097L56 2100L53 2103V2197L56 2200L53 2203V2297L56 2300L53 2303V2397L56 2400L53 2403V2497L56 2500L50 2506L44 2500L47 2497V2403L44 2400L47 2397V2303L44 2300L47 2297V2203L44 2200L47 2197V2103L44 2100L47 2097V2003L44 2000L47 1997V1903L44 1900L47 1897V1803L44 1800L47 1797V1703L44 1700L47 1697V1603L44 1600L47 1597V1503L44 1500L47 1497V1400V1303L44 1300L47 1297V1203L44 1200L47 1197V1103L44 1100L47 1097V1003L44 1000L47 997V903L44 900L47 897V803L44 800L47 797V703L44 700L47 697V603L44 600L47 597V503L44 500L47 497V403L44 400L47 397V303L44 300Z" fill="white"/>
+
+      <!-- Bridgehand -->
+      <path d="M19 0V250H23V249L21 247V0L19 0Z" fill="url(#indicator)"/>
+      <path d="M39 0H58.6203C58.6203 0 57.0188 5.08293 57.5501 8.31188C58.2635 12.6485 57.3291 15.5144 57.5501 19.5149C57.771 23.5153 58.0118 25.7776 57.5501 29.9951C57.2669 32.5815 55.7644 33.9232 56.1231 36.5C56.3077 37.8258 57.1933 39.7525 57.1933 39.7525C57.1933 39.7525 57.5501 41.9208 57.5501 42.6436C57.5501 43.3663 57.7167 43.9821 57.5501 44.8119C57.4005 45.5566 57.0588 45.8929 56.8366 46.6188C56.0114 49.3148 56.7615 51.025 56.8366 53.8465C56.908 56.5307 56.501 58.1209 57.1933 60.7129C57.5042 61.8768 57.9216 62.449 58.2635 63.604C58.6325 64.8503 58.9096 65.5571 58.977 66.8564C59.0432 68.1327 58.9789 68.8837 58.6203 70.1089C58.266 71.3191 57.7082 71.8505 57.1933 73C56.5734 74.3842 56.0564 75.1225 55.7664 76.6139C55.3616 78.6955 56.2286 79.9157 56.1231 82.0347C56.0309 83.8886 55.4909 84.8782 55.4097 86.7327C55.323 88.7116 55.9692 89.8219 55.7664 91.7921C55.6332 93.0862 55.3189 93.7716 55.0529 95.0446C54.7588 96.4526 55.2043 97.2274 55.0529 98.6584C54.8748 100.342 55.0672 101.302 55.0529 102.995C55.015 107.513 55.3249 110.086 54.6962 114.559C54.4766 116.122 54.1215 116.963 53.9827 118.535C53.7086 121.64 54.6442 123.368 54.6962 126.485C54.7433 129.311 53.6754 130.887 53.626 133.713C53.5495 138.089 53.9827 140.539 53.9827 144.916C53.9827 149.293 53.5597 151.742 53.626 156.119C53.6709 159.086 53.9479 160.741 53.9827 163.708C53.9943 164.696 54.0515 165.252 53.9827 166.238C53.9133 167.233 53.7417 167.776 53.626 168.767C53.3147 171.434 53.335 172.949 53.2693 175.634C53.2105 178.032 52.8048 179.425 53.2693 181.777C53.3819 182.348 53.5217 182.651 53.626 183.223C53.9295 184.888 53.4197 185.879 53.626 187.559C53.7845 188.851 54.3395 189.542 54.3395 190.812C54.3395 192.082 54.3395 192.794 54.3395 194.064C54.3395 195.335 55.1251 196.064 55.7664 197.317C56.3748 198.505 57.1615 198.869 57.1933 200.208C57.2137 201.066 56.1536 201.974 55.7664 202.738C55.2693 203.718 55.7981 203.38 55.0529 204.183C54.2322 205.068 53.724 205.59 53.2693 206.713C52.6964 208.128 53 210.935 53 212.495V300H47V219C46.7255 212.52 46.5304 209.169 45.7779 205.99C45.7779 205.99 45.116 204.095 44.351 203.099C43.8672 202.469 43.285 202.363 42.9241 201.653C42.5987 201.014 42.4642 200.559 42.5673 199.847C42.6852 199.032 43.2948 198.786 43.6375 198.04C44.0092 197.23 44.001 196.69 44.351 195.871C44.7971 194.827 45.4267 194.422 45.7779 193.342C46.0859 192.394 46.0605 191.807 46.1346 190.812C46.2185 189.686 46.0657 189.048 46.1346 187.921C46.2042 186.785 46.4006 186.164 46.4914 185.03C46.6603 182.92 46.505 181.726 46.4914 179.609C46.4541 173.821 46.1701 170.58 46.1346 164.792C46.1225 162.816 46.3588 161.695 46.1346 159.733C46.0372 158.88 45.8944 158.415 45.7779 157.564C45.4135 154.905 45.3751 153.383 45.4212 150.698C45.4722 147.721 45.9298 146.079 46.1346 143.109C46.4552 138.461 45.7739 135.829 45.4212 131.183C45.0644 126.485 45.0644 123.594 45.4212 118.535C45.6993 114.591 45.7381 112.311 45.0644 108.416C44.8428 107.134 44.3342 106.464 44.351 105.163C44.362 104.305 44.688 103.853 44.7077 102.995C44.7306 101.997 44.351 101.463 44.351 100.465C44.351 99.4674 44.7907 98.93 44.7077 97.9356C44.6075 96.7341 44.6318 96.2163 44.351 95.0446C44.086 93.9388 44.0045 93.2912 43.9942 92.1535C43.9787 90.4366 43.2808 89.5338 43.2808 87.8168C43.2808 86.0999 42.8166 85.1785 42.5673 83.4802C42.2369 81.2293 42.3415 79.9194 41.8539 77.698C41.4425 75.8242 42.4996 74.8047 41.8539 73C41.2367 71.2751 40.3606 70.4743 40.0702 68.6634C39.8691 67.4096 39.7971 66.6506 40.0702 65.4109C40.3013 64.3619 40.8646 63.919 41.1404 62.8812C41.6474 60.9733 41.1404 57.8218 41.1404 57.8218C41.2549 54.9875 41.8286 53.4306 41.8539 50.5941C41.8816 47.4765 40.8663 45.7488 41.1404 42.6436C41.2791 41.072 41.7857 40.2447 41.8539 38.6683C41.9212 37.111 41.6631 36.2428 41.4971 34.6931C40.8537 28.6869 40.9533 27.2072 41.1404 26.7426C41.9415 24.753 41.0214 21.9041 40.7837 20.2376C40.3841 17.4377 39.0868 15.8227 39.7135 12.6485C40.0702 10.8416 39.4795 8.55736 39.3567 6.50495C39.1478 3.01142 39 0 39 0Z" fill="url(#bridgehand)"/>
+      <path d="M44 200L50 194L56 200L50 206L44 200Z" fill={BH_DARK}/>
+      <path d="M50 148L52 150L50 152L48 150L50 148Z" fill="white"/>
+
+      <!-- Conservatory -->
+      <path d="M45 1200L50 1195L55 1200L50 1205L45 1200Z" fill={GREEN}/>
+
+      <!-- The Middle -->
+      <path d="M38.6744 1403.84L49.8372 1415L61 1403.84V1396.4L49.8372 1385.23L38.6744 1396.4V1403.84Z" fill="white"/>
+      <path d="M40.012 1403.39L49.8372 1413.22L59.6624 1403.39V1396.84L49.8372 1387.02L40.012 1396.84V1403.39Z" fill={GREEN}/>
+      <path d="M49.6729 1413.23H49.9673V1410.58L57.7686 1402.78V1397.48L49.9673 1389.68V1386.89H49.6729V1389.68L41.8716 1397.48V1402.78L49.6729 1410.58V1413.23Z" fill="white"/>
+      <path d="M42.3132 1402.64L49.8201 1410.14L57.327 1402.64V1397.63L49.8201 1390.12L42.3132 1397.63V1402.64Z" fill={GREEN}/>
+      <path d="M49.8236 1400.13H44.6471L49.8236 1405.31L49.8236 1400.13Z"    fill="white"/>
+      <path d="M49.8235 1400.13L49.8235 1405.31L55 1400.13L49.8235 1400.13Z" fill={KS_SHADE_1}/>
+      <path d="M49.8236 1400.13V1394.95L44.6471 1400.13L49.8236 1400.13Z"    fill={KS_SHADE_1}/>
+      <path d="M49.8235 1400.13L55 1400.13L49.8235 1394.95L49.8235 1400.13Z" fill={KS_SHADE_2}/>
+
+      <!-- Broken End -->
+      <path d="M0 0V50L0.75 49.6744V48.3721L1.5 48.6977V49.0233H2.25V48.6977H3V48.3721H3.75V48.6977L4.5 49.0233V48.0465H5.25V48.3721H6V0H0Z" transform="translate(47, 2500)" fill="white" />
+
+      <!-- Leans Indicator -->
+      <path d="M23 2050H19V2250H23V2249L21 2247V2053L23 2051V2050Z" fill={BLUE}/>
+
+    </svg>
+
+    <nav class="absolute inset-0 font-title-xwide uppercase flex flex-col pl-[25%] md:pl-[20%] text-sm md:text-xl whitespace-nowrap">
+      <a data-ix="-12.5" href="/lore/the-cult-of-the-hand" class="text-2xs md:text-sm">Cult of the Hand</a>
+      <a data-ix="-12"   href="/lore/the-bridgehand">The Bridgehand</a>
+      <a data-ix="-11"   href="/location/workhome">Workhome</a>
+      <a data-ix="-10"   href="/location/new-commons"> New Commons </a>
+      <a data-ix="-9"    class="hidden" />
+      <a data-ix="-8"    class="hidden" />
+      <a data-ix="-7"    href="/location/abreast">Abreast</a>
+      <a data-ix="-6"    href="/location/loom">Loom</a>
+      <a data-ix="-5"    class="hidden" />
+      <a data-ix="-4"    href="/location/respite">Respite</a>
+      <a data-ix="-3"    href="/location/foundry">Foundry</a>
+      <a data-ix="-2"    href="/location/conservatory">Conservatory</a>
+      <a data-ix="-1"    href="/location/union">Union</a>
+
+      <a data-ix="0"     href="/location/the-middle" class="text-xl md:text-3xl">The Middle</a>
+
+      <a data-ix="1"     href="/location/high-commons">High Commons</a>
+      <a data-ix="2"     href="/location/the-mint">The Mint</a>
+      <a data-ix="3"     href="/location/jubilee">Jubilee</a>
+      <a data-ix="4"     href="/location/mackintosh">Mackintosh</a>
+      <a data-ix="5"     href="/location/haven">Haven</a>
+      <a data-ix="6"     href="/location/new-start">New Start</a>
+      <a data-ix="7.5"   href="/location/leans">Leans</a>
+      <a data-ix="8"     class="hidden" />
+      <a data-ix="9"     class="hidden" />
+      <a data-ix="10"    href="/location/pulsers-clave">Pulsers Clave</a>
+      <a data-ix="11"    href="/location/far-echo">Far Echo</a>
+    </nav>
+  </div>
+</Layout>
+
+<style define:vars={{ step: "100% / 26", middle: 100 / 2600 / 2 }}>
+  nav {
+    a {
+      display: block;
+      position: absolute;
+      transform: translateY(-50%);
+      font-weight: 500;
+
+      /* A bunch of carry-on to re-create the underline effect while avoiding
+       * the extra width created by letter-spacing */
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0.5em;
+        bottom: -0.1em;
+        height: 0.1em;
+        opacity: 0;
+        background-color: currentColor;
+        transform: translateY(100%);
+        transition: opacity 0.1s linear, transform 0.1s ease-out;
+      }
+      &:hover::before { opacity: 1.0; transform: translateY(0%); }
+    }
+
+    [data-ix="-12.5"] { top: calc(var(--step) *  1.5); }
+    [data-ix="-12"]   { top: calc(var(--step) *   2 ); }
+    [data-ix="-11"]   { top: calc(var(--step) *   3 ); }
+    [data-ix="-10"]   { top: calc(var(--step) *   4 ); }
+    [data-ix="-9"]    { top: calc(var(--step) *   5 ); }
+    [data-ix="-8"]    { top: calc(var(--step) *   6 ); }
+    [data-ix="-7"]    { top: calc(var(--step) *   7 ); }
+    [data-ix="-6"]    { top: calc(var(--step) *   8 ); }
+    [data-ix="-5"]    { top: calc(var(--step) *   9 ); }
+    [data-ix="-4"]    { top: calc(var(--step) *  10 ); }
+    [data-ix="-3"]    { top: calc(var(--step) *  11 ); }
+    [data-ix="-2"]    { top: calc(var(--step) *  12 ); }
+    [data-ix="-1"]    { top: calc(var(--step) *  13 ); }
+    [data-ix="0"]     { top: calc(var(--step) *  14 ); }
+    [data-ix="1"]     { top: calc(var(--step) *  15 ); }
+    [data-ix="2"]     { top: calc(var(--step) *  16 ); }
+    [data-ix="3"]     { top: calc(var(--step) *  17 ); }
+    [data-ix="4"]     { top: calc(var(--step) *  18 ); }
+    [data-ix="5"]     { top: calc(var(--step) *  19 ); }
+    [data-ix="6"]     { top: calc(var(--step) *  20 ); }
+    [data-ix="7"]     { top: calc(var(--step) *  21 ); }
+    [data-ix="7.5"]   { top: calc(var(--step) * 21.5); }
+    [data-ix="8"]     { top: calc(var(--step) *  22 ); }
+    [data-ix="9"]     { top: calc(var(--step) *  23 ); }
+    [data-ix="10"]    { top: calc(var(--step) *  24 ); }
+    [data-ix="11"]    { top: calc(var(--step) *  25 ); }
+    [data-ix="11.5"]  { top: calc(var(--step) * 25.5); }
+
+  }
+</style>
