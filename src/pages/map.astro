@@ -11,11 +11,11 @@ const KS_SHADE_2 = '#D9D9D9'
 <Layout title="Map">
   <h1 class="font-title-wide text-center text-2xl">Enclaves</h1>
 
-  <div class="relative grid md:[grid-template-columns:3fr_1fr] my-[-17vw] md:my-[-15vw] lg:-my-48">
-    <svg width="100%" viewBox="0 0 280 2600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <div class="relative grid md:[grid-template-columns:3fr_1fr] "> <!-- my-[-17vw] md:my-[-15vw] lg:-my-48"> -->
+    <svg width="100%" viewBox="0 100 280 2450" fill="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <linearGradient id="bridgehand" x1="50" y1="0"  x2="50" y2="300" gradientUnits="userSpaceOnUse"> <stop offset="0.125751" stop-color={BH_DARK}  stop-opacity="0"/> <stop offset="0.415" stop-color={BH_DARK}/> <stop offset="0.580029" stop-color={BH_LIGHT}/> <stop offset="0.75" stop-color={BH_LIGHT}/> <stop offset="1" stop-color="white"/> </linearGradient>
-        <linearGradient id="indicator"  x1="21" y1="-4" x2="21" y2="359" gradientUnits="userSpaceOnUse"> <stop offset="0.103818" stop-color={BH_LIGHT} stop-opacity="0"/> <stop offset="0.285" stop-color={BH_LIGHT}/> </linearGradient>
+        <linearGradient id="bridgehand" x1="0"  y1="84"  x2="50" y2="300" gradientUnits="userSpaceOnUse"> <stop offset="0.125751" stop-color={BH_DARK}  stop-opacity="0"/> <stop offset="0.415" stop-color={BH_DARK}/> <stop offset="0.580029" stop-color={BH_LIGHT}/> <stop offset="0.75" stop-color={BH_LIGHT}/> <stop offset="1" stop-color="white"/> </linearGradient>
+        <linearGradient id="indicator"  x1="21" y1="64" x2="21" y2="359" gradientUnits="userSpaceOnUse"> <stop offset="0.103818" stop-color={BH_LIGHT} stop-opacity="0"/> <stop offset="0.285" stop-color={BH_LIGHT}/> </linearGradient>
       </defs>
 
       <!-- Bridge Main -->
@@ -80,7 +80,7 @@ const KS_SHADE_2 = '#D9D9D9'
   </div>
 </Layout>
 
-<style define:vars={{ step: "100% / 26", middle: 100 / 2600 / 2 }}>
+<style define:vars={{ step: "100% / 24.5" }}>
   nav {
     a {
       display: block;
@@ -105,33 +105,33 @@ const KS_SHADE_2 = '#D9D9D9'
       &:hover::before { opacity: 1.0; transform: translateY(0%); }
     }
 
-    [data-ix="-12.5"] { top: calc(var(--step) *  1.5); }
-    [data-ix="-12"]   { top: calc(var(--step) *   2 ); }
-    [data-ix="-11"]   { top: calc(var(--step) *   3 ); }
-    [data-ix="-10"]   { top: calc(var(--step) *   4 ); }
-    [data-ix="-9"]    { top: calc(var(--step) *   5 ); }
-    [data-ix="-8"]    { top: calc(var(--step) *   6 ); }
-    [data-ix="-7"]    { top: calc(var(--step) *   7 ); }
-    [data-ix="-6"]    { top: calc(var(--step) *   8 ); }
-    [data-ix="-5"]    { top: calc(var(--step) *   9 ); }
-    [data-ix="-4"]    { top: calc(var(--step) *  10 ); }
-    [data-ix="-3"]    { top: calc(var(--step) *  11 ); }
-    [data-ix="-2"]    { top: calc(var(--step) *  12 ); }
-    [data-ix="-1"]    { top: calc(var(--step) *  13 ); }
-    [data-ix="0"]     { top: calc(var(--step) *  14 ); }
-    [data-ix="1"]     { top: calc(var(--step) *  15 ); }
-    [data-ix="2"]     { top: calc(var(--step) *  16 ); }
-    [data-ix="3"]     { top: calc(var(--step) *  17 ); }
-    [data-ix="4"]     { top: calc(var(--step) *  18 ); }
-    [data-ix="5"]     { top: calc(var(--step) *  19 ); }
-    [data-ix="6"]     { top: calc(var(--step) *  20 ); }
-    [data-ix="7"]     { top: calc(var(--step) *  21 ); }
-    [data-ix="7.5"]   { top: calc(var(--step) * 21.5); }
-    [data-ix="8"]     { top: calc(var(--step) *  22 ); }
-    [data-ix="9"]     { top: calc(var(--step) *  23 ); }
-    [data-ix="10"]    { top: calc(var(--step) *  24 ); }
-    [data-ix="11"]    { top: calc(var(--step) *  25 ); }
-    [data-ix="11.5"]  { top: calc(var(--step) * 25.5); }
+    [data-ix="-12.5"] { top: calc(var(--step) *  0.5); }
+    [data-ix="-12"]   { top: calc(var(--step) *   1 ); }
+    [data-ix="-11"]   { top: calc(var(--step) *   2 ); }
+    [data-ix="-10"]   { top: calc(var(--step) *   3 ); }
+    [data-ix="-9"]    { top: calc(var(--step) *   4 ); }
+    [data-ix="-8"]    { top: calc(var(--step) *   5 ); }
+    [data-ix="-7"]    { top: calc(var(--step) *   6 ); }
+    [data-ix="-6"]    { top: calc(var(--step) *   7 ); }
+    [data-ix="-5"]    { top: calc(var(--step) *   8 ); }
+    [data-ix="-4"]    { top: calc(var(--step) *  9 ); }
+    [data-ix="-3"]    { top: calc(var(--step) *  10 ); }
+    [data-ix="-2"]    { top: calc(var(--step) *  11 ); }
+    [data-ix="-1"]    { top: calc(var(--step) *  12 ); }
+    [data-ix="0"]     { top: calc(var(--step) *  13 ); }
+    [data-ix="1"]     { top: calc(var(--step) *  14 ); }
+    [data-ix="2"]     { top: calc(var(--step) *  15 ); }
+    [data-ix="3"]     { top: calc(var(--step) *  16 ); }
+    [data-ix="4"]     { top: calc(var(--step) *  17 ); }
+    [data-ix="5"]     { top: calc(var(--step) *  18 ); }
+    [data-ix="6"]     { top: calc(var(--step) *  19 ); }
+    [data-ix="7"]     { top: calc(var(--step) *  20 ); }
+    [data-ix="7.5"]   { top: calc(var(--step) * 20.5); }
+    [data-ix="8"]     { top: calc(var(--step) *  21 ); }
+    [data-ix="9"]     { top: calc(var(--step) *  22 ); }
+    [data-ix="10"]    { top: calc(var(--step) *  23 ); }
+    [data-ix="11"]    { top: calc(var(--step) *  24 ); }
+    [data-ix="11.5"]  { top: calc(var(--step) * 24.5); }
 
   }
 </style>
