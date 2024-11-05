@@ -8,7 +8,7 @@ import LinkIcon from '@/icons/arrow-top-right-on-square.astro'
 interface Props {
   src:      string
   level?:   number
-  heading?: string
+  heading?: boolean
 }
 
 const { src, heading = false, level = 2 } = Astro.props

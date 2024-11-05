@@ -3,6 +3,7 @@
 
 - Replace tailwind-typography with custom styles
 - Serve story thread index from `/chapter/tamryn` ?
+- change 'heading' prop ro string to allow override of embed headings
 
 # Content Preprocessing
 
