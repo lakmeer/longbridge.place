@@ -1,0 +1,10 @@
+---
+interface Props {
+  enable: boolean
+}
+
+// TODO: Some global state that switches on the meta sections
+
+const { enable = false } = Astro.props
+---
+{ enable && <slot /> }
