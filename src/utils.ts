@@ -85,8 +85,8 @@ export function runMatches (rx:RegExp, str:string):WikiLink[] {
 }
 
 export function launderWikiLink (src:string):WikiLink {
-  const [ coll, slug ] = src.split(':')
-
+  let [ coll, slug ] = src.split(':')
+  if (slug.includes('#')) slug = slug.split('#')[0]
   return [ coll as unknown as AnyContentKey, slug ]
 }
 

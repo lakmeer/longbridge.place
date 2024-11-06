@@ -2,6 +2,12 @@
 import 'colors'
 import { indexPages, indexContentByCollection } from '../lib/collation.ts'
 
+export function splitLink (src:string) {
+  let [ coll, slug ] = src.split(':')
+  if (slug.includes('#')) slug = slug.split('#')[0]
+  return [ coll, slug ]
+}
+
 
 //
 // Link Checker
@@ -30,7 +36,7 @@ export default function LinkChecker () {
       // Collection links
       if (node.url.includes(':')) {
 
-        const [ collection, slug ] = node.url.split(':')
+        const [ collection, slug ] = splitLink(node.url)
 
         if (collection === 'tag') return
 
