@@ -1,0 +1,22 @@
+---
+interface Props {
+  src: string
+  type: 'pie' | 'bar' | 'line'
+  heading: string
+}
+
+import Pie from './charts/Pie.astro'
+import { getEntry } from 'astro:content'
+import { uid, launderWikiLink } from '@utils'
+
+const { src, type, heading = "" } = Astro.props
+const [ coll, slug ] = launderWikiLink(src)
+const data = await getEntry(coll, slug)
+const id = 'chart-' + uid()
+---
+
+{ heading && <h5 class="text-center font-title mb-2">{heading}</h5> }
+
+<script is:inline src="/chartjs.4.4.6.js" />
+
+<Pie id={id} data={data.data} />

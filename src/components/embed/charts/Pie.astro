@@ -1,0 +1,78 @@
+---
+interface Props {
+  id: string
+  data: any
+}
+
+import Chart from 'chart.js/auto'
+const { id, data } = Astro.props
+
+const DUSK = [
+  '#4f1b79',
+  '#6b3c9a',
+  '#8c5da2',
+  '#b87aad',
+  '#f2b5ca',
+]
+
+const SUNSET = [
+  '#ff6d1f',
+  '#ff8b42',
+  '#ffab66',
+  '#ffd280',
+  '#ffedb3',
+]
+
+const palette = SUNSET
+
+const color = (ix:number) => palette[ ix % palette.length ]
+
+// Process raw data for pie chart
+const labels = Object.keys(data)
+const total  = Object.values(data).reduce((a, b) => a + b, 0)
+const values = Object.values(data).map(x => x / total * 100)
+---
+
+<div class="grid grid-cols-2 gap-8">
+  <div class="relative aspect-square">
+    <canvas id={id} class="max-w-full aspect-square" />
+  </div>
+
+  <div class="my-auto">
+    <div class="grid [grid-template-columns:1rem_auto_1fr] gap-2 items-center justify-center text-sm md:text-base">
+      { labels.map((label, ix) => <>
+        <div style=`background-color: ${color(ix)}` class="w-4 h-4 border" role="presentation"></div>
+        <span class="font-bold justify-self-end">{values[ix].toFixed(2)}%</span>
+        <span>{ label }</span>
+      </>)}
+    </div>
+  </div>
+</div>
+
+<script is:inline define:vars={{ id, labels, values, palette }}>
+  new Chart(document.getElementById(id), {
+    type: 'pie',
+    data: {
+      labels,
+      datasets: [{
+        data: values,
+        backgroundColor: palette,
+        borderWidth: 1,
+      }]
+    },
+    options: {
+      color: 'white',
+      aspectRatio: 1,
+      plugins: {
+        tooltip: {
+          callbacks: {
+            label: (item) => item.raw.toFixed(2) + "%"
+          }
+        },
+        legend: {
+          display: false,
+        }
+      }
+    }
+  });
+</script>

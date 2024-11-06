@@ -90,3 +90,7 @@ export function launderWikiLink (src:string):WikiLink {
   return [ coll as unknown as AnyContentKey, slug ]
 }
 
+export function uid ():string {
+  return Math.round(Math.random()*1e6).toFixed()
+}
+

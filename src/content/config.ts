@@ -104,12 +104,6 @@ const image = defineCollection({
 // Media: Gaussian Splats
 // Media: Interactive Maps
 
-
-// Misc data storage with no specific schmea
-const misc = defineCollection({
-  type: 'data'
-})
-
 // Storyline Threads
 const thread = defineCollection({
   type: 'data',
@@ -129,6 +123,16 @@ const author = defineCollection({
   })
 })
 
+// Data tables
+const tables = defineCollection({
+  type: 'data'
+})
+
+// Misc data storage with no specific schmea
+const misc = defineCollection({
+  type: 'data'
+})
+
 
 //
 // Export and Utility Functions
@@ -143,10 +147,11 @@ const content = {
 }
 
 const data = {
-  misc,
   image,
   author,
   thread,
+  tables,
+  misc,
 }
 
 export const collections = {
