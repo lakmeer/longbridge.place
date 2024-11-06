@@ -1,7 +1,6 @@
 
 import { runMatches } from '@utils'
-
-export type WikiLink = [ string, string ]
+import type { WikiLink } from '@/content/config.ts'
 
 
 // collectEmbeds

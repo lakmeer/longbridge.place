@@ -1,16 +1,16 @@
 
 import { getEntry, getCollection, type CollectionEntry } from 'astro:content'
 import { collectEmbeds, collectLinks } from '@/lib/collections'
+import type { AnyContentEntry, WikiLink, AnyContentKey, AnyEntry } from '@/content/config.ts'
 
 export function absolutePath (path:string) {
   return '/' + path.replace(/^\//, '')
 }
 
-export async function resolve (ref:string | { collection:string, slug:string }) {
-  console.log('🟡', ref)
+export async function resolve (ref:string | { collection:AnyContentKey, slug:string }) {
   if (typeof ref === 'string') {
     if (ref.includes(':')) {
-      const [ collection, slug ] = ref.split(':')
+      const [ collection, slug ] = launderWikiLink(ref)
       return resolve({ collection, slug })
     } else {
       return ref
@@ -20,7 +20,7 @@ export async function resolve (ref:string | { collection:string, slug:string }) 
   }
 }
 
-export function entryUrl (entry:CollectionEntry) {
+export function entryUrl (entry:AnyContentEntry) {
   return `/${entry.collection}/${entry.slug}`
 }
 
@@ -34,11 +34,11 @@ export function pluck<T> (items:T[], key: string) {
 }
 
 export function dedupe<T> (items:T[], fn = (a:T, b:T):Boolean => a === b):T[] {
-  const unique = []
+  const unique = [] as T[]
   for (const a of items) {
     let found = false
     for (const b of unique) {
-      if (fn(a,b)) { found = true; break }
+      if (fn(a, b)) { found = true; break }
     }
     if (!found) unique.push(a)
   }
@@ -49,45 +49,44 @@ export function withSameTags (tags:string[]) {
   return ({ data }) => data.tags.some((tag) => tags.includes(tag))
 }
 
-export function sameEntry (a:CollectionEntry) {
-  return (b:CollectionEntry) => a.collection === b.collection && a.slug === b.slug
+export function sameEntry (a:AnyContentEntry) {
+  return (b:AnyContentEntry) => a.collection === b.collection && a.slug === b.slug
 }
 
 export async function resolveWikiLinks (links:WikiLink[]) {
   return await Promise.all(links.map(([ cat, slug ]) => getEntry(cat, slug)))
 }
 
-export async function getRelatedEntries (entry:CollectionEntry) {
-  const tags     = entry.data.tags
+export async function getRelatedEntries (entry:AnyContentEntry) {
+  const tags     = entry.data.tags ?? []
   const embedded = await resolveWikiLinks(collectEmbeds(entry.body))
   const linked   = await resolveWikiLinks(collectLinks(entry.body))
 
   let related = (await getCollection('lore', withSameTags(tags)))
     .filter((e) => e.data.title !== entry.data.title) // filter out this entry
+    //@ts-ignore cbf
     .concat(linked).filter(Boolean)                   // Add linked entries
+    //@ts-ignore cbf
     .filter((a) => embedded.findIndex(sameEntry(a)) === -1)
     .toSorted((a, b) => a.data.title.localeCompare(b.data.title))
 
   return dedupe(related, (a, b) => a.data.title === b.data.title)
 }
 
-export function runMatches<T> (rx:RegExp, str:string):T[] {
-  const all:T[] = []
+export function runMatches (rx:RegExp, str:string):WikiLink[] {
+  const all:WikiLink[] = []
 
   let match:RegExpMatchArray | null
   while (match = rx.exec(str)) {
-    //@ts-ignore
-    all.push(match[2].split(':'))
+    all.push(launderWikiLink(match[2]))
   }
 
   return all
 }
 
-import type { AnyCollectionKey } from '@/content/config.ts'
-
-export function launderWikiLink (src:string):[AnyCollectionKey, string] {
+export function launderWikiLink (src:string):WikiLink {
   const [ coll, slug ] = src.split(':')
 
-  return [ coll as unknown as AnyCollectionKey, slug ]
+  return [ coll as unknown as AnyContentKey, slug ]
 }
 

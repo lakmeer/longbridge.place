@@ -2,6 +2,7 @@
 import type { AnyCollectionKey } from '@/content/config.ts'
 import { getEntry } from 'astro:content'
 import { Markdown } from '@astropub/md'
+import { launderWikiLink } from '@utils'
 
 import LinkIcon from '@/icons/arrow-top-right-on-square.astro'
 
@@ -12,8 +13,8 @@ interface Props {
 }
 
 const { src, heading = false, level = 2 } = Astro.props
-const [ coll, slug ] = src.split(':')
-const entry = await getEntry(coll as AnyCollectionKey, slug)
+const [ coll, slug ] = launderWikiLink(src)
+const entry = await getEntry(coll, slug)
 
 // Process body to find just the first paragraph
 const first = entry!.body.split(/\n\s*\n/)[0]
@@ -29,7 +30,7 @@ const Htag = 'h' + level
 { heading &&
   <Htag>
     <a class="font-weight-light" href={`/lore/${slug}`}>
-      {entry?.data.title ?? entry?.data.name}
+      {entry?.data.title}
       <LinkIcon class="ml-2" />
     </a>
   </Htag>

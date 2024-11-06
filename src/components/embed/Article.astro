@@ -18,7 +18,7 @@ const entry = await getEntry(coll, slug)
 
 // Render Heading etc
 const Htag = 'h' + level
-const { Content } = await entry?.render()
+const { Content } = await entry!.render()
 ---
 
 { heading &&

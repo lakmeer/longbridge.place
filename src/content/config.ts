@@ -31,7 +31,7 @@ const chapter = defineCollection({
     pov_char: reference('person').or(z.string()).optional(),
     other_chars: z.array(reference('person').or(z.string())).optional(),
     locations: z.array(reference('location').or(z.string())).optional(),
-    tags: tags.optional(),
+    tags: tags,
   })
 })
 
@@ -134,20 +134,35 @@ const author = defineCollection({
 // Export and Utility Functions
 //
 
-export const collections = {
+const content = {
   lore,
   location,
   person,
+  chapter,
   meta,
+}
+
+const data = {
   misc,
   image,
-  chapter,
   author,
   thread,
 }
 
+export const collections = {
+  ...content, ...data
+}
+
+import type { CollectionEntry } from 'astro:content'
+
 export type AnyCollectionKey = keyof typeof collections
-export type AnyContentKey = 'lore' | 'location' | 'person' | 'chapter'
+export type AnyContentKey = keyof typeof content
+export type AnyDataKey = keyof typeof data
+
+export type AnyEntry = CollectionEntry<AnyCollectionKey>
+export type AnyContentEntry = CollectionEntry<AnyContentKey>
+
+export type WikiLink = [ AnyContentKey, string ]
 
 export function isValidCollection (coll:string): coll is AnyCollectionKey {
   return Object.keys(collections).includes(coll)

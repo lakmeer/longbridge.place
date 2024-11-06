@@ -1,10 +1,10 @@
 ---
-import type { AnyCollectionKey } from '@/content/config.ts'
+import type { AnyContentEntry } from '@/content/config.ts'
 import type { CollectionEntry } from 'astro:content'
 import { entryUrl, getRelatedEntries } from '@utils'
 
 interface Props {
-  entry: CollectionEntry<AnyCollectionKey>
+  entry: AnyContentEntry
 }
 
 const related = await getRelatedEntries(Astro.props.entry)
