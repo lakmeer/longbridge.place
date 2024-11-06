@@ -71,6 +71,10 @@
       border-color: transparent transparent white;
     }
   }
+
+  .bad-link {
+    color: yellow !important;
+  }
 }
 
 @layer utilities {
@@ -142,13 +146,12 @@
     margin-top: 0 !important;
   }
 
-
   /* For story formatting */
   .prose-book {
     p {
       text-indent: 1.5rem;
       text-align: justify;
-      
+
       &:first-child {
         margin-bottom: 0.5rem;
       }
