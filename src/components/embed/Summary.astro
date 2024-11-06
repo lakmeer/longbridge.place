@@ -3,6 +3,7 @@ import type { AnyCollectionKey } from '@/content/config.ts'
 import { getEntry } from 'astro:content'
 import { Markdown } from '@astropub/md'
 import { launderWikiLink } from '@utils'
+import { firstChunk, stripLinks } from '@/lib/markdown'
 
 import LinkIcon from '@/icons/arrow-top-right-on-square.astro'
 
@@ -17,7 +18,7 @@ const [ coll, slug ] = launderWikiLink(src)
 const entry = await getEntry(coll, slug)
 
 // Process body to find just the first paragraph
-const first = entry!.body.split(/\n\s*\n/)[0]
+const first = stripLinks(firstChunk(entry!.body))
 
 // Render heading
 const Htag = 'h' + level
