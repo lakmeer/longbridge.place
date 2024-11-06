@@ -72,7 +72,7 @@
     }
   }
 
-  .bad-link {
+  a[href=""] {
     color: yellow !important;
   }
 }

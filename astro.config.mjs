@@ -8,7 +8,6 @@ import auto     from 'astro-auto-import'
 
 import CollectionLinks  from './src/plugins/collection-links.ts'
 import LinkChecker      from './src/plugins/link-checker.ts'
-import MarkMissingLinks from './src/plugins/mark-missing-links.ts'
 
 export default defineConfig({
   vite: {
@@ -25,6 +24,5 @@ export default defineConfig({
   }), mdx(), alpinejs()],
   markdown: {
     remarkPlugins: [ LinkChecker, CollectionLinks ],
-    rehypePlugins: [ MarkMissingLinks ],
   }
 })

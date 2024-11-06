@@ -1,31 +1,54 @@
 
 import 'colors'
-import { indexContentByCollection } from '../lib/collation.ts'
+import { indexPages, indexContentByCollection } from '../lib/collation.ts'
 
 
 //
 // Link Checker
 //
 // Check MDX link urls against existing collection entries and emit warnings.
+// If a bad link is found, url is set to the empty string so it can be visually
+// styled with CSS. This is hacky but it lets us distinguish collection links
+// from normal pages and check each of them specifically, compared to the rehype
+// phase after they have all been homogenised.
 //
 
 export default function LinkChecker () {
   const allCollections = indexContentByCollection()
+  const allPages       = indexPages()
 
   //@ts-ignore can't be bothered digging out this typedef
   return function visit (node) {
-    if (node.type === 'link' && node.url.includes(':')) {
 
-      const [ collection, slug ] = node.url.split(':')
+    if (node.type === 'link') {
 
-      if (collection === 'tag') return
+      // Collection Links
+      if (node.url.includes(':')) {
 
-      if (!allCollections[collection]) {
-        return console.warn(' LNK-CHK '.red.inverse, "Unknown collection".red, collection)
+        const [ collection, slug ] = node.url.split(':')
+
+        if (collection === 'tag') return
+
+        if (!allCollections[collection]) {
+          console.warn(' LNK-CHK '.red.inverse, "Missing collection".red, collection)
+          node.url = ""
+          return
+        }
+
+        if (!allCollections[collection].includes(slug)) {
+          console.warn(' LNK-CHK '.yellow.inverse, "Missing entry".yellow, collection + ":" + slug)
+          node.url = ""
+          return
+        }
       }
 
-      if (!allCollections[collection].includes(slug)) {
-        return console.warn(' LNK-CHK '.yellow.inverse, "Unknown entry".yellow, collection + ":" + slug)
+      // Pages
+      if (node.url.startsWith('/')) {
+        if (!allPages.includes(node.url)) {
+          console.warn(' LNK-CHK '.yellow.inverse, "Missing page".yellow, node.url)
+          node.url = ""
+          return
+        }
       }
 
     } else if (node.children && node.children.length) {
