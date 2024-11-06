@@ -22,7 +22,12 @@ export default function LinkChecker () {
 
     if (node.type === 'link') {
 
-      // Collection Links
+      // External links
+      if (node.url.startsWith('http')) {
+        return
+      }
+
+      // Collection links
       if (node.url.includes(':')) {
 
         const [ collection, slug ] = node.url.split(':')

@@ -17,6 +17,6 @@ export function collectEmbeds (src:string):WikiLink[] {
 // Scrapes markdown source to find all wiki link urls
 
 export function collectLinks (src:string):WikiLink[] {
-  return runMatches(/\[([^\]]+)\]\(([^)]+)\)/g, src)
+  return runMatches(/\[([^\]]+)\]\((\w+:\w+)\)/g, src)
 }
 
