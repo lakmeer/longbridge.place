@@ -1,7 +1,9 @@
 ---
+export type PieData = Record<string, number>
+
 interface Props {
   id: string
-  data: any
+  data: PieData
 }
 
 import Chart from 'chart.js/auto'
