@@ -14,15 +14,36 @@
 - Examine slugs in body links and report missing files
 - Save relational graph of linked entries to sqlite so it can gather relevant pages for LLM edits
 
+# Site template
+
+- implement sidebar presentation of embed items
+- list of all tags
+
 ## Markdown Extras
 
 - Markdown extension for deflists
 
-# More Embed types
+# Embeds
+
+- Remove 'Embed.' namespace
+
+## More types
 
 - Set of summaries with a given tag
-- Notes that pop up in little boxes - eg: idioms
-  - Glossary Entries
+
+## Glossary popups
+
+- create glossary content collection
+
+      word: string
+      defn: string
+      link: wikilink
+
+- create [gloss:] preprocess plugin
+- move small stub articles into glossary
+- show js popup with glossary entry that links thru to full article
+- copy glossary from doc
+- add idioms to this collection
 
 # More Content types
 
