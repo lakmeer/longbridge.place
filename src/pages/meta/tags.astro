@@ -1,16 +1,69 @@
 ---
 import Layout  from '@/layouts/Layout.astro'
 
-import { getEntry } from 'astro:content'
+import { getCollection } from 'astro:content'
+import { collections } from '@/content/config'
+import { entryUrl } from '@utils'
 
 
-//const { Content } = await entry.render()
+// Collect all tags from all collections
+const allTags:Record<string, number> = {}
+
+for (const coll of Object.keys(collections)) {
+  (await getCollection(coll)).forEach((entry) => {
+    if (entry.data.tags) {
+      entry.data.tags.forEach((tag) => {
+        if (!allTags[tag]) {
+          allTags[tag] = [entry]
+        } else {
+          allTags[tag].push(entry)
+        }
+      })
+    }
+  })
+}
+
+// Renderable list
+const tagList = Object.entries(allTags)
+  .map(([tag, entries]) => [
+    tag,
+    entries.map((e) => ({
+      title: e.data.title,
+      url: entryUrl(e)
+    }))
+  ])
+
 ---
-<Layout title={entry.data.title}>
-  <h1 class="max-w-prose mx-auto text-3xl md:text-4xl mb-4 md:mb-8 lg:mb-16 font-title-wide">{ entry.data.title }</h1>
+<Layout title="Tags" sky="eveningside">
+  <h1 class="text-3xl md:text-4xl mb-4 text-center font-title-wide">Tags</h1>
 
-  <div class="prose mx-auto">
+  <div class="prose" x-data=`{ showCount: false, tagList: ${ JSON.stringify(tagList) } }`>
+    <div class="text-center">
+      <button x-show="!showCount" @click="showCount = true" class="btn btn-primary">Show Counts</button>
+      <button x-show="showCount" @click="showCount = false" class="btn btn-primary">Show Links</button>
+    </div>
 
+    <table>
+      <template x-for="(tag, index) in tagList.sort((a, b) => showCount ? b[1].length - a[1].length : a[0].localeCompare(b[0]))" :key="index">
+        <tr valign="top">
+          <td class="font-mono py-2 pr-2 border-b">
+            <span class="text-xs" x-text="tag[0]"></span>
+          </td>
+
+          <td class="text-right py-2 border-b" x-show="showCount">
+            <span x-text="tag[1].length"></span>
+          </td>
+
+          <td class="py-2 border-b" x-show="!showCount">
+            <template x-for="entry in tag[1]" :key="entry.url">
+              <div>
+                <a :href="entry.url" x-text="entry.title"></a>
+                <br />
+              </div>
+            </template>
+          </td>
+        </tr>
+      </template>
+    </table>
   </div>
 </Layout>
-

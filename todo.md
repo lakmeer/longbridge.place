@@ -9,7 +9,7 @@
 # Content Preprocessing
 
 - Scrape markdown frontmatter for tags
-- Collate all tags with slugs of tagged content, and save to a file or sqlite
+- Tag similarity report
 - Save relational graph of linked entries to sqlite so it can gather relevant pages for LLM edits
 
 # Site template
