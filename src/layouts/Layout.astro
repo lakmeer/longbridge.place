@@ -5,14 +5,23 @@ import { ViewTransitions } from 'astro:transitions'
 import Title from '@/components/Title.astro'
 
 interface Props {
-  title:  string;
-  class?: string;
+  title:   string
+  class?:  string
+  debug?:  boolean
+  center?: boolean
+  sky?: 'simple' | 'morningside' | 'eveningside' | 'high-clouds'
 }
 
-const { title, class: cl } = Astro.props
+const { title, class: cl, debug = false, center = false, sky = 'morningside' } = Astro.props
+const bg =
+  sky === 'high-clouds' ? 'bg-high-clouds' :
+  sky === 'morningside' ? 'bg-morningside' :
+  sky === 'eveningside' ? 'bg-eveningside' :
+    'bg-simple-sky'
+
 ---
 <!doctype html>
-<html lang="en" class="bg-sky-day" style="background-attachment:fixed">
+<html lang="en" class:list={[ debug ? "debug" : "", bg, "bg-sky-600" ]} style="background-attachment:fixed">
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content="Astro description" />
@@ -26,12 +35,30 @@ const { title, class: cl } = Astro.props
   </head>
 
   <body class:list={[ cl, "text-white min-h-screen min-w-[420px]" ]}>
-    <main class="py-8 lg:py-[5vw] px-4 md:px-8 xl:px-16 max-w-7xl mx-auto">
+    <main class="py-8 lg:py-[5vw] flex flex-col min-h-screen px-4 md:px-8 xl:px-16 max-w-7xl mx-auto">
       <Title />
 
-      <div class="mx-auto px-4 lg:px-8 py-8 grid lg:mt-[5vw]">
+      <div class:list={[ "mx-auto px-4 lg:px-8 py-8 lg:mt-[5vw] flex-grow", center ? "grid-center" : "" ]}>
         <slot />
       </div>
     </main>
   </body>
 </html>
+
+<style>
+  .bg-simple-sky {
+    background-image: linear-gradient(180deg, theme('colors.sky-day-dark'), theme('colors.sky-day-light'));
+  }
+
+  .bg-morningside {
+    background-image: linear-gradient(180deg, #003155 0%, #1880CB 50%, #B1DCFB 100%);
+  }
+
+  .bg-eveningside {
+    background-image: linear-gradient(180deg, #000000 0%, #00223A 21%, #005B9C 63.5%, #2E4563 81.92%, #083759 94%);
+  }
+
+  .bg-high-clouds {
+    background-image: linear-gradient(180deg, #003155 0%, #1880CB 49%, #84CBFF 62.5%, #FFFFFF 80.5%);
+  }
+</style>

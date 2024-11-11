@@ -46,6 +46,8 @@
     --font-body:  'Roboto', sans-serif;
     --font-mono:  'Fira Code', monospace;
 
+    --title-height: 1.5rem;
+
     scrollbar-gutter: stable;
     color: white;
     font-family: var(--font-body);
@@ -82,6 +84,14 @@
     outline: 1px solid red;
   }
 
+  .grid-center {
+    display: grid;
+    place-items: center;
+  }
+
+
+  /* Title Fonts */
+
   .font-title-xwide {
     font-family: var(--font-title);
     letter-spacing: 0.5em;
@@ -96,12 +106,9 @@
     font-family: var(--font-title);
   }
 
-  .bg-sky-day {
-    background-image: linear-gradient(to bottom right, theme('colors.sky-day-dark'), theme('colors.sky-day-light'));
-    background-size: 400%;
-  }
 
   /* Tailwind Typography Overrrides */
+
   .prose {
     letter-spacing: 0.03rem;
 
