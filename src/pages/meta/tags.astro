@@ -1,0 +1,16 @@
+---
+import Layout  from '@/layouts/Layout.astro'
+
+import { getEntry } from 'astro:content'
+
+
+//const { Content } = await entry.render()
+---
+<Layout title={entry.data.title}>
+  <h1 class="max-w-prose mx-auto text-3xl md:text-4xl mb-4 md:mb-8 lg:mb-16 font-title-wide">{ entry.data.title }</h1>
+
+  <div class="prose mx-auto">
+
+  </div>
+</Layout>
+
