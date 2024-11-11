@@ -54,10 +54,12 @@ export function indexPages ():string[] {
 // Returns top ten most misilar tag pairs by levenshtein distance, with a
 // special exemption for tags beginning with 'the-'
 
-function lev (s, t) {
+function lev (s:string, t:string) {
   if (!s.length) return t.length
   if (!t.length) return s.length
-  const arr = []
+
+  const arr:number[][] = []
+
   for (let i = 0; i <= t.length; i++) {
     arr[i] = [i]
     for (let j = 1; j <= s.length; j++) {

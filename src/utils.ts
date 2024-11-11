@@ -90,16 +90,10 @@ export function uid ():string {
   return Math.round(Math.random()*1e6).toFixed()
 }
 
-export function objMap<T, U> (obj:T, fn:(key:keyof T, value:T[keyof T])=>U):Record<keyof T, U> {
-  const mapped:Record<keyof T, U> = {}
-  for (const key in obj) {
-    mapped[key] = fn(key, obj[key])
-  }
-  return mapped
-}
-
 export function entryUrl (entry:AnyEntry):string {
+  // @ts-ignore dunno why this doesn't narrow properly
   if (entry.slug) {
+    // @ts-ignore
     return `/${entry.collection}/${entry.slug}`
   }
 
