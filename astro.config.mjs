@@ -6,8 +6,8 @@ import alpinejs from '@astrojs/alpinejs'
 import mdx      from '@astrojs/mdx'
 import auto     from 'astro-auto-import'
 
-import CollectionLinks from './src/plugins/collection-links.ts'
-import LinkChecker     from './src/plugins/link-checker.ts'
+import CollectionLinks  from './src/plugins/collection-links.ts'
+import LinkChecker      from './src/plugins/link-checker.ts'
 
 export default defineConfig({
   vite: {

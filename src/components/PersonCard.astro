@@ -22,6 +22,7 @@ const gridLayout =
   size === 'md' ? '[grid-template-columns:1fr_1fr]' :
     '[grid-template-columns:1fr_1fr]'
 
+const age = typeof person.data.birthdate === 'number' ? now.data.year - person.data.birthdate : person.data.birthdate
 ---
 
 <Card heading="Citizen" link={link}>
@@ -48,7 +49,7 @@ const gridLayout =
 
         { person.data.birthdate && <>
           <dt>Age</dt>
-          <dd>{now.data.year - person.data.birthdate}</dd>
+          <dd>{age}</dd>
         </> }
 
         { person.data.residence && <>

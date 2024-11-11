@@ -19,4 +19,7 @@ export { default as Person  } from './Person.astro'
 export { default as Summary } from './Summary.astro'
 export { default as Deflist } from './Deflist.astro'
 export { default as Todo    } from './Todo.astro'
+export { default as Meta    } from './Meta.astro'
+export { default as Tag     } from './Tag.astro'
+export { default as Chart   } from './Chart.astro'
 

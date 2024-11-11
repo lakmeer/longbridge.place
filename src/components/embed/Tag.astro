@@ -1,37 +1,39 @@
 ---
 import type { AnyCollectionKey } from '@/content/config.ts'
-import { getEntry } from 'astro:content'
-import { Markdown } from '@astropub/md'
+import { getCollection } from 'astro:content'
+import { withSameTags } from '@utils'
 
 import LinkIcon from '@/icons/arrow-top-right-on-square.astro'
 import Summary  from '@comp/embed/Summary.astro'
 
 interface Props {
   tag:      string
+  limit:    number
   level?:   number
   heading?: boolean
 }
 
-const { tag, heading = false, level = 2 } = Astro.props
+const {
+  tag,
+  limit = 1,
+  heading = false,
+  level = 2
+} = Astro.props
 
 const Htag = 'h' + level
 
-
-// TODO:
-
-
-// Rendering explicitly using astropub/md instead of built-in render function, since
-// - the collection doc isn't modifyable from here
-// - we don't want to support embeds in the summary snippet
+const entries = (await getCollection('lore', withSameTags([tag])))
+  .slice(0, limit)
+  .filter(Boolean)
 
 ---
 { heading &&
   <Htag>
-    <a class="font-weight-light" href={`/lore/${slug}`}>
-      {entry?.data.title ?? entry?.data.name}
+    <a class="font-weight-light" href={`/tag/${tag}`}>
+      Tagged '{tag}'
       <LinkIcon class="ml-2" />
     </a>
   </Htag>
 }
 
-
+{ entries.map((e) => <Summary src=`${e.collection}:${e.slug}` heading level={4} />) }

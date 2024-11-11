@@ -32,6 +32,23 @@ export function indexContentByCollection ():CollectionIndex {
 }
 
 
+// indexPages
+//
+// returns slugs of valid paths in /pages
+
+export function indexPages ():string[] {
+  return globSync('./src/pages/**/*.{mdx,astro}')
+    .filter(p => !p.match(/\[\.\.\.slug\]/))
+    .map((p) => p
+      .replace('src/pages/', '')
+      .replace('.mdx', '')
+      .replace('.astro', '')
+      .replace(/index$/, '')
+    )
+    .map(p => '/' + p)
+}
+
+
 // collateTags
 //
 // Returns a list of all tags discovered in the content

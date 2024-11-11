@@ -1,0 +1,26 @@
+---
+interface Props {
+  src: string
+  type: 'pie' | 'bar' | 'line'
+  heading: string
+}
+
+import Pie, { type PieData } from './charts/Pie.astro'
+import { getEntry } from 'astro:content'
+import { uid, launderWikiLink } from '@utils'
+
+const { src, type, heading = "" } = Astro.props
+const [ coll, slug ] = launderWikiLink(src)
+const entry = await getEntry(coll, slug)
+const id = 'chart-' + uid()
+
+let data
+
+switch (type) {
+  case 'pie':
+    data = entry?.data as unknown as PieData
+}
+---
+<script is:inline src="/js/chartjs.4.4.6.js" />
+{ heading && <h5 class="text-center font-title mb-2">{heading}</h5> }
+{ type === 'pie' ? <Pie {id} {data} /> : `TODO: ${type} chart` }

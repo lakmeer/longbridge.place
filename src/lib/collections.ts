@@ -1,7 +1,6 @@
 
 import { runMatches } from '@utils'
-
-export type WikiLink = [ string, string ]
+import type { WikiLink } from '@/content/config.ts'
 
 
 // collectEmbeds
@@ -18,6 +17,6 @@ export function collectEmbeds (src:string):WikiLink[] {
 // Scrapes markdown source to find all wiki link urls
 
 export function collectLinks (src:string):WikiLink[] {
-  return runMatches(/\[([^\]]+)\]\(([^)]+)\)/g, src)
+  return runMatches(/\[([^\]]+)\]\((\w+:\w+)\)/g, src)
 }
 

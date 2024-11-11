@@ -20,7 +20,7 @@ const { Content } = await entry.render()
 
 const thread = await getEntry(entry.data.thread)
 ---
-<Layout title={entry?.data.day_name}>
+<Layout title={entry?.data.title}>
   <div class="mx-auto max-w-3xl grid gap-20">
     <div class="grid text-center gap-8">
       <h2 class="font-title-xwide uppercase text-center text-lg ">{ thread.data.title }</h2>
