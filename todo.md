@@ -3,6 +3,7 @@
 
 - Replace tailwind-typography with custom styles
 - Serve story thread index from `/chapter/tamryn` ?
+- Fauna page as a tag collection rather than an article
 
 # Content Preprocessing
 
