@@ -33,7 +33,6 @@ const labels = Object.keys(data)
 const total  = Object.values(data).reduce((a, b) => a + b, 0)
 const values = Object.values(data).map(x => x / total * 100)
 ---
-
 <div class="grid grid-cols-2 gap-8">
   <div class="relative aspect-square">
     <canvas id={id} class="max-w-full aspect-square" />
