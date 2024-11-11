@@ -8,7 +8,8 @@
     "check": "astro check --watch --minimumSeverity error",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "missing": "node src/tools missing-links"
   },
   "dependencies": {
     "@astrojs/alpinejs": "^0.4.0",
