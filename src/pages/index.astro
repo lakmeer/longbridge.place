@@ -5,7 +5,7 @@ import { getEntry } from 'astro:content'
 
 const { Content } = await getEntry('lore', 'introduction').then(e => e.render())
 ---
-<Layout title="Welcome to Longbrige">
+<Layout title="Welcome to Longbridge">
   <div class="prose mx-auto">
     <Content />
   </div>
