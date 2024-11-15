@@ -26,7 +26,7 @@ const chapter = defineCollection({
     title: z.string(),
     thread: reference('thread'),
     author: reference('author'),
-    number: z.number().optional(),
+    number: z.number(),
     synopsis: z.string().optional(),
     pov_char: reference('person').or(z.string()).optional(),
     other_chars: z.array(reference('person').or(z.string())).optional(),
