@@ -2,3 +2,4 @@
 pnpm-lock.yaml
 *.ttf
 *.webp
+public/js/chartjs.4.4.6.js

@@ -3,6 +3,7 @@ import Layout from '@/layouts/Layout.astro'
 import ChapterCard from '@/components/ChapterCard.astro'
 
 import { getEntry, getCollection } from 'astro:content'
+import { getNextChapter } from '@/lib/collections'
 import { resolve } from '@utils'
 
 // All entries
@@ -17,7 +18,8 @@ export async function getStaticPaths() {
 // This entry
 const { entry } = Astro.props
 const { Content } = await entry.render()
-
+const [ next ] = await getCollection('chapter', ({ data }) =>
+  data.thread.id === entry.data.thread.id && data.number === entry.data.number + 1)
 const thread = await getEntry(entry.data.thread)
 ---
 <Layout title={entry?.data.title}>
@@ -30,5 +32,11 @@ const thread = await getEntry(entry.data.thread)
     <div class="prose prose-book mx-auto">
       <Content />
     </div>
+
+    { next &&
+      <div class="text-center font-title-wide text-xl">
+        <a href=`/chapter/${next.slug}`> { next.data.title } </a>
+      </div>
+    }
   </div>
 </Layout>
