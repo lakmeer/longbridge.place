@@ -30,7 +30,7 @@ const bg =
 
 ---
 <!doctype html>
-<html lang="en" class:list={[ debug ? "debug" : "", bg, "bg-sky-600" ]} style="background-attachment:fixed">
+<html lang="en" class:list={[ debug ? "debug" : "", bg ]}>
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content="{ description }" />
@@ -55,19 +55,28 @@ const bg =
 </html>
 
 <style>
+  html {
+    background-size: 100% 100dvh;
+    background-attachment: fixed;
+  }
+
   .bg-simple-sky {
     background-image: linear-gradient(180deg, theme('colors.sky-day-dark'), theme('colors.sky-day-light'));
+    @apply bg-sky-500;
   }
 
   .bg-morningside {
     background-image: linear-gradient(180deg, #003155 0%, #1880CB 60%, #B1DCFB 100%);
+    @apply bg-sky-500;
   }
 
   .bg-eveningside {
     background-image: linear-gradient(180deg, #000000 0%, #00223A 21%, #005B9C 70%, #2E4563 85%, #083759 94%);
+    @apply bg-sky-900;
   }
 
   .bg-high-clouds {
     background-image: linear-gradient(180deg, #003155 0%, #1880CB 49%, #84CBFF 62.5%, #FFFFFF 80.5%);
+    @apply bg-sky-300;
   }
 </style>

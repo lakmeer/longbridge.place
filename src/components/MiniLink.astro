@@ -13,9 +13,9 @@ interface Props {
 }
 
 const { ref, class: cl } = Astro.props
-const entry = await WikiLink.fromAstroRef(ref).resolve()
+let entry = (typeof ref !== 'string') ? await WikiLink.fromAstroRef(ref).resolve() : undefined
 ---
-{ typeof entry === 'string' ? entry :
+{ typeof ref === 'string' ? ref :
   <a href=`/${entry!.collection}/${entry!.slug}` class:list={[ cl, "inline-flex minilink gap-1 hover:underline font-bold" ]}>
     { entry!.collection === 'location' && <><MapPin     class="size-5 "/> { entry!.data.name }</> }
     { entry!.collection === 'person'   && <><UserCircle class="size-5 "/> { entry!.data.day_name }</> }

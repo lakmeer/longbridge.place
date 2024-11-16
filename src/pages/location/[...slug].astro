@@ -1,9 +1,10 @@
 ---
+import { getCollection } from 'astro:content'
+
 import Layout    from '@/layouts/Layout.astro'
 import PlaceCard from '@/components/PlaceCard.astro'
 
-import { getCollection } from 'astro:content'
-
+// All records
 export async function getStaticPaths() {
   const entries = await getCollection('location')
   return entries.map((entry) => ({
@@ -12,14 +13,10 @@ export async function getStaticPaths() {
   }))
 }
 
-
 // This record
-
 const { entry } = Astro.props
 const { Content } = await entry.render()
-
 ---
-
 <Layout title={entry.data.name}>
   <div class="mx-auto max-w-3xl grid gap-8">
     <PlaceCard place={entry} />
