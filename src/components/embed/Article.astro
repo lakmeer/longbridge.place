@@ -1,7 +1,5 @@
 ---
-import { getEntry } from 'astro:content'
-import { launderWikiLink } from '@utils'
-
+import WikiLink from '@/lib/wikilink.ts'
 import LinkIcon from '@/icons/arrow-top-right-on-square.astro'
 
 interface Props {
@@ -13,8 +11,8 @@ interface Props {
 const { src, heading = false, level = 2 } = Astro.props
 
 // Gather entry
-const [ coll, slug ] = launderWikiLink(src)
-const entry = await getEntry(coll, slug)
+const link = WikiLink.split(src)
+const entry = await link.resolve()
 
 // Render Heading etc
 const Htag = 'h' + level
@@ -23,7 +21,7 @@ const { Content } = await entry!.render()
 
 { heading &&
   <Htag>
-    <a class="font-weight-light" href={`/lore/${slug}`}>
+    <a class="font-weight-light" href={`/lore/${link.slug}`}>
       {entry?.data.title}
       <LinkIcon class="ml-2" />
     </a>

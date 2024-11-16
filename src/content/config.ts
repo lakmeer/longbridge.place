@@ -167,8 +167,6 @@ export type AnyDataKey = keyof typeof data
 export type AnyEntry = CollectionEntry<AnyCollectionKey>
 export type AnyContentEntry = CollectionEntry<AnyContentKey>
 
-export type WikiLink = [ AnyContentKey, string ]
-
 export function isValidCollection (coll:string): coll is AnyCollectionKey {
   return Object.keys(collections).includes(coll)
 }

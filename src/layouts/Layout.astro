@@ -6,13 +6,22 @@ import Title from '@/components/Title.astro'
 
 interface Props {
   title:   string
+  description?: string
   class?:  string
   debug?:  boolean
   center?: boolean
   sky?: 'simple' | 'morningside' | 'eveningside' | 'high-clouds'
 }
 
-const { title, class: cl, debug = false, center = false, sky = 'morningside' } = Astro.props
+const {
+  title,
+  description = "Welcome to Longbridge",
+  class: cl,
+  debug = false,
+  center = false,
+  sky = 'morningside'
+} = Astro.props
+
 const bg =
   sky === 'high-clouds' ? 'bg-high-clouds' :
   sky === 'morningside' ? 'bg-morningside' :
@@ -24,7 +33,7 @@ const bg =
 <html lang="en" class:list={[ debug ? "debug" : "", bg, "bg-sky-600" ]} style="background-attachment:fixed">
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Astro description" />
+    <meta name="description" content="{ description }" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 64x64">
     <link rel="icon" href="icon.svg" type="image/svg+xml">

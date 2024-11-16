@@ -1,0 +1,72 @@
+---
+import { getCollection, getEntry } from 'astro:content'
+import { collections, type AnyContentEntry } from '@/content/config'
+import { dedupe, closestLev } from '@utils'
+
+import WikiLink from '@/lib/wikilink.ts'
+import Layout  from '@/layouts/Layout.astro'
+
+type MatchRank = { link: string, closest: string, dist: number }
+
+function rankColor (dist:number) {
+  if (dist < 0.08) return 'font-bold'
+  if (dist < 0.25) return 'opacity-100'
+  return 'opacity-50'
+}
+
+// Get all entries in content-type collections
+const allEntries:AnyContentEntry[] = []
+
+for (let coll of Object.keys(collections)) {
+  (await getCollection(coll)).forEach((entry) => {
+    if (entry.slug!) { // is a content type collection
+      allEntries.push(entry as AnyContentEntry)
+    }
+  })
+}
+
+// Scrape wikilinks from all entries
+const missingLinks:WikiLink[] = allEntries
+  .reduce((acc, entry) => acc.concat(WikiLink.scrape(entry.body)), [])
+  .filter((link) => link.coll !== 'tag')
+
+// Turn existing entries into raw links
+const existing = allEntries.map((entry) => WikiLink.fromEntry(entry).toLink())
+
+// Find match ranks of wikilinks without matching entries
+let missingRanks:MatchRank[] = []
+
+for (const link of missingLinks) {
+  const entry = await link.resolve()
+
+  if (!entry) {
+    const [ closest, dist ] = closestLev(link.toLink(), existing)
+    missingRanks.push({ link, closest, dist })
+  }
+}
+
+missingRanks = dedupe(missingRanks, (a, b) => a.link === b.link)
+missingRanks.sort((a, b) => a.link.slug.localeCompare(b.link.slug))
+---
+<Layout title="Missing Pages" sky="eveningside" description="Linked pages that are missing">
+  <h1 class="text-3xl md:text-4xl mb-16 text-center font-title-wide">Missing Pages</h1>
+
+  <div class="prose">
+    <table>
+      <thead>
+        <th> Collection </th>
+        <th> Missing Link </th>
+        <th> Closest Match </th>
+        <th> Match </th>
+      </thead>
+      <tbody>
+        { missingRanks.map((rank) => <tr>
+          <td> { rank.link.coll } </td>
+          <td> { rank.link.slug } </td>
+          <td class={rankColor(rank.dist)}> { rank.closest } </td>
+          <td class:list={[ 'text-right', rankColor(rank.dist) ]}> { rank.dist.toFixed(3) } </td>
+        </tr>) }
+      </tbody>
+    </table>
+  </div>
+</Layout>

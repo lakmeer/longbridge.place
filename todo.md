@@ -14,6 +14,7 @@
 
 # Site template
 
+- Add meta descriptions for existing page templates
 - Implement sidebar presentation of embed items
 - List of all tags in meta/tags
 
