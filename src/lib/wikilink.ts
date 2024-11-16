@@ -63,4 +63,11 @@ export default class WikiLink {
     return new WikiLink(entry.collection, entry.slug)
   }
 
+  static fromAstroRef (ref:string | { collection:AnyContentKey, slug:string }):WikiLink {
+    if (typeof ref === 'string') {
+      return WikiLink.split(ref)
+    } else {
+      return new WikiLink(ref.collection as AnyContentKey, ref.slug)
+    }
+  }
 }
