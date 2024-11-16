@@ -1,0 +1,19 @@
+---
+import { getCollection, getEntry } from 'astro:content'
+import { content, type AnyContentEntry, type AnyContentKey } from '@/content/config'
+import { dedupe, closestLev } from '@utils'
+
+import WikiLink from '@/lib/wikilink.ts'
+import Layout  from '@/layouts/Layout.astro'
+
+---
+<Layout title="Meta Pages" sky="eveningside" description="Pages about the project itself">
+  <h1 class="text-3xl md:text-4xl mb-16 text-center font-title-wide">Meta Pages</h1>
+
+  <div class="prose">
+    <ul class="grid gap-1">
+      <li><a href="/meta/tags">Tags</a></li>
+      <li><a href="/meta/missing">Missing Links</a></li>
+    </ul>
+  </div>
+</Layout>
