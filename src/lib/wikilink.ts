@@ -11,9 +11,8 @@ import type { AnyContentEntry, AnyContentKey } from '@/content/config.ts'
 // Used in raw markdown articles to specify particular content collections.
 // Not used to data-type collections.
 //
-// TODO: Scrape fragemnts also
-//
 
+// TODO: Match fragemnts also
 const RX_WIKILINK = /\[([^\]]+)\]\((\w+:\w+)\)/g
 
 export default class WikiLink {
@@ -22,7 +21,10 @@ export default class WikiLink {
   slug: string
   fragment?: string
 
-  constructor (public coll:string, public slug:string, public fragment?:string) {
+  constructor (coll:AnyContentKey, slug:string, fragment?:string) {
+    this.coll = coll
+    this.slug = slug
+    this.fragment = fragment
   }
 
   toLink () {
@@ -33,7 +35,11 @@ export default class WikiLink {
     return `/${this.coll}/${this.slug}`
   }
 
-  async resolve<T> ():Promise<T[]> {
+  sameAs (other:WikiLink) {
+    return this.coll === other.coll && this.slug === other.slug
+  }
+
+  async resolve ():Promise<AnyContentEntry | undefined> {
     return await getEntry(this.coll, this.slug)
   }
 
@@ -41,16 +47,16 @@ export default class WikiLink {
     const [ coll, rest ] = src.split(':')
     if (rest.includes('#')) {
       const [ slug, frag ] = rest.split('#')[0]
-      return new WikiLink(coll, slug, frag)
+      return new WikiLink(coll as AnyContentKey, slug, frag)
     } else {
-      return new WikiLink(coll, rest)
+      return new WikiLink(coll as AnyContentKey, rest)
     }
   }
 
   static scrape (str:string):WikiLink[] {
     const links = str.match(RX_WIKILINK)
     if (!links) return [] as WikiLink[]
-    return links.map(link => WikiLink.split(link.match(/\[([^\]]+)\]\((\w+:\w+)\)/)[2]))
+    return links.map(link => WikiLink.split(link.match(/\[([^\]]+)\]\((\w+:\w+)\)/)![2]))
   }
 
   static fromEntry (entry:AnyContentEntry):WikiLink {

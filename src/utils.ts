@@ -9,19 +9,6 @@ export function absolutePath (path:string) {
   return '/' + path.replace(/^\//, '')
 }
 
-export async function resolve (ref:string | { collection:AnyContentKey, slug:string }) {
-  if (typeof ref === 'string') {
-    if (ref.includes(':')) {
-      const [ collection, slug ] = launderWikiLink(ref)
-      return resolve({ collection, slug })
-    } else {
-      return ref
-    }
-  } else {
-    return await getEntry(ref.collection, ref.slug)
-  }
-}
-
 export function pluck<T> (items:T[], key: string) {
   if (key.includes('.')) {
     const [ k, ...next ] = key.split('.')
@@ -72,7 +59,7 @@ export function runMatches (rx:RegExp, str:string):WikiLink[] {
 
   let match:RegExpMatchArray | null
   while (match = rx.exec(str)) {
-    all.push(launderWikiLink(match[2]))
+    all.push(WikiLink.split(match[2]!))
   }
 
   return all

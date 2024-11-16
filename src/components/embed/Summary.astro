@@ -14,7 +14,7 @@ interface Props {
 
 const { src, heading = false, level = 2 } = Astro.props
 const link = WikiLink.split(src)
-const entry = await link.resolve<AnyContentEntry>()
+const entry = await link.resolve()
 
 // Process body to find just the first paragraph
 const first = stripLinks(firstChunk(entry!.body))

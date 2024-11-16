@@ -7,11 +7,12 @@ interface Props {
 
 import Pie, { type PieData } from './charts/Pie.astro'
 import { getEntry } from 'astro:content'
-import { uid, launderWikiLink } from '@utils'
+import { uid } from '@utils'
+import WikiLink from '@/lib/wikilink.ts'
 
 const { src, type, heading = "" } = Astro.props
-const [ coll, slug ] = launderWikiLink(src)
-const entry = await getEntry(coll, slug)
+const link = WikiLink.split(src)
+const entry = await link.resolve()
 const id = 'chart-' + uid()
 
 let data

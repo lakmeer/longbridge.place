@@ -1,15 +1,15 @@
 ---
 import { getCollection, getEntry } from 'astro:content'
-import { collections, type AnyContentEntry } from '@/content/config'
+import { content, type AnyContentEntry, type AnyContentKey } from '@/content/config'
 import { dedupe, closestLev } from '@utils'
 
 import WikiLink from '@/lib/wikilink.ts'
 import Layout  from '@/layouts/Layout.astro'
 
-type MatchRank = { link: string, closest: string, dist: number }
+type MatchRank = { link: WikiLink, closest: string, dist: number }
 
 function rankColor (dist:number) {
-  if (dist < 0.08) return 'font-bold'
+  if (dist < 0.10) return 'font-bold'
   if (dist < 0.25) return 'opacity-100'
   return 'opacity-50'
 }
@@ -17,18 +17,18 @@ function rankColor (dist:number) {
 // Get all entries in content-type collections
 const allEntries:AnyContentEntry[] = []
 
-for (let coll of Object.keys(collections)) {
-  (await getCollection(coll)).forEach((entry) => {
+for (let coll of Object.keys(content)) {
+  (await getCollection(coll as AnyContentKey)).forEach((entry) => {
+    // @ts-ignore shut up
     if (entry.slug!) { // is a content type collection
-      allEntries.push(entry as AnyContentEntry)
+      allEntries.push(entry)
     }
   })
 }
 
 // Scrape wikilinks from all entries
 const missingLinks:WikiLink[] = allEntries
-  .reduce((acc, entry) => acc.concat(WikiLink.scrape(entry.body)), [])
-  .filter((link) => link.coll !== 'tag')
+  .reduce((acc, entry) => acc.concat(WikiLink.scrape(entry.body)), [] as WikiLink[])
 
 // Turn existing entries into raw links
 const existing = allEntries.map((entry) => WikiLink.fromEntry(entry).toLink())
@@ -45,7 +45,7 @@ for (const link of missingLinks) {
   }
 }
 
-missingRanks = dedupe(missingRanks, (a, b) => a.link === b.link)
+missingRanks = dedupe(missingRanks, (a, b) => a.link.sameAs(b.link))
 missingRanks.sort((a, b) => a.link.slug.localeCompare(b.link.slug))
 ---
 <Layout title="Missing Pages" sky="eveningside" description="Linked pages that are missing">

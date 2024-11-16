@@ -48,8 +48,3 @@ export function indexPages ():string[] {
     .map(p => '/' + p)
 }
 
-
-// tagSimilarity
-//
-// Returns top ten most misilar tag pairs by levenshtein distance, with a
-// special exemption for tags beginning with 'the-'

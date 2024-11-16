@@ -138,7 +138,7 @@ const misc = defineCollection({
 // Export and Utility Functions
 //
 
-const content = {
+export const content = {
   lore,
   location,
   person,
@@ -146,7 +146,7 @@ const content = {
   meta,
 }
 
-const data = {
+export const data = {
   image,
   author,
   thread,
