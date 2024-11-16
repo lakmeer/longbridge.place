@@ -8,5 +8,9 @@
       "@utils": ["src/utils.ts"],
       "@comp/*": ["src/components/*"]
     }
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "public/js",
+  ]
 }
