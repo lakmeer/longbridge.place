@@ -13,7 +13,7 @@ import type { AnyContentEntry, AnyContentKey } from '@/content/config.ts'
 //
 
 // TODO: Match fragemnts also
-const RX_WIKILINK = /\[([^\]]+)\]\((\w+:\w+)\)/g
+const RX_WIKILINK = /\[([^\]]+)\]\((\w+:[-a-z]+)\)/g
 
 export default class WikiLink {
 
@@ -56,8 +56,11 @@ export default class WikiLink {
 
   static scrape (str:string):WikiLink[] {
     const links = str.match(RX_WIKILINK)
+
     if (!links) return [] as WikiLink[]
-    return links.map(link => WikiLink.split(link.match(/\[([^\]]+)\]\((\w+:\w+)\)/)![2]))
+    return links.map(link => {
+      return WikiLink.split(link.match(/\((\w+:[-a-z]+)\)/)![1])
+    })
   }
 
   static fromEntry (entry:AnyContentEntry):WikiLink {
