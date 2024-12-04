@@ -1,7 +1,6 @@
 
-import { getEntry, getCollection, type CollectionEntry } from 'astro:content'
-import { collectEmbeds, collectLinks } from '@/lib/collections'
-import type { AnyContentEntry, AnyContentKey, AnyEntry } from '@/content/config.ts'
+import { getCollection } from 'astro:content'
+import type { AnyContentEntry, AnyEntry } from '@/content/config.ts'
 
 import WikiLink from './lib/wikilink.ts'
 

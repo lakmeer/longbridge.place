@@ -24,7 +24,7 @@ const SUNSET = [
   '#ffedb3',
 ]
 
-const palette = SUNSET
+const palette = SUNSET ?? DUSK
 
 const color = (ix:number) => palette[ ix % palette.length ]
 

@@ -4,7 +4,6 @@
 //
 
 import { globSync } from 'glob'
-import { readFileSync } from 'fs'
 
 export type CollectionIndex = Record<string, string[]>
 

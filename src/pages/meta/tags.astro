@@ -16,6 +16,7 @@ const allTags:Record<string, EntrySummary[]> = {}
 for (const coll of Object.keys(collections) as AnyCollectionKey[]) {
   (await getCollection(coll)).forEach((entry) => {
     if (entry.data.tags) {
+      //@ts-ignore
       entry.data.tags.forEach((tag) => {
         const summary = { title: entry.data.title, url: entryUrl(entry) }
         if (!allTags[tag]) {
