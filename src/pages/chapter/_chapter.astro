@@ -1,20 +1,26 @@
 ---
 import Layout from '@/layouts/Layout.astro'
 import ChapterCard from '@/components/ChapterCard.astro'
+import { absolutePath } from '@utils'
 
 import { getEntry, getCollection } from 'astro:content'
 
-// This entry
 const { entry } = Astro.props
 const { Content } = await entry.render()
 const [ next ] = await getCollection('chapter', ({ data }) =>
-  data.thread.id === entry.data.thread.id && data.number === entry.data.number + 1)
+  data.published
+    && data.thread.id === entry.data.thread.id
+    && data.number === entry.data.number + 1)
 const thread = await getEntry(entry.data.thread)
 ---
 <Layout title={entry?.data.title} description={entry?.data.synopsis}>
   <div class="mx-auto max-w-3xl grid gap-16 lg:gap-20">
     <div class="grid text-center gap-4 lg:gap-8 mt-8">
-      <h2 class="font-title-xwide uppercase text-center text-lg ">{ thread?.data.title }</h2>
+      <h2 class="font-title-xwide uppercase text-center text-lg ">
+        <a href={absolutePath(`chapter/${ thread.id }`)}>
+          { thread?.data.title }
+        </a>
+      </h2>
       <h3 class="font-title-wide text-center text-2xl lg:text-3xl">{ entry.data.title }</h3>
     </div>
 

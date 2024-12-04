@@ -5,21 +5,23 @@ import { getCollection } from 'astro:content'
 import { collateByKey, json, entryUrl } from '@utils'
 
 const threads  = await getCollection('thread')
-const chapters = await getCollection('chapter')
+const chapters = await getCollection('chapter', ({ data }) => data.published)
 const all = collateByKey(chapters, ({ data }) => data.thread.id)
 ---
 <Layout title="Chapters">
   <PageHeading>Chapters</PageHeading>
 
   <div class="grid gap-8">
-    { threads.map((thread) =>
+    { threads
+      .filter(({ id }) => all[id]?.length > 0)
+      .map((thread) =>
       <div class="grid gap-4">
         <h3 class="text-2xl font-title-wide">
         { thread.data.title }
       </h3>
 
         <div class="grid gap-2">
-          { all[thread.id].map((chapter) =>
+          { all[thread.id]?.map((chapter) =>
             <a class="hl" href={entryUrl(chapter)}>
               { chapter.data.title }
             </a>

@@ -1,7 +1,6 @@
 ---
 import ThreadPage  from './_thread.astro'
 import ChapterPage from './_chapter.astro'
-
 import { getCollection } from 'astro:content'
 
 // All entries
@@ -14,14 +13,16 @@ export async function getStaticPaths() {
       params: { slug: entry.id },
       props: { entry }
     })),
-    ...chapters.map((entry) => ({
-      params: { slug: entry.slug },
-      props: { entry },
-    }))
+    ...chapters
+      .filter((entry) => entry.data.published)
+      .map((entry) => ({
+        params: { slug: entry.slug },
+        props: { entry },
+      }
+    ))
   ]
 }
 
-// This entry
 const { entry } = Astro.props
 ---
 { entry.collection === 'chapter' ? <ChapterPage {entry} /> :

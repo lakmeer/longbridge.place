@@ -4,18 +4,15 @@ import { entryUrl, json } from '@utils'
 
 import Layout from '@/layouts/Layout.astro'
 
-// This entry
 const { entry } = Astro.props
-
-const chapters = await getCollection('chapter', 
-  ({ data }) => data.thread.id === entry.id)
-
-const links = chapters.map((chapter) => ({
-  url: entryUrl(chapter),
-  title: chapter.data.title,
-  number: chapter.data.number,
-}))
-
+const chapters = await getCollection('chapter', ({ data }) => data.thread.id === entry.id)
+const links = chapters
+  .filter(({ data }) => data.published)
+  .map((chapter) => ({
+    url: entryUrl(chapter),
+    title: chapter.data.title,
+    number: chapter.data.number,
+  }))
 ---
 <Layout title={entry?.data.title} description={entry?.data.synopsis}>
   <div x-data=`{ reversed: false, links: ${ json(links)} }`
@@ -34,7 +31,3 @@ const links = chapters.map((chapter) => ({
     </div>
   </div>
 </Layout>
-
-<script>
-
-</script>
