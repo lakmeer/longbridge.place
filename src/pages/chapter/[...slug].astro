@@ -1,40 +1,30 @@
 ---
-import Layout from '@/layouts/Layout.astro'
-import ChapterCard from '@/components/ChapterCard.astro'
+import ThreadPage  from './_thread.astro'
+import ChapterPage from './_chapter.astro'
 
 import { getEntry, getCollection } from 'astro:content'
 
 // All entries
 export async function getStaticPaths() {
+  const threads  = await getCollection('thread')
   const chapters = await getCollection('chapter')
-  return chapters.map((entry) => ({
-    params: { slug: entry.slug },
-    props: { entry },
-  }))
+
+  return [
+    ...threads.map((entry) => ({
+      params: { slug: entry.id },
+      props: { entry }
+    })),
+    ...chapters.map((entry) => ({
+      params: { slug: entry.slug },
+      props: { entry },
+    }))
+  ]
 }
 
 // This entry
 const { entry } = Astro.props
-const { Content } = await entry.render()
-const [ next ] = await getCollection('chapter', ({ data }) =>
-  data.thread.id === entry.data.thread.id && data.number === entry.data.number + 1)
-const thread = await getEntry(entry.data.thread)
 ---
-<Layout title={entry?.data.title} description={entry?.data.synopsis}>
-  <div class="mx-auto max-w-3xl grid gap-16 lg:gap-20">
-    <div class="grid text-center gap-4 lg:gap-8 mt-8">
-      <h2 class="font-title-xwide uppercase text-center text-lg ">{ thread.data.title }</h2>
-      <h3 class="font-title-wide text-center text-2xl lg:text-3xl">{ entry.data.title }</h3>
-    </div>
-
-    <div class="prose prose-book mx-auto">
-      <Content />
-    </div>
-
-    { next &&
-      <div class="text-center font-title-wide text-xl">
-        <a href=`/chapter/${next.slug}`> { next.data.title } </a>
-      </div>
-    }
-  </div>
-</Layout>
+{ entry.collection === 'chapter' ? <ChapterPage {entry} /> :
+  entry.collection === 'thread'  ? <ThreadPage  {entry} /> :
+  null
+}

@@ -101,3 +101,6 @@ export function closestLev (target:string, list:string[]):[ string, number ] {
   return [ closest.link, closest.dist/(Math.max(target.length, closest.link.length)) ]
 }
 
+export function json (it:any, format = false):string {
+  return JSON.stringify(it, null, format ? 2 : 0)
+}

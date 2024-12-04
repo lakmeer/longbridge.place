@@ -1,5 +1,4 @@
 ---
-//@ts-nocheck
 import { getEntry, getCollection, type CollectionEntry } from 'astro:content'
 import { resolve, absolutePath } from '@utils'
 
@@ -28,14 +27,26 @@ const author = await getEntry(chapter.data.author)
       <dt>Author</dt>
       <dd>{author.data.name}</dd>
 
-      <dt>Locations</dt>
-      <dd>{chapter.data.locations.map((l) => <MiniLink ref={l} />)}</dd>
+      <dt>Thread</dt>
+      <dd>{thread.data.title}</dd>
+
+      { chapter.data.locations && <>
+        <dt>Locations</dt>
+        <dd class="grid">{chapter.data.locations?.map((l) => <MiniLink class="block" ref={l} />)}</dd>
+      </> }
 
       <dt>Protagonist</dt>
       <dd><MiniLink ref={chapter.data.pov_char} /></dd>
 
-      <dt>Other Characters</dt>
-      <dd>{chapter.data.other_chars.map((c) => <MiniLink class="block" ref={c} />)}</dd>
+      { chapter.data.other_chars && <>
+        <dt>Other Characters</dt>
+        <dd class="grid">
+          { chapter.data.other_chars.map((c) =>
+            <MiniLink class="block" ref={c} />)
+          }
+      </dd>
+      </> }
+
     </dl>
   </div>
 </Card>

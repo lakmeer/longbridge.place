@@ -110,7 +110,7 @@ const thread = defineCollection({
   schema: z.object({
     title: z.string(),
     tags: tags,
-    authors: z.array(reference('author').or(z.string())),
+    authors: z.array(reference('author')),
   })
 })
 

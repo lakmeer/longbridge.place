@@ -7,7 +7,6 @@ interface Props {
 
 const { heading, link, class: cl } = Astro.props;
 ---
-
 <div class:list={[ cl, "bg-white/20 shadow-lg ring-4 ring-white/30 shadow-white/40" ]}>
   <div class="p-1 font-title text-sm bg-white/15 text-center ">
     { link ? <a href={link}>{heading}</a> : heading }

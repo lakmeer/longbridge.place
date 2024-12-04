@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content'
+import { entryUrl, json } from '@utils'
+
+import Layout from '@/layouts/Layout.astro'
+
+// This entry
+const { entry } = Astro.props
+
+const chapters = await getCollection('chapter', 
+  ({ data }) => data.thread.id === entry.id)
+
+const links = chapters.map((chapter) => ({
+  url: entryUrl(chapter),
+  title: chapter.data.title,
+  number: chapter.data.number,
+}))
+
+---
+<Layout title={entry?.data.title} description={entry?.data.synopsis}>
+  <div x-data=`{ reversed: false, links: ${ json(links)} }`
+       class="mx-auto max-w-3xl grid gap-16 lg:gap-20">
+    <div class="grid text-center gap-4 lg:gap-8 mt-8">
+      <h2 class="font-title-xwide uppercase text-center text-lg ">{ entry.data.title }</h2>
+      <button @click="reversed = !reversed" x-text="reversed ? 'Latest' : 'Oldest'" />
+    </div>
+
+    <div class="w-[32ch]">
+      <nav class="grid gap-2">
+        <template x-for="(link) in (reversed ? links.toReversed() : links)">  
+          <a :href="link.url" x-text="link.title" />
+        </template>
+      </nav>
+    </div>
+  </div>
+</Layout>
+
+<script>
+
+</script>
