@@ -37,5 +37,7 @@ export default defineConfig({
     remarkPlugins: [ LinkChecker, CollectionLinks ],
   },
 
-  adapter: vercel()
+  adapter: vercel({
+    edgeMiddleware: false
+  })
 })
