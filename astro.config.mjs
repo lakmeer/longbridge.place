@@ -9,13 +9,17 @@ import auto     from 'astro-auto-import'
 import CollectionLinks  from './src/plugins/collection-links.ts'
 import LinkChecker      from './src/plugins/link-checker.ts'
 
+import vercel from '@astrojs/vercel/serverless';
+
 export default defineConfig({
   output: 'hybrid',
+
   vite: {
     resolve: {
       preserveSymlinks: true,
     }
   },
+
   integrations: [
     tailwind({
       applyBaseStyles: false,
@@ -28,7 +32,10 @@ export default defineConfig({
     mdx(),
     alpinejs()
   ],
+
   markdown: {
     remarkPlugins: [ LinkChecker, CollectionLinks ],
-  }
+  },
+
+  adapter: vercel()
 })
