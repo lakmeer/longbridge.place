@@ -44,10 +44,10 @@ const bg =
   </head>
 
   <body class:list={[ cl, "text-white min-h-screen min-w-[420px]" ]}>
-    <main class="py-8 lg:py-[5vw] flex flex-col min-h-screen px-4 md:px-8 xl:px-16 max-w-7xl mx-auto">
+    <main class="py-8 flex flex-col min-h-screen px-4 md:px-8 xl:px-16 max-w-7xl mx-auto">
       <Title />
 
-      <div class:list={[ "mx-auto px-4 lg:px-8 py-8 lg:mt-[5vw] flex-grow", center ? "grid-center" : "" ]}>
+      <div class:list={[ "mx-auto px-4 lg:px-8 py-8 flex-grow", center ? "grid-center" : "" ]}>
         <slot />
       </div>
     </main>

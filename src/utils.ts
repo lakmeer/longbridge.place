@@ -103,3 +103,14 @@ export function closestLev (target:string, list:string[]):[ string, number ] {
 export function json (it:any, format = false):string {
   return JSON.stringify(it, null, format ? 2 : 0)
 }
+
+export function collateByKey<T> (things:T[], fn:(T) => string):Record<string, T[]> {
+  const obj = {}
+  things.forEach((it:T) => {
+    const key = fn(it)
+    if (!obj[key]) obj[key] = []
+    obj[key] = obj[key].concat(it)
+  })
+  return obj
+}
+

@@ -1,5 +1,6 @@
 ---
-import Layout from '@/layouts/Layout.astro'
+import Layout      from '@/layouts/Layout.astro'
+import PageHeading from '@comp/PageHeading.astro'
 
 const GREEN      = '#3ACB1D'
 const BH_DARK    = '#4B50AE'
@@ -9,9 +10,9 @@ const KS_SHADE_1 = '#EDEDED'
 const KS_SHADE_2 = '#D9D9D9'
 ---
 <Layout title="Map">
-  <h1 class="font-title-wide text-center text-2xl">Enclaves</h1>
+  <PageHeading>Enclaves</PageHeading>
 
-  <div class="relative grid md:[grid-template-columns:3fr_1fr] "> <!-- my-[-17vw] md:my-[-15vw] lg:-my-48"> -->
+  <div class="relative grid md:[grid-template-columns:3fr_1fr] ">
     <svg width="100%" viewBox="0 100 280 2450" fill="none" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="bridgehand" x1="0"  y1="84"  x2="50" y2="300" gradientUnits="userSpaceOnUse"> <stop offset="0.125751" stop-color={BH_DARK}  stop-opacity="0"/> <stop offset="0.415" stop-color={BH_DARK}/> <stop offset="0.580029" stop-color={BH_LIGHT}/> <stop offset="0.75" stop-color={BH_LIGHT}/> <stop offset="1" stop-color="white"/> </linearGradient>
@@ -45,7 +46,6 @@ const KS_SHADE_2 = '#D9D9D9'
 
       <!-- Leans Indicator -->
       <path d="M23 2050H19V2250H23V2249L21 2247V2053L23 2051V2050Z" fill={BLUE}/>
-
     </svg>
 
     <nav class="absolute inset-0 font-title-xwide uppercase flex flex-col pl-[25%] md:pl-[20%] text-sm md:text-xl whitespace-nowrap">
@@ -53,11 +53,8 @@ const KS_SHADE_2 = '#D9D9D9'
       <a data-ix="-12"   href="/lore/the-bridgehand">The Bridgehand</a>
       <a data-ix="-11"   href="/location/workhome">Workhome</a>
       <a data-ix="-10"   href="/location/new-commons"> New Commons </a>
-      <a data-ix="-9"    class="hidden" />
-      <a data-ix="-8"    class="hidden" />
       <a data-ix="-7"    href="/location/abreast">Abreast</a>
       <a data-ix="-6"    href="/location/loom">Loom</a>
-      <a data-ix="-5"    class="hidden" />
       <a data-ix="-4"    href="/location/respite">Respite</a>
       <a data-ix="-3"    href="/location/foundry">Foundry</a>
       <a data-ix="-2"    href="/location/conservatory">Conservatory</a>
@@ -72,8 +69,6 @@ const KS_SHADE_2 = '#D9D9D9'
       <a data-ix="5"     href="/location/haven">Haven</a>
       <a data-ix="6"     href="/location/new-start">New Start</a>
       <a data-ix="7.5"   href="/location/leans">Leans</a>
-      <a data-ix="8"     class="hidden" />
-      <a data-ix="9"     class="hidden" />
       <a data-ix="10"    href="/location/pulsers-clave">Pulsers Clave</a>
       <a data-ix="11"    href="/location/far-echo">Far Echo</a>
     </nav>
@@ -86,7 +81,7 @@ const KS_SHADE_2 = '#D9D9D9'
       display: block;
       position: absolute;
       transform: translateY(-50%);
-      font-weight: 500;
+      font-weight: 400;
 
       /* A bunch of carry-on to re-create the underline effect while avoiding
        * the extra width created by letter-spacing */

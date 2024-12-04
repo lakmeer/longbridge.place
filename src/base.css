@@ -74,9 +74,21 @@
     }
   }
 
+
+  /* Standard text link treatment */
+
+  a.hl, .prose a[href] {
+    text-decoration-color: transparent;
+    text-underline-offset: 0.2em;
+    transition: text-decoration-color 0.1s linear, text-underline-offset 0.1s ease-out;
+    font-weight: 500;
+    &:hover { text-decoration-color: currentColor; text-underline-offset: 0.1em; }
+  }
+
   a[href=""] {
     color: yellow !important;
   }
+
 }
 
 @layer utilities {
@@ -135,25 +147,11 @@
       font-weight: 400;
       letter-spacing: 0.05rem;
     }
-
-    a[href] {
-      text-decoration-color: transparent;
-      text-underline-offset: 0.2em;
-      transition: text-decoration-color 0.1s linear, text-underline-offset 0.1s ease-out;
-      font-weight: 500;
-      &:hover { text-decoration-color: currentColor; text-underline-offset: 0.1em; }
-    }
   }
 
-  /* Apply this hack to h6 and h6 as well */
-  :where(h5 + *):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
-    margin-top: 0 !important;
-  }
-  :where(h6 + *):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
-    margin-top: 0 !important;
-  }
 
   /* For story formatting */
+
   .prose-book {
     p {
       text-indent: 1.5rem;
@@ -169,4 +167,15 @@
       margin-bottom: 0.5rem;
     }
   }
+
+
+  /* Apply this hack to h6 and h6 as well */
+
+  :where(h5 + *):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    margin-top: 0 !important;
+  }
+  :where(h6 + *):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    margin-top: 0 !important;
+  }
+
 }

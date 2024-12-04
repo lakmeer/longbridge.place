@@ -1,0 +1,31 @@
+---
+import Layout      from '@/layouts/Layout.astro'
+import PageHeading from '@comp/PageHeading.astro'
+import { getCollection } from 'astro:content'
+import { collateByKey, json, entryUrl } from '@utils'
+
+const threads  = await getCollection('thread')
+const chapters = await getCollection('chapter')
+const all = collateByKey(chapters, ({ data }) => data.thread.id)
+---
+<Layout title="Chapters">
+  <PageHeading>Chapters</PageHeading>
+
+  <div class="grid gap-8">
+    { threads.map((thread) =>
+      <div class="grid gap-4">
+        <h3 class="text-2xl font-title-wide">
+        { thread.data.title }
+      </h3>
+
+        <div class="grid gap-2">
+          { all[thread.id].map((chapter) =>
+            <a class="hl" href={entryUrl(chapter)}>
+              { chapter.data.title }
+            </a>
+          )}
+        </div>
+      </div>
+    )}
+  </div>
+</Layout>
