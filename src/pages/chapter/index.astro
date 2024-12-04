@@ -2,15 +2,15 @@
 import { getCollection } from 'astro:content'
 import { collateByKey, entryUrl } from '@utils'
 
-import Layout      from '@/layouts/Layout.astro'
-import PageHeading from '@comp/PageHeading.astro'
+import Layout  from '@/layouts/Layout.astro'
+import Heading from '@comp/PageHeading.astro'
 
 const threads  = await getCollection('thread')
 const chapters = await getCollection('chapter', ({ data }) => data.published)
 const all = collateByKey(chapters, ({ data }) => data.thread.id)
 ---
 <Layout title="Chapters">
-  <PageHeading>Chapters</PageHeading>
+  <Heading>Chapters</Heading>
 
   <div class="grid gap-8">
     { threads

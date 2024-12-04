@@ -114,3 +114,11 @@ export function collateByKey<T> (things:T[], fn:(it:T) => string):Record<string,
   return obj
 }
 
+export function titlecase (str:string):string {
+  return str
+    .split(" ")
+    .filter(Boolean)
+    .map(word => word[0].toUpperCase() + word.slice(1))
+    .join(" ")
+}
+
