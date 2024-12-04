@@ -15,7 +15,7 @@ const thread = await getEntry(chapter.data.thread)
 const author = await getEntry(chapter.data.author)
 ---
 <Card heading={thread.data.title + (chapter.data.number ? ' #' + chapter.data.number : '')} link=`/thread/${thread.id}`>
-  <div class="grid gap-8">
+  <div class="grid gap-4">
     <div class="grid gap-2">
       <h3 class="font-title text-xl">{chapter.data.title}</h3>
 
