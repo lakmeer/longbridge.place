@@ -9,7 +9,7 @@ import auto     from 'astro-auto-import'
 import CollectionLinks  from './src/plugins/collection-links.ts'
 import LinkChecker      from './src/plugins/link-checker.ts'
 
-import vercel from '@astrojs/vercel/serverless';
+import vercel from '@astrojs/vercel';
 
 export default defineConfig({
   output: 'hybrid',
@@ -37,7 +37,5 @@ export default defineConfig({
     remarkPlugins: [ LinkChecker, CollectionLinks ],
   },
 
-  adapter: vercel({
-    edgeMiddleware: false
-  })
+  adapter: vercel()
 })
