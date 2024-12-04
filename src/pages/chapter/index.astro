@@ -1,8 +1,9 @@
 ---
+import { getCollection } from 'astro:content'
+import { collateByKey, entryUrl } from '@utils'
+
 import Layout      from '@/layouts/Layout.astro'
 import PageHeading from '@comp/PageHeading.astro'
-import { getCollection } from 'astro:content'
-import { collateByKey, json, entryUrl } from '@utils'
 
 const threads  = await getCollection('thread')
 const chapters = await getCollection('chapter', ({ data }) => data.published)

@@ -104,7 +104,7 @@ export function json (it:any, format = false):string {
   return JSON.stringify(it, null, format ? 2 : 0)
 }
 
-export function collateByKey<T> (things:T[], fn:(T) => string):Record<string, T[]> {
+export function collateByKey<T> (things:T[], fn:(it:T) => string):Record<string, T[]> {
   const obj = {}
   things.forEach((it:T) => {
     const key = fn(it)
