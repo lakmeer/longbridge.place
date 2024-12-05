@@ -6,16 +6,16 @@ Catalog of all raw content for the Longbridge project.
 
 - Collections are named the same as the route they are served from
 - Collection names are in the singular (person vs people)
-- Story chapters are written in the present tense
-- Chapters are organised into threads named after the POV character
+- Chapters are organised into threads
   - Since Astro can't type schemas of nested collections, thread reference is a prop of the frontmatter
   - Threads are data objects
-- Chapter collection is subfolders for each thread (storyline)
+- Chapter collection is subfolders for each thread
 
 
 ## Content Types
 
 ### People `/person`
+
 Citizen character profiles.
 
 #### Frontmatter Schema
@@ -31,7 +31,9 @@ Citizen character profiles.
     tags:
       - tag-slug
 
+
 ### Entries `/entry`
+
 Storyline chapters/subchapters.
 
 #### Frontmatter Schema
@@ -49,7 +51,9 @@ Storyline chapters/subchapters.
     related:
       - lore-slug
 
+
 ### Lore `/lore`
+
 Lore wiki articles. Can link to and embed each other, and embed media items.
 
 #### Frontmatter Schema
@@ -60,23 +64,23 @@ Lore wiki articles. Can link to and embed each other, and embed media items.
     related:
       - lore-slug
 
+
 #### Guidelines
 
-- Lore articles should NOT include their own main heading in the acutal body.
+- Lore articles should not include their own main heading in the acutal body.
 - Lore articles should start with a one-ish paragraph overview that can be used
   as a fair summary of the entire article contents. This will be used to create
-  embedded sections in relevant articles, and tooltips for links. Embedding this
-  way will take all contant before the first subheading inside the article to use
-  as the summary. Using as tooltip will take just the first paragraph.
-
-  TODO: May promote this to an explicit field in the frontmatter.
-
+  embedded sections in relevant articles, search results, and tooltips for
+  links. Embedding this way will take all contant before the first subheading
+  inside the article to use as the summary. Using as tooltip will take just the
+  first paragraph. TODO: May promote this to an explicit field in the frontmatter.
 - Related articles will be generated from matching tags and internal links.
 
 
 ## Media & Data Types
 
 ### Images
+
 Images to complement articles
 
 #### Schema
@@ -99,21 +103,23 @@ Images to complement articles
 - TBD
 
 ### `/models/`
+3D Meshes
 #### Frontmatter Schema
 - TBD
 
 ### `/splats/`
+Gaussian scenes
 #### Frontmatter Schema
 - TBD
 
 ### `/maps/`
+2D pannable maps
 #### Frontmatter Schema
 - TBD
 
-Images, videos, 3d meshes, splats, TIs, etc to complement articles
-
 ### Meta
 Meta content relating to the project itself, such as notes, user profiles, admins etc.
+Includes helper pages like tags overview, missing article links, and so on
 No fixed schema.
 
 ### Notes

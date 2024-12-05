@@ -12,8 +12,8 @@ import type { AnyContentEntry, AnyContentKey } from '@/content/config.ts'
 // Not used to data-type collections.
 //
 
-// TODO: Match fragemnts also
-const RX_WIKILINK = /\[([^\]]+)\]\((\w+:[-a-z]+)\)/g
+const RX_WIKILINK    = /\[([^\]]+)\]\((\w+:[-a-z]+)(#[-a-z]+)?\)/g
+const RX_PARENS_ONLY = /\((\w+:[-a-z]+)(#[-a-z]+)?\)/
 
 export default class WikiLink {
 
@@ -58,8 +58,9 @@ export default class WikiLink {
     const links = str.match(RX_WIKILINK)
 
     if (!links) return [] as WikiLink[]
+
     return links.map(link => {
-      return WikiLink.split(link.match(/\((\w+:[-a-z]+)\)/)![1])
+      return WikiLink.split(link.match(RX_PARENS_ONLY)![1])
     })
   }
 
