@@ -34,7 +34,7 @@ export function withSameTags (tags:string[]) {
 }
 
 export function sameEntry (a:AnyContentEntry) {
-  return (b:AnyContentEntry) => a.collection === b.collection && a.slug === b.slug
+  return (b:AnyContentEntry) => a.collection === b.collection && a.id === b.id
 }
 
 export async function getRelatedEntries (entry:AnyContentEntry) {
@@ -69,12 +69,6 @@ export function uid ():string {
 }
 
 export function entryUrl (entry:AnyEntry):string {
-  // @ts-ignore dunno why this doesn't narrow properly
-  if (entry.slug) {
-    // @ts-ignore
-    return `/${entry.collection}/${entry.slug}`
-  }
-
   return `/${entry.collection}/${entry.id}`
 }
 

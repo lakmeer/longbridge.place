@@ -3,9 +3,9 @@ import 'colors'
 import { indexPages, indexContentByCollection } from '../lib/collation.ts'
 
 export function splitLink (src:string) {
-  let [ coll, slug ] = src.split(':')
-  if (slug.includes('#')) slug = slug.split('#')[0]
-  return [ coll, slug ]
+  let [ coll, id ] = src.split(':')
+  if (id.includes('#')) id = id.split('#')[0]
+  return [ coll, id ]
 }
 
 
@@ -36,7 +36,7 @@ export default function LinkChecker () {
       // Collection links
       if (node.url.includes(':')) {
 
-        const [ collection, slug ] = splitLink(node.url)
+        const [ collection, id ] = splitLink(node.url)
 
         if (collection === 'tag') return
 
@@ -46,8 +46,8 @@ export default function LinkChecker () {
           return
         }
 
-        if (!allCollections[collection].includes(slug)) {
-          console.warn(' LNK-CHK '.yellow.inverse, "Missing entry".yellow, collection + ":" + slug)
+        if (!allCollections[collection].includes(id)) {
+          console.warn(' LNK-CHK '.yellow.inverse, "Missing entry".yellow, collection + ":" + id)
           node.url = ""
           return
         }

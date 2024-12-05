@@ -1,9 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro'
 
-import { getEntry } from 'astro:content'
+import { getEntry, render } from 'astro:content'
 
-const { Content } = await getEntry('lore', 'introduction').then(e => e.render())
+const { Content } = await getEntry('lore', 'introduction').then(e => render(e))
 ---
 <Layout title="Welcome to Longbridge" center>
   <div class="prose">

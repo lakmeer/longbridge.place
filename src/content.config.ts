@@ -1,8 +1,14 @@
 import { defineCollection, z, reference } from 'astro:content'
+import { glob } from 'astro/loaders'
 
 // TODO: Custom validator for Longbridge dates
 const longbridgeDate = z.string().or(z.number())
 const tags = z.array(z.string()).optional()
+
+const mdx = (base:string) => glob({
+  pattern: '**\/[^_]*.mdx?',
+  base: `./src/content/${base}`
+})
 
 
 //
@@ -11,7 +17,7 @@ const tags = z.array(z.string()).optional()
 
 // Main Wiki articles
 const lore = defineCollection({
-  type: 'content',
+  loader:  mdx('lore'),
   schema: z.object({
     title: z.string(),
     tags: tags,
@@ -21,7 +27,7 @@ const lore = defineCollection({
 
 // Story chapters
 const chapter = defineCollection({
-  type: 'content',
+  loader:  mdx('chapters'),
   schema: z.object({
     title: z.string(),
     thread: reference('thread'),
@@ -38,7 +44,7 @@ const chapter = defineCollection({
 
 // Citizen profiles and story characters
 const person = defineCollection({
-  type: 'content',
+  loader:  mdx('people'),
   schema: z.object({
     title: z.string(),
     day_name: z.string(),
@@ -55,7 +61,7 @@ const person = defineCollection({
 
 // Physical Places
 const location = defineCollection({
-  type: 'content',
+  loader:  mdx('locations'),
   schema: z.object({
     title: z.string(),
     name: z.string(),
@@ -71,7 +77,7 @@ const location = defineCollection({
 
 // Meta-articles targeted at contributors
 const meta = defineCollection({
-  type: 'content',
+  loader:  mdx('meta'),
   schema: z.object({
     title: z.string(),
     tags: tags,

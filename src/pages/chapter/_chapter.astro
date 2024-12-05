@@ -1,12 +1,12 @@
 ---
-import { absolutePath } from '@utils'
-import { getEntry, getCollection } from 'astro:content'
-
 import Layout from '@/layouts/Layout.astro'
 import ChapterCard from '@/components/ChapterCard.astro'
 
+import { absolutePath } from '@utils'
+import { getEntry, getCollection, render } from 'astro:content'
+
 const { entry }   = Astro.props
-const { Content } = await entry.render()
+const { Content } = await render(entry)
 
 const thread   = await getEntry(entry.data.thread)
 const [ next ] = await getCollection('chapter', ({ data }) =>
@@ -33,7 +33,7 @@ const [ next ] = await getCollection('chapter', ({ data }) =>
 
     { next &&
       <div class="text-center font-title-wide text-xl">
-        <a href=`/chapter/${next.slug}`> { next.data.title } </a>
+        <a href=`/chapter/${next.id}`> { next.data.title } </a>
       </div>
     }
   </div>

@@ -10,13 +10,13 @@ export async function getStaticPaths() {
 
   return [
     ...threads.map((entry) => ({
-      params: { slug: entry.id },
+      params: { id: entry.id },
       props: { entry }
     })),
     ...chapters
       .filter((entry) => entry.data.published)
       .map((entry) => ({
-        params: { slug: entry.slug },
+        params: { id: entry.id },
         props: { entry },
       }
     ))

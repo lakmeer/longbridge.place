@@ -2,6 +2,8 @@
 import WikiLink from '@/lib/wikilink.ts'
 import LinkIcon from '@/icons/arrow-top-right-on-square.astro'
 
+import { render } from 'astro:content'
+
 interface Props {
   src: string
   level?: number
@@ -16,12 +18,12 @@ const entry = await link.resolve()
 
 // Render Heading etc
 const Htag = 'h' + level
-const { Content } = await entry!.render()
+const { Content } = await render(entry)
 ---
 
 { heading &&
   <Htag>
-    <a class="font-weight-light" href={`/lore/${link.slug}`}>
+    <a class="font-weight-light" href={link.toUrl()}>
       {entry?.data.title}
       <LinkIcon class="ml-2" />
     </a>

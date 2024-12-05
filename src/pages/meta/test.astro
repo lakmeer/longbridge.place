@@ -2,10 +2,10 @@
 import Layout  from '@/layouts/Layout.astro'
 import Related from '@comp/Related.astro'
 
-import { getEntry } from 'astro:content'
+import { getEntry, render } from 'astro:content'
 
 const entry = await getEntry('meta', 'markdown-test')
-const { Content } = await entry.render()
+const { Content } = await render(entry)
 ---
 <Layout title={entry.data.title}>
   <h1 class="max-w-prose mx-auto text-3xl md:text-4xl mb-4 md:mb-8 lg:mb-16 font-title-wide">{ entry.data.title }</h1>

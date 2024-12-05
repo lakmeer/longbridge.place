@@ -25,11 +25,11 @@ Citizen character profiles.
     gender: Character's Gender
     birthdate: Year or date in system format
     media:
-      - link to media item (image:slug)
+      - link to media item (image:id)
     location:
       - list of locations
     tags:
-      - tag-slug
+      - tag-id
 
 
 ### Entries `/entry`
@@ -47,9 +47,9 @@ Storyline chapters/subchapters.
       - Links to other characters appearing or mentioned (person:handelyn-first-ria), or
       - Just the name (for minor characters without profiles)
     tags:
-      - tag-slug
+      - tag-id
     related:
-      - lore-slug
+      - lore-id
 
 
 ### Lore `/lore`
@@ -60,9 +60,9 @@ Lore wiki articles. Can link to and embed each other, and embed media items.
 
     title: text
     tags:
-      - tag-slug
+      - tag-id
     related:
-      - lore-slug
+      - lore-id
 
 
 #### Guidelines

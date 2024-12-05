@@ -7,7 +7,7 @@ import UserCircle from '@/icons/head.astro'
 import BookOpen   from '@/icons/book.astro'
 
 interface Props {
-  ref: string | { collection: AnyContentKey, slug: string }
+  ref: string | { collection: AnyContentKey, id: string }
   class?: string
 }
 
@@ -15,7 +15,7 @@ const { ref, class: cl } = Astro.props
 let entry = (typeof ref !== 'string') ? await WikiLink.fromAstroRef(ref).resolve() : undefined
 ---
 { typeof ref === 'string' ? <span>{ ref }</span> :
-  <a href=`/${entry!.collection}/${entry!.slug}` class:list={[ cl, "inline-flex minilink gap-2 hover:underline font-bold" ]}>
+  <a href=`/${entry!.collection}/${entry!.id}` class:list={[ cl, "inline-flex minilink gap-2 hover:underline font-bold" ]}>
     { entry!.collection === 'location' && <><MapPin     class="size-5 translate-y-px"/> { entry!.data.name }</> }
     { entry!.collection === 'person'   && <><UserCircle class="size-5 translate-y-px"/> { entry!.data.day_name }</> }
     { entry!.collection === 'lore'     && <><BookOpen   class="size-5 translate-y-px"/> { entry!.data.title }</> }

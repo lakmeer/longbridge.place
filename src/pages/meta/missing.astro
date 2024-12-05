@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content'
-import { content, type AnyContentEntry, type AnyContentKey } from '@/content/config'
+import { content, type AnyContentEntry, type AnyContentKey } from '@/content.config'
 import { dedupe, closestLev } from '@utils'
 
 import WikiLink from '@/lib/wikilink.ts'
@@ -19,16 +19,14 @@ const allEntries:AnyContentEntry[] = []
 
 for (let coll of Object.keys(content)) {
   (await getCollection(coll as AnyContentKey)).forEach((entry) => {
-    // @ts-ignore shut up
-    if (entry.slug!) { // is a content type collection
-      allEntries.push(entry)
-    }
+    allEntries.push(entry)
   })
 }
 
 // Scrape wikilinks from all entries
 const missingLinks:WikiLink[] = allEntries
   .reduce((acc, entry) => acc.concat(WikiLink.scrape(entry.body ?? "")), [] as WikiLink[])
+  .filter((link) => link.coll !== 'tag') // tags don't count
 
 // Turn existing entries into raw links
 const existing = allEntries.map((entry) => WikiLink.fromEntry(entry).toLink())
@@ -46,7 +44,7 @@ for (const link of missingLinks) {
 }
 
 missingRanks = dedupe(missingRanks, (a, b) => a.link.sameAs(b.link))
-missingRanks.sort((a, b) => a.link.slug.localeCompare(b.link.slug))
+missingRanks.sort((a, b) => a.link.id.localeCompare(b.link.id))
 ---
 <Layout title="Missing Pages" sky="eveningside" description="Linked pages that are missing">
   <h1 class="text-3xl md:text-4xl mb-16 text-center font-title-wide">Missing Pages</h1>
@@ -62,7 +60,7 @@ missingRanks.sort((a, b) => a.link.slug.localeCompare(b.link.slug))
       <tbody>
         { missingRanks.map((rank) => <tr>
           <td> { rank.link.coll } </td>
-          <td> { rank.link.slug } </td>
+          <td> { rank.link.id } </td>
           <td class={rankColor(rank.dist)}> { rank.closest } </td>
           <td class:list={[ 'text-right', rankColor(rank.dist) ]}> { rank.dist.toFixed(3) } </td>
         </tr>) }

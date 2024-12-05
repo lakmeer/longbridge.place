@@ -6,7 +6,7 @@ import type { AnyContentEntry, AnyContentKey } from '@/content/config.ts'
 //
 // WikiLink
 //
-// This format:   coll:slug#fragment?
+// This format:   coll:id#fragment?
 //
 // Used in raw markdown articles to specify particular content collections.
 // Not used to data-type collections.
@@ -15,40 +15,41 @@ import type { AnyContentEntry, AnyContentKey } from '@/content/config.ts'
 const RX_WIKILINK    = /\[([^\]]+)\]\((\w+:[-a-z]+)(#[-a-z]+)?\)/g
 const RX_PARENS_ONLY = /\((\w+:[-a-z]+)(#[-a-z]+)?\)/
 
+
 export default class WikiLink {
 
+  id: string
   coll: AnyContentKey
-  slug: string
   fragment?: string
 
-  constructor (coll:AnyContentKey, slug:string, fragment?:string) {
+  constructor (coll:AnyContentKey, id:string, fragment?:string) {
+    this.id = id
     this.coll = coll
-    this.slug = slug
     this.fragment = fragment
   }
 
   toLink () {
-    return `${this.coll}:${this.slug}`
+    return `${this.coll}:${this.id}`
   }
 
   toUrl () {
-    return `/${this.coll}/${this.slug}`
+    return `/${this.coll}/${this.id}`
   }
 
   sameAs (other:WikiLink) {
-    return this.coll === other.coll && this.slug === other.slug
+    return this.coll === other.coll && this.id === other.id
   }
 
   async resolve ():Promise<AnyContentEntry | undefined> {
-    return await getEntry(this.coll, this.slug)
+    return await getEntry(this.coll, this.id)
   }
 
   static split (src:string):WikiLink {
     const [ coll, rest ] = src.split(':')
 
     if (rest.includes('#')) {
-      const [ slug, frag ] = rest.split('#')[0]
-      return new WikiLink(coll as AnyContentKey, slug, frag)
+      const [ id, frag ] = rest.split('#')[0]
+      return new WikiLink(coll as AnyContentKey, id, frag)
     } else {
       return new WikiLink(coll as AnyContentKey, rest)
     }
@@ -65,10 +66,10 @@ export default class WikiLink {
   }
 
   static fromEntry (entry:AnyContentEntry):WikiLink {
-    return new WikiLink(entry.collection, entry.slug)
+    return new WikiLink(entry.collection, entry.id)
   }
 
-  static fromAstroRef (ref:{ collection:AnyContentKey, slug:string }):WikiLink {
-    return new WikiLink(ref.collection, ref.slug)
+  static fromAstroRef (ref:{ collection:AnyContentKey, id:string }):WikiLink {
+    return new WikiLink(ref.collection, ref.id)
   }
 }

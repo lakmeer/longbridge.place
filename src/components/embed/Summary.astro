@@ -29,7 +29,7 @@ const Htag = 'h' + level
 ---
 { heading &&
   <Htag>
-    <a class="font-weight-light" href={`/lore/${link.slug}`}>
+    <a class="font-weight-light" href={link.toUrl()}>
       {entry?.data.title}
       <LinkIcon class="ml-2" />
     </a>
