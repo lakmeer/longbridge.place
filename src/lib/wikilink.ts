@@ -55,13 +55,11 @@ export default class WikiLink {
   }
 
   static scrape (str:string):WikiLink[] {
-    console.log('🔎', str)
     const links = str.match(RX_WIKILINK)
 
     if (!links) return [] as WikiLink[]
 
     return links.map(link => {
-      console.log('🟢', link)
       return WikiLink.split(link.match(RX_PARENS_ONLY)![1])
     })
   }
