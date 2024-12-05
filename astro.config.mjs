@@ -12,8 +12,6 @@ import LinkChecker      from './src/plugins/link-checker.ts'
 import vercel from '@astrojs/vercel';
 
 export default defineConfig({
-  output: 'hybrid',
-
   vite: {
     resolve: {
       preserveSymlinks: true,
