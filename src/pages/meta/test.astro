@@ -1,17 +1,20 @@
 ---
 import Layout  from '@/layouts/Layout.astro'
 import Related from '@comp/Related.astro'
+import Heading from '@comp/PageHeading.astro'
 
 import { getEntry, render } from 'astro:content'
 
 const entry = await getEntry('meta', 'markdown-test')
+if (!entry) return Astro.redirect('/404')
 const { Content } = await render(entry)
 ---
 <Layout title={entry.data.title}>
-  <h1 class="max-w-prose mx-auto text-3xl md:text-4xl mb-4 md:mb-8 lg:mb-16 font-title-wide">{ entry.data.title }</h1>
+  <Heading>{ entry.data.title }</Heading>
 
   <div class="prose mx-auto">
     <Content />
+
     <Related entry={entry} />
   </div>
-</Layout>
+</Layout?>

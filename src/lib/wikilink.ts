@@ -1,6 +1,6 @@
 
 import { getEntry } from 'astro:content'
-import type { AnyContentEntry, AnyContentKey } from '@/content/config.ts'
+import type { AnyContentEntry, AnyContentKey } from '@/content.config.ts'
 
 
 //

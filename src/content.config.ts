@@ -6,7 +6,12 @@ const longbridgeDate = z.string().or(z.number())
 const tags = z.array(z.string()).optional()
 
 const mdx = (base:string) => glob({
-  pattern: '**\/[^_]*.mdx?',
+  pattern: '**/*.mdx',
+  base: `./src/content/${base}`
+})
+
+const yaml = (base:string) => glob({
+  pattern: '**/*.yaml',
   base: `./src/content/${base}`
 })
 
@@ -17,7 +22,7 @@ const mdx = (base:string) => glob({
 
 // Main Wiki articles
 const lore = defineCollection({
-  loader:  mdx('lore'),
+  loader: mdx('lore'),
   schema: z.object({
     title: z.string(),
     tags: tags,
@@ -27,7 +32,7 @@ const lore = defineCollection({
 
 // Story chapters
 const chapter = defineCollection({
-  loader:  mdx('chapters'),
+  loader: mdx('chapter'),
   schema: z.object({
     title: z.string(),
     thread: reference('thread'),
@@ -44,7 +49,7 @@ const chapter = defineCollection({
 
 // Citizen profiles and story characters
 const person = defineCollection({
-  loader:  mdx('people'),
+  loader: mdx('person'),
   schema: z.object({
     title: z.string(),
     day_name: z.string(),
@@ -61,7 +66,7 @@ const person = defineCollection({
 
 // Physical Places
 const location = defineCollection({
-  loader:  mdx('locations'),
+  loader: mdx('location'),
   schema: z.object({
     title: z.string(),
     name: z.string(),
@@ -77,7 +82,7 @@ const location = defineCollection({
 
 // Meta-articles targeted at contributors
 const meta = defineCollection({
-  loader:  mdx('meta'),
+  loader: mdx('meta'),
   schema: z.object({
     title: z.string(),
     tags: tags,
@@ -92,7 +97,7 @@ const meta = defineCollection({
 
 // Media: Images  TODO: Validate that referenced files exist on build
 const image = defineCollection({
-  type: 'data',
+  loader: yaml('image'),
   schema: z.object({
     title: z.string(),
     filepath: z.string(),
@@ -113,31 +118,31 @@ const image = defineCollection({
 
 // Storyline Threads
 const thread = defineCollection({
-  type: 'data',
+  loader: yaml('thread'),
   schema: z.object({
     title: z.string(),
     tags: tags,
-    authors: z.array(reference('author')),
+    //authors: z.array(reference('author')),
   })
 })
 
 // Content Authors
 const author = defineCollection({
-  type: 'data',
+  loader: yaml('author'),
   schema: z.object({
     name: z.string(),
-    headshot: reference('image').optional(),
+    //headshot: reference('image').optional(),
   })
 })
 
 // Data tables
 const tables = defineCollection({
-  type: 'data'
+  loader: yaml('tables'),
 })
 
 // Misc data storage with no specific schmea
 const misc = defineCollection({
-  type: 'data'
+  loader: yaml('misc'),
 })
 
 

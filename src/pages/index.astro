@@ -1,12 +1,41 @@
 ---
 import Layout from '../layouts/Layout.astro'
 
-import { getEntry, render } from 'astro:content'
+import { getCollection, getEntry, render } from 'astro:content'
+import { collections } from '@/content.config'
+import { asyncObjMap } from '@/utils'
 
-const { Content } = await getEntry('lore', 'introduction').then(e => render(e))
+const { Content } = await getEntry('lore', 'introduction').then(render)
+
+const lore = await getCollection('lore')
+const people = await getCollection('person')
+const places = await getCollection('location')
+const threads = await getCollection('thread')
+const chapters = await getCollection('chapter')
+
+import { glob } from 'glob'
+
+const raw = glob.sync('./src/content/person/*.mdx')
+  .map(file => file.replace('src/content/lore/', ''))
+  .map(file => file.replace('.mdx', ''))
+  .toSorted()
+
+const all = await asyncObjMap(collections, getCollection)
 ---
 <Layout title="Welcome to Longbridge" center>
   <div class="prose">
     <Content />
+
+    { import.meta.env.DEV &&
+      <hr />
+      <table>
+        { Object.keys(all).toSorted().map(key => 
+          <tr>
+            <td>{key}</td>
+            <td>{all[key].length}</td>
+          </tr>)
+        }
+      </table>
+    }
   </div>
 </Layout>

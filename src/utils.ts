@@ -116,3 +116,15 @@ export function titlecase (str:string):string {
     .join(" ")
 }
 
+export async function objMap<T>(obj:Record<string, T>, fn:(key:string, val:T) => void) {
+  const out = {}
+  await Object.keys(obj).map((key) => out[key] = fn(key, obj[key]))
+  return out
+}
+
+export async function asyncObjMap<T>(obj:Record<string, T>, fn:(key:string, val:T) => Promise<void>) {
+  const out = {}
+  await Promise.all(Object.keys(obj).map(async (key) => out[key] = await fn(key, obj[key])))
+  return out
+}
+
