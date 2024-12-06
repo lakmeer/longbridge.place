@@ -5,13 +5,8 @@ import { glob } from 'astro/loaders'
 const longbridgeDate = z.string().or(z.number())
 const tags = z.array(z.string()).optional()
 
-const mdx = (base:string) => glob({
-  pattern: '**/*.mdx',
-  base: `./src/content/${base}`
-})
-
-const yaml = (base:string) => glob({
-  pattern: '**/*.yaml',
+const folder = (base:string, ext:string) => glob({
+  pattern: `**/*.${ext}`,
   base: `./src/content/${base}`
 })
 
@@ -22,7 +17,7 @@ const yaml = (base:string) => glob({
 
 // Main Wiki articles
 const lore = defineCollection({
-  loader: mdx('lore'),
+  loader: folder('lore', 'mdx'),
   schema: z.object({
     title: z.string(),
     tags: tags,
@@ -32,7 +27,7 @@ const lore = defineCollection({
 
 // Story chapters
 const chapter = defineCollection({
-  loader: mdx('chapter'),
+  loader: folder('chapter', 'mdx'),
   schema: z.object({
     title: z.string(),
     thread: reference('thread'),
@@ -49,7 +44,7 @@ const chapter = defineCollection({
 
 // Citizen profiles and story characters
 const person = defineCollection({
-  loader: mdx('person'),
+  loader: folder('person', 'mdx'),
   schema: z.object({
     title: z.string(),
     day_name: z.string(),
@@ -66,7 +61,7 @@ const person = defineCollection({
 
 // Physical Places
 const location = defineCollection({
-  loader: mdx('location'),
+  loader: folder('location', 'mdx'),
   schema: z.object({
     title: z.string(),
     name: z.string(),
@@ -82,7 +77,7 @@ const location = defineCollection({
 
 // Meta-articles targeted at contributors
 const meta = defineCollection({
-  loader: mdx('meta'),
+  loader: folder('meta', 'mdx'),
   schema: z.object({
     title: z.string(),
     tags: tags,
@@ -97,7 +92,7 @@ const meta = defineCollection({
 
 // Media: Images  TODO: Validate that referenced files exist on build
 const image = defineCollection({
-  loader: yaml('image'),
+  loader: folder('image', 'yaml'),
   schema: z.object({
     title: z.string(),
     filepath: z.string(),
@@ -118,7 +113,7 @@ const image = defineCollection({
 
 // Storyline Threads
 const thread = defineCollection({
-  loader: yaml('thread'),
+  loader: folder('thread', 'yaml'),
   schema: z.object({
     title: z.string(),
     tags: tags,
@@ -128,7 +123,7 @@ const thread = defineCollection({
 
 // Content Authors
 const author = defineCollection({
-  loader: yaml('author'),
+  loader: folder('author', 'yaml'),
   schema: z.object({
     name: z.string(),
     //headshot: reference('image').optional(),
@@ -137,12 +132,12 @@ const author = defineCollection({
 
 // Data tables
 const table = defineCollection({
-  loader: yaml('table'),
+  loader: folder('table', 'json'),
 })
 
 // Misc data storage with no specific schmea
 const misc = defineCollection({
-  loader: yaml('misc'),
+  loader: folder('misc', 'json'),
 })
 
 
