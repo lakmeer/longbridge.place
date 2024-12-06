@@ -3,14 +3,17 @@ import Layout from '@/layouts/Layout.astro'
 import ChapterCard from '@/components/ChapterCard.astro'
 
 import { absolutePath } from '@utils'
-import { getEntry, getCollection, render } from 'astro:content'
+import { getEntry, getCollection, render, type CollectionEntry } from 'astro:content'
+
+interface Props {
+  entry: any
+}
 
 const { entry } = Astro.props
-if (!entry) return Astro.redirect('/404')
 const { Content } = await render(entry)
+                                                    // don't know why this is necessary
+const thread = await getEntry(entry.data.thread) as unknown as CollectionEntry<'thread'>
 
-const thread = await getEntry(entry.data.thread)
-if (!thread) return Astro.redirect('/404')
 const [ next ] = await getCollection('chapter', ({ data }) =>
   data.published
     && data.thread.id === entry.data.thread.id
@@ -20,8 +23,8 @@ const [ next ] = await getCollection('chapter', ({ data }) =>
   <div class="mx-auto max-w-3xl grid gap-16 lg:gap-20">
     <div class="grid text-center gap-4 lg:gap-8 mt-8">
       <h2 class="font-title-xwide uppercase text-center text-lg ">
-        <a href={absolutePath(`chapter/${ thread!.id }`)}>
-          { thread!.data.title }
+        <a href={absolutePath(`chapter/${ thread.id }`)}>
+          { thread.data.title }
         </a>
       </h2>
       <h3 class="font-title-wide text-center text-2xl lg:text-3xl">{ entry.data.title }</h3>

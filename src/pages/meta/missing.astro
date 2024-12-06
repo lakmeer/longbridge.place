@@ -26,7 +26,7 @@ for (let coll of Object.keys(content)) {
 // Scrape wikilinks from all entries
 const missingLinks:WikiLink[] = allEntries
   .reduce((acc, entry) => acc.concat(WikiLink.scrape(entry.body ?? "")), [] as WikiLink[])
-  .filter((link) => link.coll !== 'tag') // tags don't count
+  .filter((link) => (link.coll as string) !== 'tag') // tags don't count
 
 // Turn existing entries into raw links
 const existing = allEntries.map((entry) => WikiLink.fromEntry(entry).toLink())

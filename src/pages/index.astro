@@ -2,19 +2,12 @@
 import Layout from '../layouts/Layout.astro'
 
 import { getCollection, getEntry, render } from 'astro:content'
-import { collections } from '@/content.config'
+import { collections, type AnyCollectionKey, type AnyEntry } from '@/content.config'
 import { asyncObjMap } from '@/utils'
 
 const intro = await getEntry('lore', 'introduction')
 if (!intro) return Astro.redirect('/404')
 const { Content } = await render(intro)
-
-import { glob } from 'glob'
-
-const raw = glob.sync('./src/content/person/*.mdx')
-  .map(file => file.replace('src/content/lore/', ''))
-  .map(file => file.replace('.mdx', ''))
-  .toSorted()
 
 const all = await asyncObjMap(collections, getCollection)
 ---

@@ -15,10 +15,11 @@ const { src, heading = false, level = 2 } = Astro.props
 // Gather entry
 const link = WikiLink.split(src)
 const entry = await link.resolve()
+if (!entry) return
+const { Content } = await render(entry)
 
 // Render Heading etc
 const Htag = 'h' + level
-const { Content } = await render(entry)
 ---
 
 { heading &&

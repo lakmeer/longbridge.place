@@ -55,7 +55,9 @@ export default class WikiLink {
     }
   }
 
-  static scrape (str:string):WikiLink[] {
+  static scrape (str?:string):WikiLink[] {
+    if (!str) return []
+
     const links = str.match(RX_WIKILINK)
 
     if (!links) return [] as WikiLink[]

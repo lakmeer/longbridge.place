@@ -1,6 +1,6 @@
 
 import { getCollection } from 'astro:content'
-import type { AnyContentEntry, AnyEntry } from '@/content/config.ts'
+import type { AnyContentEntry, AnyEntry } from '@/content.config.ts'
 
 import WikiLink from './lib/wikilink.ts'
 
@@ -116,13 +116,13 @@ export function titlecase (str:string):string {
     .join(" ")
 }
 
-export async function objMap<T>(obj:Record<string, T>, fn:(key:string, val:T) => void) {
+export async function objMap<T>(obj:Record<string, T>, fn:Function) {
   const out = {}
   await Object.keys(obj).map((key) => out[key] = fn(key, obj[key]))
   return out
 }
 
-export async function asyncObjMap<T>(obj:Record<string, T>, fn:(key:string, val:T) => Promise<void>) {
+export async function asyncObjMap<T>(obj:Record<string, any>, fn:Function) {
   const out = {}
   await Promise.all(Object.keys(obj).map(async (key) => out[key] = await fn(key, obj[key])))
   return out
