@@ -38,7 +38,7 @@ const chapter = defineCollection({
     thread: reference('thread'),
     author: reference('author'),
     number: z.number(),
-    published: z.boolean().optional(),
+    published: z.coerce.boolean().optional(),
     synopsis: z.string().optional(),
     pov_char: reference('person').or(z.string()).optional(),
     other_chars: z.array(reference('person').or(z.string())).optional(),
@@ -136,8 +136,8 @@ const author = defineCollection({
 })
 
 // Data tables
-const tables = defineCollection({
-  loader: yaml('tables'),
+const table = defineCollection({
+  loader: yaml('table'),
 })
 
 // Misc data storage with no specific schmea
@@ -162,13 +162,11 @@ export const data = {
   image,
   author,
   thread,
-  tables,
+  table,
   misc,
 }
 
-export const collections = {
-  ...content, ...data
-}
+export const collections = { ...content, ...data }
 
 import type { CollectionEntry } from 'astro:content'
 

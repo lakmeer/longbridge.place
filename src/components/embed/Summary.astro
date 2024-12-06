@@ -16,7 +16,7 @@ const link = WikiLink.split(src)
 const entry = await link.resolve()
 
 // Process body to find just the first paragraph
-const first = stripLinks(firstChunk(entry!.body))
+const first = stripLinks(firstChunk(entry!.body as string))
 
 // Render heading
 const Htag = 'h' + level
