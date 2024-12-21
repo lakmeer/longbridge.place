@@ -15,7 +15,8 @@ const { Content } = await render(entry)
 const thread = await getEntry(entry.data.thread) as unknown as CollectionEntry<'thread'>
 
 const [ next ] = await getCollection('chapter', ({ data }) =>
-  data.published
+  //data.published 
+  true
     && data.thread.id === entry.data.thread.id
     && data.number    === entry.data.number + 1)
 ---
