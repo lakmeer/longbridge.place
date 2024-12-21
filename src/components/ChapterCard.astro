@@ -22,43 +22,48 @@ const author = await getEntry(chapter.data.author)
       { chapter.data.synopsis && <p>{ chapter.data.synopsis }</p> }
     </div>
 
-    <dl>
-      <dt>Author</dt>
-      <dd>{author.data.name}</dd>
+    <div class="grid grid-cols-2 gap-2">
+      <dl>
+        <dt>Author</dt>
+        <dd>{author.data.name}</dd>
 
-      <dt>Thread</dt>
-      <dd>{thread.data.title}</dd>
+        <dt>Thread</dt>
+        <dd>{thread.data.title}</dd>
 
-      { chapter.data.locations && <>
-        <dt>Locations</dt>
-        <dd class="grid">
-          { chapter.data.locations?.map((loc) => 
-            <MiniLink class="block" ref={loc} />)
-          }
-        </dd>
-      </> }
+        <dt>Word Count</dt>
+        <dd>{chapter.body?.split(/\s+/).length ?? 0}</dd>
+      </dl>
 
-      <dt>Protagonist</dt>
-      <dd><MiniLink ref={chapter.data.pov_char!} /></dd>
+      <dl>
+        <dt>Protagonist</dt>
+        <dd><MiniLink ref={chapter.data.pov_char!} /></dd>
 
-      { chapter.data.other_chars && <>
-        <dt>Other Characters</dt>
-        <dd class="grid">
-          { chapter.data.other_chars.map((char) =>
-            typeof char === "string"
-              ? <span>{ char }</span>
-              : <MiniLink class="block" ref={char} />
-          )
-          }
-      </dd>
-      </> }
+        { chapter.data.other_chars && <>
+          <dt>Other Characters</dt>
+          <dd class="grid">
+            { chapter.data.other_chars.map((char) =>
+              typeof char === "string"
+                ? <span>{ char }</span>
+                : <MiniLink class="block" ref={char} />)
+            }
+          </dd>
+        </> }
 
-    </dl>
+        { chapter.data.locations && <>
+          <dt>Locations</dt>
+          <dd class="grid">
+            { chapter.data.locations?.map((loc) => 
+              <MiniLink class="block" ref={loc} />)
+            }
+          </dd>
+        </> }
+
+      </dl>
+    </div>
   </div>
 </Card>
 
 <style>
-  dl { columns: 2; }
   dt { font-weight: 500; font-family: var(--font-title); }
   dd + dt { margin-top: 0.5rem; }
 </style>
