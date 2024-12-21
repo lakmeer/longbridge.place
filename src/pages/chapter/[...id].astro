@@ -14,7 +14,7 @@ export async function getStaticPaths() {
       props: { entry }
     })),
     ...chapters
-      .filter((entry) => entry.data.published)
+      //.filter((entry) => entry.data.published)
       .map((entry) => ({
         params: { id: entry.id },
         props: { entry },
