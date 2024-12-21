@@ -51,7 +51,7 @@ const person = defineCollection({
     names: z.string(),
     gender: z.enum(['Male', 'Female', 'Nymi', 'Luminari']).optional(),
     birthdate: longbridgeDate.optional(),
-    residence: reference('location').or(z.string()).optional(),
+    residence: z.string().or(reference('location')).optional(),
     vocation: reference('lore').or(z.string()).optional(),
     headshot: reference('image'),
     affiliation: reference('lore').or(reference('location')).or(z.string()).optional(),
@@ -69,7 +69,7 @@ const location = defineCollection({
     address: z.string().optional(),
     coordinates: z.number().array().length(2).optional(),
     affiliation: reference('lore').or(reference('location')).or(z.string()).optional(),
-    location: reference('location').or(z.string()).optional(), // Greater/parent location
+    location: z.string().or(reference('location')).optional(), // Greater/parent location
     image: reference('image').optional(),
     tags: tags,
   })
@@ -132,7 +132,7 @@ const author = defineCollection({
 
 // Data tables
 const table = defineCollection({
-  loader: folder('table', 'json'),
+  loader: folder('tables', 'json'),
 })
 
 // Misc data storage with no specific schmea
