@@ -18,7 +18,7 @@ const { entry } = Astro.props
 const { Content } = await render(entry)
 ---
 <Layout title={entry?.data.day_name}>
-  <div class="mx-auto max-w-3xl grid gap-16">
+  <div class="mx-auto max-w-3xl grid gap-16 py-8 md:py-16">
     <PersonCard person={entry} />
 
     <div class="prose mx-auto">
