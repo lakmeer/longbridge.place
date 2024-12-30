@@ -12,7 +12,7 @@ import { getCollection } from 'astro:content'
 
 const DEFAULT_LEVEL = 3
 
-function toThreshold (param:string) {
+function toThreshold (param:string|null) {
   if (typeof param !== 'string') return DEFAULT_LEVEL
   if (param === '') return DEFAULT_LEVEL
   return Math.max(0, Math.min(10, parseInt(param)))
@@ -40,7 +40,7 @@ const results = !query ? [] : index.search(query)
 
   <div class="grid gap-8">
     <div class="text-center">
-      <form class="flex gap-4 md:w-prose" action={Astro.url} method="get">
+      <form class="flex gap-4 md:w-prose" action={Astro.url.toString()} method="get">
         <input class="bg-transparent border py-1 px-2 flex-1"
             value={ query }
             type="search"
@@ -66,7 +66,7 @@ const results = !query ? [] : index.search(query)
             )}
           </nav>
 
-          <form class="flex justify-center gap-4" action={Astro.url} method="get">
+          <form class="flex justify-center gap-4" action={Astro.url.toString()} method="get">
             <input type="hidden" name="q" value={ query } />
             <button class="btn" name="level" value={ level - 1 } type="submit"> Less </button>
             <button class="btn" name="level" value={ level + 1 } type="submit"> More </button>
