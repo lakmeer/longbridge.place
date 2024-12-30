@@ -4,6 +4,11 @@ import type { AnyContentEntry, AnyEntry } from '@/content.config.ts'
 
 import WikiLink from './lib/wikilink.ts'
 
+export function log (...args:any[]) {
+  console.log(...args)
+  return args[0]
+}
+
 export function absolutePath (path:string) {
   return '/' + path.replace(/^\//, '')
 }

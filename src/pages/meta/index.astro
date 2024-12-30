@@ -1,13 +1,30 @@
 ---
 import Layout  from '@/layouts/Layout.astro'
+import Heading from '@comp/PageHeading.astro'
+
+import { getCollection } from 'astro:content'
+import { entryUrl } from '@utils'
+
+const meta = await getCollection('meta')
 ---
 <Layout title="Meta Pages" sky="eveningside" description="Pages about the project itself">
-  <h1 class="text-3xl md:text-4xl mb-16 text-center font-title-wide">Meta Pages</h1>
+  <Heading>Meta Pages</Heading>
 
   <div class="prose">
-    <ul class="grid gap-1">
-      <li><a href="/meta/tags">Tags</a></li>
-      <li><a href="/meta/missing">Missing Links</a></li>
-    </ul>
-  </div>
+    <div class="grid md:grid-cols-2 gap-8">
+      <div>
+        <h3>Meta Articles</h3>
+        <ul class="grid gap-1">
+          { meta.map((meta) => <li><a href={entryUrl(meta)}>{ meta.data.title }</a></li>) }
+        </ul>
+      </div>
+
+      <div>
+        <h3>Utility Pages</h3>
+        <ul class="grid gap-1">
+          <li><a href="/meta/tags">Tags</a></li>
+          <li><a href="/meta/missing">Missing Links</a></li>
+        </ul>
+      </div>
+    </div>
 </Layout>

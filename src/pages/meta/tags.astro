@@ -1,5 +1,6 @@
 ---
 import Layout  from '@/layouts/Layout.astro'
+import Heading from '@comp/PageHeading.astro'
 
 import { getCollection } from 'astro:content'
 import { collections, type AnyCollectionKey } from '@/content.config'
@@ -30,12 +31,12 @@ for (const coll of Object.keys(collections) as AnyCollectionKey[]) {
 
 ---
 <Layout title="Tags" sky="eveningside">
-  <h1 class="text-3xl md:text-4xl mb-4 text-center font-title-wide">Tags</h1>
+  <Heading>Tags</Heading>
 
   <div class="prose" x-data=`{ showCount: false, tagList: ${ JSON.stringify(Object.entries(allTags)) } }`>
     <div class="text-center">
-      <button x-show="!showCount" @click="showCount = true" class="btn btn-primary">Show Counts</button>
-      <button x-show="showCount" @click="showCount = false" class="btn btn-primary">Show Links</button>
+      <button x-show="!showCount" @click="showCount = true" class="btn">Show Counts</button>
+      <button x-show="showCount" @click="showCount = false" class="btn">Show Links</button>
     </div>
 
     <table>

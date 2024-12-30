@@ -19,7 +19,9 @@ const links = chapters
        class="mx-auto max-w-3xl grid gap-16 lg:gap-20">
     <div class="grid text-center gap-4 lg:gap-8 mt-8">
       <h2 class="font-title-xwide uppercase text-center text-lg ">{ entry.data.title }</h2>
-      <button @click="reversed = !reversed" x-text="reversed ? 'Latest' : 'Oldest'" />
+      <div class="text-center">
+        <button class="btn" @click="reversed = !reversed" x-text="reversed ? 'Latest' : 'Oldest'" />
+      </div>
     </div>
 
     <div class="w-[32ch]">

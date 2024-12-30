@@ -80,6 +80,7 @@ const meta = defineCollection({
   loader: folder('meta', 'mdx'),
   schema: z.object({
     title: z.string(),
+    description: z.string().optional(),
     tags: tags,
     type: z.string().optional(),
   })

@@ -5,6 +5,7 @@ import { dedupe, closestLev } from '@utils'
 
 import WikiLink from '@/lib/wikilink.ts'
 import Layout  from '@/layouts/Layout.astro'
+import Heading from '@comp/PageHeading.astro'
 
 type MatchRank = { link: WikiLink, closest: string, dist: number }
 
@@ -47,7 +48,7 @@ missingRanks = dedupe(missingRanks, (a, b) => a.link.sameAs(b.link))
 missingRanks.sort((a, b) => a.link.id.localeCompare(b.link.id))
 ---
 <Layout title="Missing Pages" sky="eveningside" description="Linked pages that are missing">
-  <h1 class="text-3xl md:text-4xl mb-16 text-center font-title-wide">Missing Pages</h1>
+  <Heading>Missing Pages</Heading>
 
   <div class="prose">
     <table>
