@@ -1,0 +1,84 @@
+---
+export const prerender = false
+
+import Fuse     from 'fuse.js'
+import WikiLink from '@/lib/wikilink.ts'
+import Layout   from '@/layouts/Layout.astro'
+import MiniLink from '@comp/MiniLink.astro'
+import Summary  from '@comp/embed/Summary.astro'
+import Heading  from '@comp/PageHeading.astro'
+
+import { getCollection } from 'astro:content'
+
+const DEFAULT_LEVEL = 3
+
+function toThreshold (param:string) {
+  if (typeof param !== 'string') return DEFAULT_LEVEL
+  if (param === '') return DEFAULT_LEVEL
+  return Math.max(0, Math.min(10, parseInt(param)))
+}
+
+const query = Astro.url.searchParams.get('q')
+const level = toThreshold(Astro.url.searchParams.get('level'))
+
+const all = await Promise.all([
+  getCollection('lore'),
+  getCollection('person'),
+  getCollection('location'),
+])
+
+const index = new Fuse(all.flat(), {
+  includeScore: true,
+  keys: [ 'data.title', 'body', { name: 'data.tags', weight: 0.3 } ],
+  threshold: level / 10
+})
+
+const results = !query ? [] : index.search(query)
+---
+<Layout title="Search" class="debug">
+  <Heading>Search</Heading>
+
+  <div class="grid gap-8">
+    <div class="text-center">
+      <form class="flex gap-4 md:w-prose" action={Astro.url} method="get">
+        <input class="bg-transparent border py-1 px-2 flex-1"
+            value={ query }
+            type="search"
+            name="q"
+            placeholder="Search..."
+            />
+        <button class="btn" type="submit">Search</button>
+        <input class="hidden" name="level" value={ level } />
+      </form>
+    </div>
+
+    { results.length
+      ? <div class="grid gap-8">
+          <nav class="grid gap-8 pt-4 max-w-prose">
+            { results.map(({ item, score }) =>
+              <div class="grid gap-2">
+                <MiniLink ref={item} />
+
+                <div class="pl-7">
+                  <Summary src={ WikiLink.fromEntry(item).toLink() } />
+                </div>
+              </div>
+            )}
+          </nav>
+
+          <form class="flex justify-center gap-4" action={Astro.url} method="get">
+            <input type="hidden" name="q" value={ query } />
+            <button class="btn" name="level" value={ level - 1 } type="submit"> Less </button>
+            <button class="btn" name="level" value={ level + 1 } type="submit"> More </button>
+          </form>
+        </div>
+
+      : query &&
+        <div class="text-center">
+          <p class="text-lg font-title-wide">
+            No results
+          </p>
+        </div>
+    }
+  </div>
+</Layout>

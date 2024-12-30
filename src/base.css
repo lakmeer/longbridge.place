@@ -195,4 +195,11 @@
     margin-top: 0 !important;
   }
 
+
+  /* Prose Width defaults */
+
+  .w-prose {
+    width: 65ch;
+  }
+
 }
