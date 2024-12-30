@@ -19,7 +19,7 @@
     "@astrojs/vercel": "^8.0.1",
     "@astropub/md": "^1.0.0",
     "@types/alpinejs": "^3.13.11",
-    "alpinejs": "^3.14.7",
+    "alpinejs": "^3.14.8",
     "astro": "^5.1.1",
     "astro-auto-import": "^0.4.4",
     "colors": "^1.4.0",

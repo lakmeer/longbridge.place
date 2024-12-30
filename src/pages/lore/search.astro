@@ -12,7 +12,7 @@ import MiniLink from '@comp/MiniLink.astro'
 import Summary  from '@comp/embed/Summary.astro'
 import Heading  from '@comp/PageHeading.astro'
 
-const query = Astro.url.searchParams.get('q')!
+const query = Astro.url.searchParams.get('q')
 
 const all = await Promise.all([
   getCollection('lore'),
@@ -26,10 +26,20 @@ const index = new Fuse(all.flat(), {
   threshold: 0.4,
 })
 
-const results = index.search(query)
+const results = !query ? [] : index.search(query)
 ---
 <Layout title="Search">
-  <Heading>Searching "{ query }"</Heading>
+  <Heading>
+    { query ? `Searching "${ query }"` : 'Search' }
+  </Heading>
+
+  { results.length === 0 &&
+    <div class="text-center">
+      <p class="text-lg">
+        No results found for <strong>{ query }</strong>
+      </p>
+    </div>
+  }
 
   <nav class="grid gap-8 pt-4">
     { results.map(({ item, score }) =>
